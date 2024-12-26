@@ -28,7 +28,7 @@ export default function ProjectModal({ project }: ProjectModalProps) {
         </Button>
       </DialogTrigger>
 
-      <DialogContent className="max-w-3xl h-full max-h-[80vh] flex flex-col bg-secondary">
+      <DialogContent className="max-w-3xl h-full max-h-[80vh] overflow-y-auto md:overflow-y-hidden flex flex-col bg-secondary">
         <DialogHeader className="font-semibold text-accent-foreground">
           {project.name}
         </DialogHeader>
@@ -78,7 +78,7 @@ export default function ProjectModal({ project }: ProjectModalProps) {
             </div>
           </div>
 
-          <div className="max-h-[90%] overflow-y-scroll w-full flex flex-col gap-2">
+          <div className="md:max-h-[90%] md:overflow-y-scroll w-full flex flex-col gap-2">
             {project.media && project.media.length > 0
               ? project.media.map((e, i) => (
                   <div className="relative w-full aspect-video">
