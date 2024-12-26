@@ -5,15 +5,16 @@ import Services from "@/components/Services";
 import Skills from "@/components/Skills";
 import Testimonials from "@/components/Testimonials";
 import Contact from "@/components/Contact";
+import Portfolio from "@/components/Portfolio";
 import Footer from "@/components/Footer";
 import { PortfolioProvider } from "./context/portfolio";
 
 const navOptions = [
-  { label: "About", toId: "about" },
-  { label: "Portfolio", toId: "portfolio" },
   { label: "Services", toId: "services" },
-  { label: "Me.", toId: "me" },
+  { label: "About", toId: "about" },
   { label: "Skills", toId: "skills" },
+  { label: "Me.", toId: "me" },
+  { label: "Portfolio", toId: "portfolio" },
   { label: "Testimonials", toId: "testimonials" },
   { label: "Contact", toId: "contact" },
 ];
@@ -26,6 +27,7 @@ function App() {
         <Services />
         <About />
         <Skills />
+        <Portfolio />
         <Testimonials />
         <Contact />
         <Footer />
