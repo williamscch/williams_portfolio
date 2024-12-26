@@ -7,6 +7,7 @@ import {
   DialogTrigger,
 } from "@/ui/dialog";
 import { Badge } from "@/ui/badge";
+import { DialogTitle } from "@radix-ui/react-dialog";
 
 interface ProjectModalProps {
   project: {
@@ -29,8 +30,8 @@ export default function ProjectModal({ project }: ProjectModalProps) {
       </DialogTrigger>
 
       <DialogContent className="max-w-3xl h-full max-h-[80vh] overflow-y-auto md:overflow-y-hidden flex flex-col bg-secondary">
-        <DialogHeader className="font-semibold text-accent-foreground">
-          {project.name}
+        <DialogHeader>
+          <DialogTitle className="font-semibold">{project.name}</DialogTitle>
         </DialogHeader>
         <div className="h-full grid lg:grid-cols-2 gap-4">
           <div className="w-full flex flex-col gap-2">
