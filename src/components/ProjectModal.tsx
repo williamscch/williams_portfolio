@@ -54,7 +54,11 @@ export default function ProjectModal({ project }: ProjectModalProps) {
               {project.live ? (
                 <div>
                   <h3>Live:</h3>
-                  <Button variant="link" className="p-0 text-start h-fit">
+                  <Button
+                    variant="link"
+                    className="p-0 text-start h-fit"
+                    onClick={() => window.open(project.source, "_blank")}
+                  >
                     {project.live}
                   </Button>
                 </div>
@@ -62,7 +66,11 @@ export default function ProjectModal({ project }: ProjectModalProps) {
               {project.source ? (
                 <div>
                   <h3>Src:</h3>
-                  <Button variant="link" className="p-0 text-start h-fit">
+                  <Button
+                    variant="link"
+                    className="p-0 text-start h-fit"
+                    onClick={() => window.open(project.source, "_blank")}
+                  >
                     {project.source}
                   </Button>
                 </div>
