@@ -36,10 +36,14 @@ export default function Testimonials() {
                 </CardHeader>
                 <CardContent>
                   <a
-                    href={connect.links.recommendations}
+                    href={
+                      !t.from.includes("Fonz")
+                        ? connect.links.recommendations
+                        : connect.accounts[2].url
+                    }
                     target="_blank"
                     rel="noreferrer"
-                    className="text-base text-muted-foreground italic"
+                    className="text-base text-muted-foreground italic hover:underline"
                   >
                     "{t.message}"
                   </a>
