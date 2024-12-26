@@ -1,12 +1,6 @@
 import { usePortfolioContext } from "@/context/portfolio";
 import { Card, CardContent, CardHeader } from "@/ui/card";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/ui/carousel";
+import { Carousel, CarouselContent, CarouselItem } from "@/ui/carousel";
 
 export default function Testimonials() {
   const { testimonials, connect } = usePortfolioContext();
@@ -55,8 +49,6 @@ export default function Testimonials() {
             </CarouselItem>
           ))}
         </CarouselContent>
-        <CarouselPrevious className="hidden lg:inline-flex" />
-        <CarouselNext className="hidden lg:inline-flex" />
       </Carousel>
     </section>
   );

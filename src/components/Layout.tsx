@@ -1,6 +1,8 @@
 import { Button } from "@/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/ui/sheet";
+import { cn } from "@/utils/cn";
 import { PanelLeft } from "lucide-react";
+import { useState } from "react";
 import { Link } from "react-scroll";
 
 interface LayoutProps {
@@ -12,11 +14,33 @@ interface LayoutProps {
 }
 
 export default function Layout({ options, children }: LayoutProps) {
+  const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  const handleScroll = () => {
+    if (window.scrollY >= 64) {
+      setScrolled(true);
+    } else {
+      setScrolled(false);
+    }
+  };
+
+  window.addEventListener("scroll", handleScroll);
+
+  console.log(scrolled);
+
   return (
     <div className="z-50 flex min-h-screen w-full flex-col ">
-      <div className="flex flex-col sm:gap-4 sm:py-4">
-        <header className="sticky top-0 z-30 flex justify-between md:justify-end h-12 items-center gap-4 border-b bg-background px-4 sm:static sm:h-auto sm:border-0 sm:bg-transparent sm:px-6">
-          <Sheet>
+      <div className="flex flex-col">
+        <header
+          className={cn(
+            "sticky top-0 z-30 flex justify-between sm:gap-4 sm:py-4 md:justify-end h-12 items-center gap-4 border-b bg-background px-4 sm:h-auto sm:border-0 sm:bg-background sm:px-6 sm:hover:bg-muted transition-all ease delay-400",
+            scrolled
+              ? "sm:disabled:hover h-10 sm:py-3 sm:border-b sm:shadow-md"
+              : ""
+          )}
+        >
+          <Sheet onOpenChange={setOpen} open={open}>
             <SheetTrigger asChild>
               <Button size="icon" variant="outline" className="sm:hidden">
                 <PanelLeft className="h-5 w-5" />
@@ -24,25 +48,31 @@ export default function Layout({ options, children }: LayoutProps) {
               </Button>
             </SheetTrigger>
             <SheetContent side="left" className="sm:max-w-xs">
-              <nav className="grid gap-4 text-lg font-medium">
-                {options.map((option, index) => (
-                  <Link
-                    key={index}
-                    to={option.toId}
-                    className="flex pl-2 h-9 w-full items-center justify-left rounded-lg text-muted-foreground text-sm transition-colors hover:text-foreground md:h-8 md:w-full gap-2"
-                  >
-                    <span className="">{option.label}</span>
-                  </Link>
-                ))}
+              <nav className="grid gap-6 text-lg font-medium mt-8">
+                {options
+                  .filter((option) => option.toId !== "me")
+                  .map((option, index) => (
+                    <Link
+                      onClick={() => setOpen((prev) => !prev)}
+                      key={index}
+                      to={option.toId}
+                      className="pl-2 text-muted-foreground text-xl font-semibold transition-colors hover:text-foreground cursor-pointer"
+                    >
+                      {option.label}
+                    </Link>
+                  ))}
               </nav>
             </SheetContent>
           </Sheet>
-          <div className="hidden sm:flex w-full gap-6 items-center justify-center">
+          <div className="hidden sm:flex w-full gap-6 items-center justify-center relative">
             {options.map((option, i) => (
               <Link
-                activeClass="text-accent-foreground"
+                activeStyle={{ color: "#2563EB" }}
                 key={i + option.toId}
-                className="font-medium cursor-pointer"
+                className={cn(
+                  "font-medium cursor-pointer",
+                  option.toId === "me" ? "text-primary text-xl" : ""
+                )}
                 to={option.toId}
                 spy
                 hashSpy
