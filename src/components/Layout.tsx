@@ -1,9 +1,9 @@
+import { useEffect, useState } from "react";
+import { Link } from "react-scroll";
+import { PanelLeft } from "lucide-react";
 import { Button } from "@/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/ui/sheet";
 import { cn } from "@/utils/cn";
-import { PanelLeft } from "lucide-react";
-import { useState } from "react";
-import { Link } from "react-scroll";
 
 interface LayoutProps {
   options: {
@@ -25,9 +25,13 @@ export default function Layout({ options, children }: LayoutProps) {
     }
   };
 
-  window.addEventListener("scroll", handleScroll);
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
 
-  console.log(scrolled);
+    return () => {
+      document.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   return (
     <div className="z-50 flex min-h-screen w-full flex-col ">
@@ -36,7 +40,7 @@ export default function Layout({ options, children }: LayoutProps) {
           className={cn(
             "sticky top-0 z-30 flex justify-between sm:gap-4 sm:py-4 md:justify-end h-12 items-center gap-4 border-b bg-background px-4 sm:h-auto sm:border-0 sm:bg-background sm:px-6 sm:hover:bg-muted transition-all ease delay-400",
             scrolled
-              ? "sm:disabled:hover h-10 sm:py-3 sm:border-b sm:shadow-md"
+              ? "sm:disabled:hover h-10 sm:py-2 sm:border-b sm:shadow-md"
               : ""
           )}
         >

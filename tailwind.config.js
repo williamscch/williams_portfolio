@@ -4,10 +4,6 @@ export default {
   content: ["./index.html", "./src/**/*.{ts,tsx,js,jsx}"],
   theme: {
     extend: {
-      transitionProperty: {
-        height: "height",
-        spacing: "margin, padding",
-      },
       screens: {
         "4xl": "2000px",
       },
