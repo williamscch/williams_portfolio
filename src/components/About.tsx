@@ -8,7 +8,7 @@ export default function About() {
   return (
     <section
       id="about"
-      className="lg:min-h-screen md:mx-6 lg:mx-24 px-6 md:px-0 py-10 md:py-24"
+      className="md:mx-6 lg:mx-24 px-6 md:px-0 py-10 md:py-24"
     >
       <div className="mb-7 px-4 text-start">
         <h2 className="font-medium text-3xl md:text-4xl mb-5">About Me</h2>

@@ -26,12 +26,12 @@ export interface PortfolioState {
     cta: string;
   };
   projects: {
-    title: string;
+    name: string;
     description: string;
-    languages: string[];
-    live: string;
-    source: string;
-    image: string;
+    skills: string[];
+    live?: string;
+    source?: string;
+    media?: string[];
   }[];
   connect: {
     accounts: {
@@ -266,120 +266,98 @@ export const state: PortfolioState = {
 
   projects: [
     {
-      title: "Online Shop",
+      name: "V2 Tokenproof Event Pages",
       description:
-        "Full Stack project made for an online shop, features like live render list of products products, filter for products by category, price and name, shopping cart to add products for registered users and place orders. Manager can also log in as an admin, with access to special functions like adding categories and products, as well as deleting and updating them, and managing users and customers.",
-      languages: ["Node", "Express js", "React", "PostgreSQL"],
-      live: "/",
-      source: "https://github.com/williamscch/myshop",
-      image:
-        "https://raw.githubusercontent.com/williamscch/myshop-client/dev/app-ss.png",
+        "Developed a flexible onboarding flow for tokenproof, supporting multiple blockchain networks (Ethereum, Solana, Flow, Sui, Bitcoin, Crypto.com) across mobile and desktop. Integrated diverse wallet providers tailored to each network, using SDKs like Dynamic, Moopay-SDK, Mysthen, Ethers, and Magic SDK. Implemented secure authentication with JWTs and nonces. Overcame challenges in cross-platform UX and SDKs integrations, delivering a smooth, secure onboarding experience for users accessing tokenproof services for token-gated events and experiences. It is composed of several react/vite projects.",
+      skills: [
+        "React",
+        "Figma",
+        "Typescript",
+        "Stripe",
+        "Web3",
+        "API integration",
+      ],
     },
     {
-      title: "Rental Cars",
+      name: "Multi-Network Onboarding Web Flow for Tokenproof App",
+      description:
+        "Developed a flexible onboarding flow for tokenproof, supporting multiple blockchain networks (Ethereum, Solana, Flow, Sui, Bitcoin, Crypto.com) across mobile and desktop. Integrated diverse wallet providers tailored to each network, using SDKs like Dynamic, Moopay-SDK, Mysthen, Ethers, and Magic SDK. Implemented secure authentication with JWTs and nonces. Overcame challenges in cross-platform UX and SDKs integrations, delivering a smooth, secure onboarding experience for users accessing tokenproof services for token-gated events and experiences. It is composed of several react/vite projects.",
+      skills: ["SDK", "React", "Security Token", "Ethers.js", "MetaMask"],
+      live: "https://tokenproof.xyz/connect/v2",
+    },
+    {
+      name: "Tokenproof Tools",
+      description:
+        "Tools played a crucial role in Tokenproof, managing, and operating the services offered. My responsibilities included creating and managing events, defining entry policies, handling online authentication, and overseeing the user experience within the app. I worked directly with Tokenproof’s API to implement new features, conduct maintenance, resolve bugs, and provide ongoing support to ensure smooth operation. I led a comprehensive UX and UI improvement for the Tools app, utilizing Tailwind and ShadCN to give the platform a fresh look while enhancing its existing functionalities.",
+      skills: [
+        "React",
+        "Typescript",
+        "Library Management",
+        "Tailwind",
+        "Shadcn",
+        "Services Management",
+      ],
+    },
+    {
+      name: "Made by Apes Bodega Web for Yuga Labs",
+      description:
+        "Assigned as the sole developer for this project, I built a web platform from scratch using Next.js and Payload CMS for the Yuga Labs team. This site displays active MBA licenses and provides interested users with resources like FAQs, Blog posts, and Handbooks. The platform includes an admin interface for content management and integrates Meilisearch for quick access to licensing information. User profile email actions are managed through Mailgun, with media storage on AWS S3 and optimized for both mobile and desktop. Live site: madeby.boredapeyachtclub.com (VPN may be needed in some regions)",
+      skills: [
+        "Payload CMS",
+        "Next.js",
+        "React",
+        "Typescript",
+        "PostgreSQL",
+        "Amazon S3",
+      ],
+      live: "https://madeby.boredapeyachtclub.com/",
+    },
+    {
+      name: "ApeFest 2024 Exclusive Merch Sale – Authentication & Payments",
+      description:
+        "As the sole developer on this project, I created a platform for the exclusive sale of merchandise based on the ticketing page available only to ApeFest 2024 ticket holders. Built with React and Tailwind, the project followed a provided Figma design and utilized Stripe to handle payments. Key features included a queue for entry, session expiration for purchases, and an online authentication widget from Tokenproof to verify ApeFest ticket ownership and make use of an internal API to handle inventory.",
+      skills: ["React", "Typescript", "Tailwind", "Figma", "Stripe"],
+    },
+    {
+      name: "ApeFest 2024 Ticket Sale – Re-skin, Load Testing & Launch Support",
+      description:
+        "As the sole person responsible at Tokenproof for the re-skin and adjustments on the ApeFest 2024 ticket sale page in Lisbon, I completed the redesign using React and Tailwind to align the website with the new Figma design and updated user flow. I developed and implemented load-testing scripts to ensure the site's stability and capacity to handle high traffic on the launch day, where I also provided real-time technical support.",
+      skills: ["React", "Typescript", "Scripting", "Load Testing", "Figma"],
+      live: "https://apefest.tokenproof.xyz/",
+      media: [],
+    },
+    {
+      name: "Rental Cars",
       description:
         "This a Full-stack project made for a renting cars business. As user you can watch the cars available, check its specifications, select and reserve it, as well as cancel those reservations. Using the admin role you can manage the availability of cars, add new ones, edit and delete them. Built with React, Rails and Postgres stack.",
-      languages: ["Ruby on Rails", "React", "Capybara", "PostgreSQL"],
+      skills: ["Ruby on Rails", "React", "Capybara", "PostgreSQL"],
       live: "https://rental-cars-williamscch.netlify.app/",
       source: "https://github.com/williamscch/front_rental_cars",
-      image:
+      media: [
         "https://raw.githubusercontent.com/williamscch/front_rental_cars/dev/app-ss.png",
+      ],
     },
     {
-      title: "Recipe App",
-      description:
-        "Ruby on Rails monolithic web application that keeps track of your cooking recipes, ingredients, and inventory. You can signup and login to use the app. It will allow you to save ingredients, keep track of what you have, create recipes, and generate a shopping list of those ingredients you do not have in your inventory",
-      languages: ["Ruby on Rails", "Rspec", "Devise", "Capybara", "PostgreSQL"],
-      live: "/",
-      source: "https://github.com/williamscch/recipes_rails_app",
-      image: "",
-    },
-    {
-      title: "My Spend Manager",
-      description:
-        "Mobile web application where you can manage your budget: you have a list of transactions associated with a category, so that you can see how much money you spent and on what.",
-      languages: ["Ruby on Rails", "Rspec", "Capybara", "PostgreSQL"],
-      live: "/",
-      source: "https://github.com/williamscch/budget_rails_app",
-      image:
-        "https://github.com/williamscch/budget_rails_app/blob/dev/screenshots/ss8.png?raw=true",
-    },
-    {
-      title: "Williams Blog",
-      description: "",
-      languages: ["Ruby on Rails", "Rspec", "Capybara", "PostgreSQL"],
-      live: "/",
-      source: "https://github.com/williamscch/blog_rails_app",
-      image: "",
-    },
-    {
-      title: "Forex Information App",
-      description:
-        "Informative web application focused on currencies trading, covers some of the major currency pairs traded worldwide, such as EUR/USD, USD/JPY and GBP/USD.",
-      languages: ["React", "Redux", "Javascript", "Jest"],
-      live: "https://forexapp-williamscch.netlify.app/",
-      source: "https://github.com/williamscch/forex-app",
-      image:
-        "https://raw.githubusercontent.com/williamscch/forex-app/dev/screenshot-fx-app.png",
-    },
-    {
-      title: "Space Travelers Hub",
-      description:
-        "Web App that shows real live data from the Space X API, useful information about rockets and missions as well counts with the functionality to join missions, reserve rockets, and those items reserved appears in your profile. Built with React and Redux toolkit",
-      languages: ["React", "Redux toolkit", "Javascript", "Jest"],
-      live: "https://spacetravelers-williamscch.netlify.app/",
-      source: "https://github.com/williamscch/space-travelers",
-      image:
-        "https://raw.githubusercontent.com/williamscch/space-travelers/dev/src/components/images/screenshot-spaceX.png",
-    },
-    {
-      title: "TV Shows",
+      name: "TV Shows Explorer",
       description:
         "Web application based on an external API which contains information about popular TV shows. This app let you like the shows that you like the most and comment what you think about them making it so interactive and uses an involvement API to save this interaction information.",
-      languages: ["Javascript", "ES6", "API utilization", "Jest"],
+      skills: ["Javascript", "ES6", "API integration", "Jest"],
       live: "https://williamscch.github.io/tv-shows/dist/",
       source: "https://github.com/williamscch/tv-shows",
-      image:
+      media: [
         "https://raw.githubusercontent.com/williamscch/tv-shows/development/app-ss.png",
+      ],
     },
     {
-      title: "Leader-board",
+      name: "Today's To-Do Tasks Tool",
       description:
-        "LeaderBoard web app that displays scores submitted by different players. It also allows you to submit your score. All data is preserved thanks to the external Leaderboard API service",
-      languages: ["JavaScript", "Webpack", "API integration", "CSS"],
-      live: "https://leaderboard-williamscch.netlify.app/",
-      source: "https://github.com/williamscch/leaderboard",
-      image:
-        "https://raw.githubusercontent.com/williamscch/leaderboard/dev/mkleaderboardss.png",
-    },
-    {
-      title: "Math Magicians",
-      description: "Calculator Web App build with React Components.",
-      languages: ["JavaScript", "React", "CSS"],
-      live: "https://calculator-williamscch.netlify.app/",
-      source: "https://github.com/williamscch/math-magicians",
-      image:
-        "https://raw.githubusercontent.com/williamscch/math-magicians/development/app-ss.png",
-    },
-    {
-      title: "To-Do List",
-      description:
-        "A web app which help you to save your daily tasks, mark them as completed and edit and delete them. Built with JavaScript",
-      languages: ["Javascript", "CSS", "HTML"],
+        "A web app which help you to save your daily tasks, mark them as completed and edit and delete them. Built vanilla JavaScript",
+      skills: ["Javascript", "CSS", "HTML", "Local Storage"],
       live: "https://williamscch.github.io/to-do-list/dist/",
       source: "https://github.com/williamscch/to-do-list",
-      image:
+      media: [
         "https://raw.githubusercontent.com/williamscch/to-do-list/master/app-ss.png",
-    },
-    {
-      title: "Pizza Restaurant",
-      description:
-        "A fully responsive page for a pizza restaurant, which contains the most important sections to be useful, and also uses JavaScript to be a fully dynamic page.",
-      languages: ["Javascript", "CSS", "HTML"],
-      live: "https://williamscch.github.io/pizza-restaurant-page/",
-      source: "https://github.com/williamscch/pizza-restaurant-page",
-      image:
-        "https://raw.githubusercontent.com/williamscch/pizza-restaurant-page/master/assets/img/ss.png",
+      ],
     },
   ],
 
