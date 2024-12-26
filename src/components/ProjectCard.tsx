@@ -20,7 +20,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
           <img
             src={project.media[0]}
             alt="project-img"
-            className="object-cover"
+            className="h-full w-full object-cover"
           />
         ) : null}
       </div>

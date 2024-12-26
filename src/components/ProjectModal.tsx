@@ -73,7 +73,7 @@ export default function ProjectModal({ project }: ProjectModalProps) {
           <div className="max-h-[90%] overflow-y-scroll w-full flex flex-col gap-2">
             {project.media && project.media.length > 0
               ? project.media.map((e, i) => (
-                  <div className="relative w-full aspect-video overflow-hidden">
+                  <div className="relative w-full aspect-video">
                     <img
                       key={i}
                       src={e}
