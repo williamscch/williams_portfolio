@@ -474,7 +474,7 @@ export const state: PortfolioState = {
       recommendations:
         "https://www.linkedin.com/in/williamscolmenaresch/details/recommendations/?detailScreenTabIndex=0",
       resume:
-        "https://drive.google.com/file/d/1OwSQfR8eCHOZ1hfjh8h_CoXwRPIxTlEc/view?usp=sharing",
+        "https://docs.google.com/document/d/100M7OyXCnLGtPcNVfu-YGa2jH5O3AG09_NlbYNN2c-0/edit?usp=sharing",
     },
   },
 
