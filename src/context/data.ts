@@ -42,7 +42,6 @@ export interface PortfolioState {
     email: string;
     links: {
       email: string;
-      whatsapp: string;
       repositories: string;
       resume: string;
       microverse: string;
@@ -470,7 +469,6 @@ export const state: PortfolioState = {
     links: {
       email:
         "mailto:williamscolmenaresch@gmail.com?subject=Hello%20Williams&body=I%20would%20like%20to%20connect%20with%20you.",
-      whatsapp: "https://wa.me/+584127711031",
       repositories: "https://github.com/williamscch?tab=repositories",
       microverse: "https://www.microverse.org/?grsf=s3swmk",
       recommendations:
