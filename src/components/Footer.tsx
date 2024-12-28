@@ -77,11 +77,6 @@ export default function Footer() {
                 {connect.email}
               </a>
             </li>
-            <li className="hover:text-accent-foreground">
-              <a href={connect.links.whatsapp} target="_blank" rel="noreferrer">
-                WhatsApp me
-              </a>
-            </li>
           </ul>
         </div>
       </div>
