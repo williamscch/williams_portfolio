@@ -8,7 +8,7 @@ export default function Footer() {
         <div>
           <h3 className="mb-2 md:mb-4 text-xl font-medium">Where to Find Me</h3>
           <p className="text-muted-foreground text-sm md:text-base">
-            Located in San Cristóbal, Táchira, Venezuela.
+            Located in LATAM.
           </p>
           <p className="text-muted-foreground text-sm md:text-base">
             A Global Citizen 🌎, connecting with the world.
