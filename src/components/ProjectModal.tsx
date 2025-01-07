@@ -58,7 +58,7 @@ export default function ProjectModal({ project }: ProjectModalProps) {
                   <Button
                     variant="link"
                     className="p-0 text-start h-fit"
-                    onClick={() => window.open(project.source, "_blank")}
+                    onClick={() => window.open(project.live, "_blank")}
                   >
                     {project.live}
                   </Button>
