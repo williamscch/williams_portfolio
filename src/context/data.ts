@@ -475,10 +475,10 @@ export const contentByLocale: Record<Language, PortfolioContent> = {
   },
 };
 
-// ─── Legacy Compatibility Shim (remove when Task 2 refactors portfolio.tsx) ───
+// ─── Legacy Compatibility Shim (remove when Task 9 deletes old components) ───
 /**
- * @deprecated Use `contentByLocale` instead. Kept only so existing components
- * continue to compile until Task 2 refactors `src/context/portfolio.tsx`.
+ * @deprecated Kept only so legacy components (About, Me, Services, etc.)
+ * continue to compile until Task 9 replaces them.
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export interface PortfolioState {
@@ -526,3 +526,5 @@ export const state: PortfolioState = {
   },
   testimonials: [],
 };
+
+
