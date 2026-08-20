@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-    <rect width="100" height="100" fill="#2563EB" />
-    <text x="50" y="55" font-size="50" fill="white" text-anchor="middle"
-        font-family="Arial, sans-serif" font-weight="bold">
-        W
-    </text>
+  <rect width="100" height="100" rx="20" fill="#FAF7F2" />
+  <text x="50" y="65" font-size="58" fill="#C25E3E" text-anchor="middle"
+      font-family="Georgia, serif" font-weight="bold">
+    W
+  </text>
 </svg>
