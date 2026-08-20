@@ -4,44 +4,40 @@ import { PanelLeft } from "lucide-react";
 import { Button } from "@/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/ui/sheet";
 import { cn } from "@/utils/cn";
+import { usePortfolioContext } from "@/context/portfolio";
 
-interface LayoutProps {
-  options: {
-    label: string;
-    toId: string;
-  }[];
-  children?: React.ReactNode;
-}
+const navOptions = [
+  { label: "Story", toId: "story" },
+  { label: "Beyond Code", toId: "beyond-code" },
+  { label: "Toolkit", toId: "toolkit" },
+  { label: "Connect", toId: "connect" },
+];
 
-export default function Layout({ options, children }: LayoutProps) {
+export default function Layout({ children }: { children?: React.ReactNode }) {
+  const { locale, setLocale } = usePortfolioContext();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
   const handleScroll = () => {
-    if (window.scrollY >= 64) {
-      setScrolled(true);
-    } else {
-      setScrolled(false);
-    }
+    setScrolled(window.scrollY >= 64);
   };
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      document.removeEventListener("scroll", handleScroll);
-    };
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const toggleLocale = () => setLocale(locale === "en" ? "es" : "en");
+
   return (
-    <div className="z-50 flex min-h-screen w-full flex-col ">
+    <div className="z-50 flex min-h-screen w-full flex-col">
       <div className="flex flex-col">
         <header
           className={cn(
-            "sticky top-0 z-30 flex justify-between sm:gap-4 sm:py-4 md:justify-end h-12 items-center gap-4 border-b bg-background px-4 sm:h-auto sm:border-0 sm:bg-background sm:px-6 sm:hover:bg-muted transition-all ease delay-400",
+            "sticky top-0 z-30 flex justify-between items-center gap-4 border-b bg-[#F4EFEA] px-4 sm:px-6 transition-all ease delay-400",
             scrolled
-              ? "sm:disabled:hover h-10 sm:py-2 sm:border-b sm:shadow-md"
-              : ""
+              ? "h-10 sm:py-2 sm:border-b sm:shadow-md"
+              : "h-12 sm:py-4 sm:border-0"
           )}
         >
           <Sheet onOpenChange={setOpen} open={open}>
@@ -51,37 +47,38 @@ export default function Layout({ options, children }: LayoutProps) {
                 <span className="sr-only">Toggle Menu</span>
               </Button>
             </SheetTrigger>
-            <SheetContent side="left" className="sm:max-w-xs">
+            <SheetContent side="left" className="sm:max-w-xs bg-[#FAF7F2]">
               <nav className="grid gap-6 text-lg font-medium mt-8">
-                {options
-                  .filter((option) => option.toId !== "me")
-                  .map((option, index) => (
-                    <Link
-                      onClick={() => setOpen((prev) => !prev)}
-                      key={index}
-                      to={option.toId}
-                      className="pl-2 text-muted-foreground text-xl font-semibold transition-colors hover:text-foreground cursor-pointer"
-                    >
-                      {option.label}
-                    </Link>
-                  ))}
+                {navOptions.map((option) => (
+                  <Link
+                    onClick={() => setOpen(false)}
+                    key={option.toId}
+                    to={option.toId}
+                    className="pl-2 text-[#4A4A52] text-xl font-semibold transition-colors hover:text-[#19191C] cursor-pointer"
+                  >
+                    {option.label}
+                  </Link>
+                ))}
+                <button
+                  onClick={() => { toggleLocale(); setOpen(false); }}
+                  className="pl-2 text-[#C25E3E] text-xl font-semibold text-left cursor-pointer"
+                >
+                  {locale === "en" ? "ES" : "EN"}
+                </button>
               </nav>
             </SheetContent>
           </Sheet>
+
           <div className="hidden sm:flex w-full gap-6 items-center justify-center relative">
-            {options.map((option, i) => (
+            {navOptions.map((option) => (
               <Link
-                activeStyle={{ color: "#2563EB" }}
-                key={i + option.toId}
-                className={cn(
-                  "font-medium cursor-pointer",
-                  option.toId === "me" ? "text-primary text-xl" : ""
-                )}
+                activeStyle={{ color: "#C25E3E" }}
+                key={option.toId}
+                className="font-medium cursor-pointer text-[#4A4A52] hover:text-[#19191C] transition-colors"
                 to={option.toId}
                 spy
-                hashSpy
                 smooth
-                offset={40}
+                offset={-40}
                 delay={200}
                 duration={600}
               >
@@ -89,6 +86,13 @@ export default function Layout({ options, children }: LayoutProps) {
               </Link>
             ))}
           </div>
+
+          <button
+            onClick={toggleLocale}
+            className="hidden sm:inline-flex font-mono text-xs uppercase tracking-widest text-[#C25E3E] hover:text-[#A84E33] transition-colors cursor-pointer"
+          >
+            {locale === "en" ? "ES" : "EN"}
+          </button>
         </header>
         <main className="flex-1">{children}</main>
       </div>
