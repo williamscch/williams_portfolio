@@ -480,7 +480,6 @@ export const contentByLocale: Record<Language, PortfolioContent> = {
  * @deprecated Kept only so legacy components (About, Me, Services, etc.)
  * continue to compile until Task 9 replaces them.
  */
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export interface PortfolioState {
   skills: { name: string; logo: string }[];
   services: {
