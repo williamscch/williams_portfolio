@@ -31,13 +31,13 @@ export default function Layout({ children }: { children?: React.ReactNode }) {
       <div className="flex flex-col">
         <header
           className={cn(
-            "sticky top-0 z-30 flex justify-between items-center gap-4 border-b bg-brand-warm px-4 sm:px-6 transition-all ease delay-400",
+            "sticky top-0 z-30 hidden sm:flex justify-between items-center gap-4 border-b bg-brand-warm px-6 transition-all ease delay-400",
             scrolled
-              ? "h-10 sm:py-2 sm:border-b sm:shadow-md"
-              : "h-12 sm:py-4 sm:border-0"
+              ? "py-2 border-b shadow-md"
+              : "py-4 border-0"
           )}
         >
-          <div className="hidden sm:flex w-full gap-6 items-center justify-center relative">
+          <div className="flex w-full gap-6 items-center justify-center relative">
             {navOptions.map((option) => (
               <Link
                 activeStyle={{ color: "hsl(14 65% 50%)" }}
@@ -57,7 +57,7 @@ export default function Layout({ children }: { children?: React.ReactNode }) {
 
           <button
             onClick={toggleLocale}
-            className="hidden sm:inline-flex font-mono text-xs uppercase tracking-widest text-brand-terra hover:text-brand-terra-hover transition-colors cursor-pointer"
+            className="inline-flex font-mono text-xs uppercase tracking-widest text-brand-terra hover:text-brand-terra-hover transition-colors cursor-pointer"
           >
             {locale === "en" ? "ES" : "EN"}
           </button>
@@ -65,7 +65,7 @@ export default function Layout({ children }: { children?: React.ReactNode }) {
         <main className="flex-1 pb-16 sm:pb-0">{children}</main>
       </div>
       {/* Mobile bottom tab bar */}
-      <nav className="sm:hidden fixed bottom-0 inset-x-0 z-50 bg-brand-cream/95 backdrop-blur-sm border-t border-brand-border px-2 py-1.5 flex items-center justify-around safe-area-bottom">
+      <nav className="sm:hidden fixed bottom-0 inset-x-0 z-50 bg-brand-cream/95 backdrop-blur-sm border-t border-brand-border px-2 py-1.5 flex items-center justify-around">
         {navOptions.map((option) => (
           <Link
             activeStyle={{ color: "hsl(14 65% 50%)" }}

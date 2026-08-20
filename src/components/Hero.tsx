@@ -1,7 +1,7 @@
 import { Link } from "react-scroll";
 import { ArrowDown, MessageCircle } from "lucide-react";
 import { usePortfolioContext } from "@/context/portfolio";
-import IMG_3406 from "@/assets/IMG_3406.jpg";
+import thumbnail from "@/assets/thumbnail.jpg";
 
 export default function Hero() {
   const { data } = usePortfolioContext();
@@ -10,14 +10,14 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className="relative bg-brand-warm px-6 pt-24 pb-20 sm:px-12 sm:pt-32 sm:pb-24 md:px-20"
+      className="relative bg-brand-warm px-6 pt-12 pb-16 sm:px-12 sm:pt-32 sm:pb-24 md:px-20"
     >
       <div className="mx-auto max-w-3xl">
         <div className="flex items-center gap-5 mb-8">
           <img
-            src={IMG_3406}
+            src={thumbnail}
             alt="Williams Colmenares"
-            className="h-20 w-20 shrink-0 rounded-full object-cover ring-2 ring-brand-terra/20 shadow-md"
+            className="h-28 w-28 shrink-0 rounded-full object-cover ring-2 ring-brand-terra/20 shadow-md"
           />
           <p className="font-mono text-sm uppercase tracking-widest text-brand-terra">
             {greeting}

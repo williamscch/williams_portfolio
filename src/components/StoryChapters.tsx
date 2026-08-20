@@ -46,20 +46,6 @@ export default function StoryChapters() {
 
             {renderNarrative(chapter.narrative)}
 
-            {chapter.quote && (
-              <blockquote className="mt-8 border-l-2 border-brand-terra pl-4 py-2 bg-brand-light/60 rounded-r-lg p-4">
-                <p className="italic text-brand-ink text-sm sm:text-base leading-relaxed mb-2">
-                  &ldquo;{chapter.quote.message}&rdquo;
-                </p>
-                <footer className="text-xs text-brand-muted">
-                  <span className="font-medium text-brand-ink">{chapter.quote.from}</span>
-                  {chapter.quote.role && (
-                    <span> — {chapter.quote.role}</span>
-                  )}
-                </footer>
-              </blockquote>
-            )}
-
             {chapter.caseStudyIds.length > 0 && (
               <div className="mt-10 space-y-4">
                 {chapter.caseStudyIds.map((csId) => {
@@ -131,6 +117,20 @@ export default function StoryChapters() {
                   );
                 })}
               </div>
+            )}
+
+            {chapter.quote && (
+              <blockquote className="mt-8 border-l-2 border-brand-terra pl-4 py-2 bg-brand-light/60 rounded-r-lg p-4">
+                <p className="italic text-brand-ink text-sm sm:text-base leading-relaxed mb-2">
+                  &ldquo;{chapter.quote.message}&rdquo;
+                </p>
+                <footer className="text-xs text-brand-muted">
+                  <span className="font-medium text-brand-ink">{chapter.quote.from}</span>
+                  {chapter.quote.role && (
+                    <span> — {chapter.quote.role}</span>
+                  )}
+                </footer>
+              </blockquote>
             )}
           </article>
         ))}

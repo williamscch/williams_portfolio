@@ -13,6 +13,8 @@ export interface TestimonialQuote {
   from: string;
   role: string;
   message: string;
+  /** Optional Spanish translation of the message. */
+  messageEs?: string;
 }
 
 export interface CaseStudy {
@@ -30,8 +32,8 @@ export interface CaseStudy {
   image?: string;
   /** Optional live production URL. */
   live?: string;
-  /** Optional testimonial linked to this specific case study. */
-  testimonial?: TestimonialQuote;
+  /** Optional public testimonials linked to this specific case study. */
+  testimonials?: TestimonialQuote[];
 }
 
 export interface StoryChapter {
@@ -134,12 +136,16 @@ const caseStudies: Record<string, CaseStudy> = {
       "Content teams went from no self-serve capability to full CMS-driven updates. License lookup is near-instant via Meilisearch.",
     tech: ["Next.js", "Payload CMS", "TypeScript", "PostgreSQL", "AWS S3", "Meilisearch", "Mailgun"],
     live: "https://madeby.boredapeyachtclub.com/",
-    testimonial: {
-      from: "Fonz Olvera",
-      role: "Serial Entrepreneur, Former CEO at tokenproof",
-      message:
-        "Williams was an amazing addition to our team. Not only did he exceed our expectations of talent and skills, but he also carries an excellent work ethic and all around great attitude.",
-    },
+    testimonials: [
+      {
+        from: "Fonz Olvera",
+        role: "Serial Entrepreneur, Former CEO at tokenproof",
+        message:
+          "Williams was an amazing addition to our team. Not only did he exceed our expectations of talent and skills, but he also carries an excellent work ethic and all around great attitude.",
+        messageEs:
+          "Williams fue una incorporación increíble a nuestro equipo. No solo superó nuestras expectativas de talento y habilidades, sino que además tiene una excelente ética de trabajo y una actitud encomiable.",
+      },
+    ],
   },
   "tga-automation": {
     id: "tga-automation",
@@ -180,12 +186,16 @@ const caseStudies: Record<string, CaseStudy> = {
       "Docker",
       "PostgreSQL",
     ],
-    testimonial: {
-      from: "Tech Lead at Apply",
-      role: "Engineering Lead",
-      message:
-        "Clean components, steady velocity, zero drama.",
-    },
+    testimonials: [
+      {
+        from: "Mario Mejia",
+        role: "Staff Engineer at Apply",
+        message:
+          "As the most senior developer on the Uniserve project, Williams was pivotal to our success. His prior experience with the tech stack allowed him to become a vital source of knowledge for the entire team. He demonstrates a high level of seniority by thinking beyond his assigned tickets, identifying potential risks, and spotting opportunities for improvement before they become issues. Williams is a standout performer — his openness to feedback and drive to help the team succeed make him a pleasure to work with.",
+        messageEs:
+          "Como el desarrollador más senior del proyecto Uniserve, Williams fue fundamental para nuestro éxito. Su experiencia previa con el stack tecnológico le permitió convertirse en una fuente vital de conocimiento para todo el equipo. Demuestra un alto nivel de seniority al pensar más allá de sus tickets asignados, identificando riesgos potenciales y detectando oportunidades de mejora antes de que se conviertan en problemas. Williams es un destacado — su apertura al feedback y su impulso por ayudar al equipo a tener éxito lo hacen un placer con quien trabajar.",
+      },
+    ],
   },
   "alltech-solo": {
     id: "alltech-solo",
@@ -211,12 +221,22 @@ const caseStudies: Record<string, CaseStudy> = {
       "Algolia",
       "Storybook",
     ],
-    testimonial: {
-      from: "Tyler Cobb",
-      role: "Global Digital Marketing Manager at Alltech",
-      message:
-        "Williams' documentation was valuable... he doesn't see this as a goodbye, but a 'see you soon.'",
-    },
+    testimonials: [
+      {
+        from: "Tyler Cobb",
+        role: "Global Digital Marketing Manager at Alltech",
+        message:
+          "Williams' documentation was valuable... he doesn't see this as a goodbye, but a 'see you soon.'",
+        messageEs:
+          "La documentación de Williams fue muy valiosa... él no ve esto como un adiós, sino como un «hasta pronto.»",
+      },
+      {
+        from: "Carlos Rosales",
+        role: "Staff Engineer at Apply",
+        message:
+          "Williams es un compañero de equipo increíble y también un gran desarrollador, siempre buscando soluciones a desarrollos y problemas complejos con la mayor disposición, a menudo no quedándose con la solución más fácil, sino contactando al equipo para discutir cuál debería ser la correcta. Ha sido capaz de ponerse al día con una gran velocidad y aportar de una forma increíble a la calidad del trabajo del equipo. Habla de su dominio con confianza, da la cara ante los desafíos y busca salir de su zona de confort. Williams es simplemente una gran persona, tenerlo en el equipo es un alivio, y puedes confiar en que llevará los proyectos con éxito hasta la meta.",
+      },
+    ],
   },
   "momentum-calculator": {
     id: "momentum-calculator",
@@ -233,52 +253,39 @@ const caseStudies: Record<string, CaseStudy> = {
     impact:
       "Feature is live in production after successfully navigating a complex requirements process over ~6 months. AI workflow proposals adopted by the team for improved efficiency.",
     tech: ["React", "TypeScript", "Tailwind CSS"],
+    testimonials: [
+      {
+        from: "Mariana Valdespino",
+        role: "Senior Software Engineer at Apply",
+        message:
+          "Williams es una persona que destaca buenas prácticas a nivel de código, proponiendo e implantando soluciones que no solo son muy legibles sino también escalables y eficientes, resultando en un trabajo de calidad. Conecta bloqueos, impedimentos y riesgos con claridad, y da retroalimentación clara sobre las implementaciones. Destaca su proactividad y por supuesto que no se limita a las tareas que le son asignadas, sino que las busca e implementa con la calidad y buena actitud que le caracterizan. Es un gusto trabajar con Williams porque siempre trae buena energía y transmite confianza por la excelente calidad de sus implementaciones.",
+      },
+    ],
   },
-  "liverpool": {
-    id: "liverpool",
-    title: "Liverpool — Backup Coverage",
-    tagline: "Rapid onboarding and delivery on an unfamiliar CMS stack.",
-    client: "Liverpool (via Apply)",
+  "quick-backups": {
+    id: "quick-backups",
+    title: "Quick Backups — Rapid Adaptation Across Stacks",
+    tagline: "Liverpool · White Stuff · Crunchyroll — proof that value starts on day one.",
+    client: "Apply (multiple clients)",
     role: "Backup Frontend Engineer",
-    timeframe: "~Jul 2025",
+    timeframe: "~Jun – Aug 2026",
     challenge:
-      "Step into an ongoing project as short-term backup coverage, onboarding fast on Contentstack CMS — a stack not previously used — and delivering immediately with no ramp-up time.",
+      "Short-term backup stints across three different clients, each requiring fast onboarding on unfamiliar stacks — Contentstack CMS at Liverpool, Vue/Nuxt at White Stuff, and Next.js at Crunchyroll. Prove rapid adaptation and autonomous delivery without supervision.",
     architecture:
-      "Contentstack CMS integration. Quick adaptation to an unfamiliar content platform, demonstrating CMS breadth beyond Payload and Contentful.",
+      "Liverpool: Contentstack CMS integration. White Stuff: Vue/Nuxt frontend, took ownership of tickets proactively. Crunchyroll: Next.js/React stack, standard fast-ramp pattern.",
     impact:
-      "Seamless coverage with no disruption to the team's velocity.",
-    tech: ["React", "TypeScript", "Contentstack CMS"],
-  },
-  "white-stuff": {
-    id: "white-stuff",
-    title: "White Stuff — Backup Coverage",
-    tagline:
-      "Highly autonomous Vue/Nuxt delivery — proving stack versatility.",
-    client: "White Stuff (via Apply)",
-    role: "Backup Frontend Engineer",
-    timeframe: "~Jun 2026",
-    challenge:
-      "Short-term backup on a Vue/Nuxt codebase — a different framework from the React/Next.js primary stack. Prove rapid adaptation and autonomous delivery without supervision.",
-    architecture:
-      "Vue/Nuxt frontend. Adapted to a new framework quickly and took ownership of tickets proactively.",
-    impact:
-      "Client feedback: 'Highly autonomous, proactively took tickets, no supervision needed.' Demonstrated that React expertise translates across frameworks.",
-    tech: ["Vue", "Nuxt", "TypeScript"],
-  },
-  "crunchyroll": {
-    id: "crunchyroll",
-    title: "Crunchyroll — Backup Coverage",
-    tagline: "Fast ramp-up on a high-profile entertainment brand.",
-    client: "Crunchyroll (via Apply)",
-    role: "Backup Frontend Engineer",
-    timeframe: "~Jul – Aug 2026",
-    challenge:
-      "Join a high-profile entertainment project for a short engagement, onboarding quickly and delivering production-ready code from day one.",
-    architecture:
-      "Next.js / React stack. Standard Apply engagement pattern — fast onboarding, immediate contribution.",
-    impact:
-      "Another data point in the rapid-adaptation pattern: different client, different domain, same day-one value delivery.",
-    tech: ["Next.js", "React", "TypeScript"],
+      "Seamless coverage with no disruption across all three teams. White Stuff feedback: 'Highly autonomous, proactively took tickets, no supervision needed.' Demonstrated that React expertise translates across frameworks and CMS platforms.",
+    tech: ["React", "Vue", "Nuxt", "Next.js", "TypeScript", "Contentstack CMS"],
+    testimonials: [
+      {
+        from: "White Stuff Team",
+        role: "Client via Apply",
+        message:
+          "Highly autonomous, proactively took tickets, no supervision needed.",
+        messageEs:
+          "Altamente autónomo, tomaba tickets proactivamente, no necesitaba supervisión.",
+      },
+    ],
   },
 };
 
@@ -359,7 +366,7 @@ export const contentByLocale: Record<Language, PortfolioContent> = {
         subtitle: "Alltech · Uniserve · Momentum · Quick Backups",
         timeframe: "2025 – 2026",
         narrative:
-          "Apply is a Canada-based software consultancy. I joined in January 2025 as a mid-level engineer (L3). By June 2026, I'd been promoted to Senior — thanks to the depth of ownership I took across every project.\n\n**Alltech (Feb–Jul 2025):** Started as backup coverage. Earned my Contentful certification and learned Algolia and Storybook on the job. Performed so well in my first project that they kept calling me back. In my second stint (~Nov 2025), I replaced the tech lead mid-project and became Apply's sole technical point of contact — making decisions, running client calls, and debugging production issues. The client's Global Digital Marketing Manager, Tyler Cobb, gave incredible public feedback. He specifically mentioned how valuable my documentation was and said he doesn't see this as a goodbye, but a \"see you soon\" — he hopes to work with me and this team on future opportunities. This was fantastic confirmation of the measurable impact I had, directly strengthening the client relationship.\n\n**Uniserve (Aug–Oct 2025):** As the most senior developer on the team, I was the vital source of knowledge for the entire dev team. Payload CMS expertise, Docker, PostgreSQL, Next.js — I became the tech lead's right hand, proactively identifying risks and spotting improvement opportunities before they became issues. \"Clean components, steady velocity, zero drama.\"\n\n**Momentum (Nov 2025 – May 2026):** A loan calculator with conflicting stakeholder requirements. I resolved ambiguity directly through meetings and written communication, proposed AI tools and standardized workflows for the team to plan tickets and automate repetitive work, and built a self code-review practice that saved time in PR reviews.\n\n**Quick Backups — Liverpool, White Stuff, Crunchyroll (~1 month each):** Short stints that show rapid adaptation. At White Stuff (Vue/Nuxt), the feedback was: \"highly autonomous, proactively took tickets, no supervision needed.\" These aren't filler — they're evidence that I deliver value from day one, regardless of the stack.",
+          "Apply is a Canada-based software consultancy. I joined in January 2025 as a mid-level engineer (L3). By June 2026, I'd been promoted to Senior — thanks to the depth of ownership I took across every project.\n\n**Alltech (Feb–Jul 2025):** Started as backup coverage. Earned my Contentful certification and learned Algolia and Storybook on the job. Performed so well in my first project that they kept calling me back. In my second stint (~Nov 2025), I replaced the tech lead mid-project and became Apply's sole technical point of contact — making decisions, running client calls, and debugging production issues. The client's Global Digital Marketing Manager, Tyler Cobb, gave incredible public feedback. He specifically mentioned how valuable my documentation was and said he doesn't see this as a goodbye, but a \"see you soon\" — he hopes to work with me and this team on future opportunities. This was fantastic confirmation of the measurable impact I had, directly strengthening the client relationship.\n\n**Uniserve (Aug–Oct 2025):** As the most senior developer on the team, I was the vital source of knowledge for the entire dev team. Payload CMS expertise, Docker, PostgreSQL, Next.js — I became the tech lead's right hand, proactively identifying risks and spotting improvement opportunities before they became issues. \"Clean components, steady velocity, zero drama.\"\n\n**Momentum (Nov 2025 – May 2026):** A loan calculator with conflicting stakeholder requirements. I resolved ambiguity directly through meetings and written communication, proposed AI tools and standardized workflows for the team to plan tickets and automate repetitive work, and built a self code-review practice that saved time in PR reviews.\n\n**Quick Backups — Liverpool, White Stuff, Crunchyroll (~1 month each):** Short stints that show rapid adaptation. At White Stuff (Vue/Nuxt), the feedback was: \"highly autonomous, proactively took tickets, no supervision needed.\" These aren't filler — they're proof I can deliver value from day one, anywhere.",
         quote: {
           from: "Luis Lara",
           role: "Computer Systems Engineer",
@@ -370,9 +377,7 @@ export const contentByLocale: Record<Language, PortfolioContent> = {
           "uniserve-architecture",
           "alltech-solo",
           "momentum-calculator",
-          "liverpool",
-          "white-stuff",
-          "crunchyroll",
+          "quick-backups",
         ],
       },
     ],
@@ -382,11 +387,11 @@ export const contentByLocale: Record<Language, PortfolioContent> = {
     humanSide: {
       headline: "Beyond the terminal",
       person:
-        "LATAM-based with Venezuelan roots. I work fully remote across global distributed teams — US, UK, Europe — and hold a C1 Advanced English certification (EF SET).",
+        "Venezuelan, based in Colombia. I work fully remote across global distributed teams — US, UK, Europe — and hold a C1 Advanced English certification (EF SET). When I'm not coding, you'll find me doing CrossFit (or trying to), watching thought-provoking movies, or catching any sport — football is my favorite. I love being outdoors and staying active.",
       aiWorkflow:
         "Apply actively pushes AI adoption across engineering. I use Claude daily — in my personal projects I also experiment with OpenCode, Antigravity, Superpowers, and GStack. At work we follow the bmad method. I'm not listing every two-hour cert; what matters is I stay current with AI-assisted engineering practices and use them as a force multiplier for quality and speed.",
       mentorship:
-        "I currently mentor two engineers at Apply through monthly 1:1 coaching sessions (Luis Herrera, Alex Orquera). Earlier I informally coached Microverse cohort peers. Beyond formal mentorship, I'm a knowledge sharer — I document reusable approaches (like the Payload CMS reference at Apply), share AI workflow practices with the team, and build self code-review habits that lift the whole team's quality.",
+        "I currently mentor two engineers at Apply through monthly 1:1 coaching sessions. Earlier I coached peers during the Microverse program. Beyond formal mentorship, I'm a knowledge sharer — I document reusable approaches, share AI workflow practices with the team, and build self code-review habits that lift the whole team's quality.",
       certifications: [
         "Braze Certified Developer (Jul 2025)",
         "Contentful Certified Professional (Feb 2025)",
@@ -492,7 +497,7 @@ export const contentByLocale: Record<Language, PortfolioContent> = {
         subtitle: "Alltech · Uniserve · Momentum · Backups Rápidos",
         timeframe: "2025 – 2026",
         narrative:
-          "Apply es una consultora de software con sede en Canadá. Me uní en enero de 2025 como ingeniero de nivel medio (L3). Para junio de 2026, había sido promovido a Senior — gracias a la profundidad de responsabilidad que asumí en cada proyecto.\n\n**Alltech (Feb–Jul 2025):** Empecé como cobertura de respaldo. Obtuve mi certificación de Contentful y aprendí Algolia y Storybook en el trabajo. Rendí tan bien en mi primer proyecto que siguieron llamándome. En mi segunda stint (~Nov 2025), reemplacé al tech lead a mitad del proyecto y me convertí en el único punto de contacto técnico de Apply — tomando decisiones, dirigiendo llamadas con el cliente y depurando problemas en producción. El Global Digital Marketing Manager del cliente, Tyler Cobb, dio un feedback público increíble. Mencionó específicamente lo valiosa que fue mi documentación y dijo que no ve esto como un adiós, sino como un \"hasta pronto\" — espera trabajar conmigo y con este equipo en futuras oportunidades. Esta fue una confirmación fantástica del impacto medible que tuve, fortaleciendo directamente la relación con el cliente.\n\n**Uniserve (Ago–Oct 2025):** Como el desarrollador más senior del equipo, fui la fuente vital de conocimiento para todo el equipo de desarrollo. Experiencia en Payload CMS, Docker, PostgreSQL, Next.js — me convertí en la mano derecha del tech lead, identificando proactivamente riesgos y detectando oportunidades de mejora antes de que se convirtieran en problemas. «Componentes limpios, velocidad constante, cero drama.»\n\n**Momentum (Nov 2025 – May 2026):** Una calculadora de préstamos con requisitos contradictorios de múltiples stakeholders. Resolví la ambigüedad directamente a través de reuniones y comunicación escrita, propuse herramientas de IA y flujos estandarizados para que el equipo planificara tickets y automatizara tareas repetitivas, y construí una práctica de auto-revisión de código que ahorró tiempo en las revisiones de PR.\n\n**Backups Rápidos — Liverpool, White Stuff, Crunchyroll (~1 mes cada uno):** Incursiones cortas que demuestran adaptación rápida. En White Stuff (Vue/Nuxt), el feedback fue: «altamente autónomo, proactivo tomando tickets, sin supervisión necesaria». No son relleno — son evidencia de que entrego valor desde el día uno, sin importar el stack.",
+          "Apply es una consultora de software con sede en Canadá. Me uní en enero de 2025 como ingeniero de nivel medio (L3). Para junio de 2026, había sido promovido a Senior — gracias a la profundidad de responsabilidad que asumí en cada proyecto.\n\n**Alltech (Feb–Jul 2025):** Empecé como cobertura de respaldo. Obtuve mi certificación de Contentful y aprendí Algolia y Storybook en el trabajo. Rendí tan bien en mi primer proyecto que siguieron llamándome. En mi segunda stint (~Nov 2025), reemplacé al tech lead a mitad del proyecto y me convertí en el único punto de contacto técnico de Apply — tomando decisiones, dirigiendo llamadas con el cliente y depurando problemas en producción. El Global Digital Marketing Manager del cliente, Tyler Cobb, dio un feedback público increíble. Mencionó específicamente lo valiosa que fue mi documentación y dijo que no ve esto como un adiós, sino como un \"hasta pronto\" — espera trabajar conmigo y con este equipo en futuras oportunidades. Esta fue una confirmación fantástica del impacto medible que tuve, fortaleciendo directamente la relación con el cliente.\n\n**Uniserve (Ago–Oct 2025):** Como el desarrollador más senior del equipo, fui la fuente vital de conocimiento para todo el equipo de desarrollo. Experiencia en Payload CMS, Docker, PostgreSQL, Next.js — me convertí en la mano derecha del tech lead, identificando proactivamente riesgos y detectando oportunidades de mejora antes de que se convirtieran en problemas. «Componentes limpios, velocidad constante, cero drama.»\n\n**Momentum (Nov 2025 – May 2026):** Una calculadora de préstamos con requisitos contradictorios de múltiples stakeholders. Resolví la ambigüedad directamente a través de reuniones y comunicación escrita, propuse herramientas de IA y flujos estandarizados para que el equipo planificara tickets y automatizara tareas repetitivas, y construí una práctica de auto-revisión de código que ahorró tiempo en las revisiones de PR.\n\n**Backups Rápidos — Liverpool, White Stuff, Crunchyroll (~1 mes cada uno):** Estancias cortas que demuestran adaptación rápida. En White Stuff (Vue/Nuxt), el feedback fue: «altamente autónomo, tomaba tickets proactivamente, no necesitaba supervisión.» Estos no son relleno — son prueba de que puedo entregar valor desde el primer día, en cualquier lugar.",
         quote: {
           from: "Luis Lara",
           role: "Ingeniero en Sistemas Computacionales",
@@ -503,9 +508,7 @@ export const contentByLocale: Record<Language, PortfolioContent> = {
           "uniserve-architecture",
           "alltech-solo",
           "momentum-calculator",
-          "liverpool",
-          "white-stuff",
-          "crunchyroll",
+          "quick-backups",
         ],
       },
     ],
@@ -515,11 +518,11 @@ export const contentByLocale: Record<Language, PortfolioContent> = {
     humanSide: {
       headline: "Más allá del terminal",
       person:
-        "LATAM-based con raíces venezolanas. Trabajo completamente en remoto con equipos distribuidos globalmente — EE.UU., Reino Unido, Europa — y cuento con certificación de inglés C1 Advanced (EF SET).",
+        "Venezolano, basado en Colombia. Trabajo completamente en remoto con equipos distribuidos globalmente — EE.UU., Reino Unido, Europa — y cuento con certificación de inglés C1 Advanced (EF SET). Cuando no estoy programando, me encontrarás haciendo CrossFit (o intentándolo), viendo películas que te dejan pensando, o viendo cualquier deporte — el fútbol es mi favorito. Me encanta estar al aire libre y mantenerme activo.",
       aiWorkflow:
         "Apply impulsa activamente la adopción de IA en ingeniería. Uso Claude a diario — en proyectos personales también experimento con OpenCode, Antigravity, Superpowers y GStack. En el trabajo seguimos el bmad method. No listo cada certificación de dos horas; lo que importa es que me mantengo al corriente con las prácticas de ingeniería asistida por IA y las uso como multiplicador de calidad y velocidad.",
       mentorship:
-        "Actualmente mentorizo a dos ingenieros en Apply mediante sesiones de coaching 1:1 mensuales (Luis Herrera, Alex Orquera). Anteriormente apoyé informalmente a compañeros del bootcamp Microverse. Más allá del mentorship formal, soy un compartidor de conocimiento — documento enfoques reutilizables (como la referencia de Payload CMS en Apply), comparto prácticas de flujos de IA con el equipo y construyo hábitos de auto-revisión de código que elevan la calidad de todo el equipo.",
+        "Actualmente mentorizo a dos ingenieros en Apply mediante sesiones de coaching 1:1 mensuales. Anteriormente apoyé a compañeros del programa Microverse. Más allá del mentorship formal, soy un compartidor de conocimiento — documento enfoques reutilizables, comparto prácticas de flujos de IA con el equipo y construyo hábitos de auto-revisión de código que elevan la calidad de todo el equipo.",
       certifications: [
         "Braze Certified Developer (Jul 2025)",
         "Contentful Certified Professional (Feb 2025)",

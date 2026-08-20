@@ -9,7 +9,7 @@ import {
 } from "@/ui/dialog";
 
 export default function CaseStudyModal() {
-  const { activeCaseStudy, closeCaseStudy } = usePortfolioContext();
+  const { activeCaseStudy, closeCaseStudy, locale } = usePortfolioContext();
 
   if (!activeCaseStudy) return null;
 
@@ -25,6 +25,7 @@ export default function CaseStudyModal() {
     tech,
     image,
     live,
+    testimonials,
   } = activeCaseStudy;
 
   return (
@@ -147,19 +148,24 @@ export default function CaseStudyModal() {
             </div>
           )}
 
-          {/* Client testimonial */}
-          {activeCaseStudy.testimonial && (
-            <blockquote className="border-l-2 border-brand-terra pl-4 py-2 bg-brand-light/60 rounded-r-lg mt-4">
-              <p className="italic text-brand-ink text-sm sm:text-base leading-relaxed mb-2">
-                &ldquo;{activeCaseStudy.testimonial.message}&rdquo;
-              </p>
-              <footer className="text-xs text-brand-muted">
-                <span className="font-medium text-brand-ink">{activeCaseStudy.testimonial.from}</span>
-                {activeCaseStudy.testimonial.role && (
-                  <span> — {activeCaseStudy.testimonial.role}</span>
-                )}
-              </footer>
-            </blockquote>
+          {/* Client testimonials */}
+          {testimonials && testimonials.length > 0 && (
+            <div className="space-y-3 mt-4">
+              {testimonials.map((t, i) => (
+                <blockquote
+                  key={`${t.from}-${i}`}
+                  className="border-l-2 border-brand-terra pl-4 py-2 bg-brand-light/60 rounded-r-lg"
+                >
+                  <p className="italic text-brand-ink text-sm sm:text-base leading-relaxed mb-2">
+                    &ldquo;{locale === "es" && t.messageEs ? t.messageEs : t.message}&rdquo;
+                  </p>
+                  <footer className="text-xs text-brand-muted">
+                    <span className="font-medium text-brand-ink">{t.from}</span>
+                    {t.role && <span> — {t.role}</span>}
+                  </footer>
+                </blockquote>
+              ))}
+            </div>
           )}
         </div>
       </DialogContent>
