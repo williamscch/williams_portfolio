@@ -141,7 +141,7 @@ const caseStudies: Record<string, CaseStudy> = {
     role: "Lead Engineer",
     timeframe: "Jul – Nov 2024",
     challenge:
-      "Every new token-gated client page (Forbes, F1, BMW, Yuga Labs) required manual per-client development. Identify a pattern, propose an automated solution, and build it.",
+      "Every new token-gated client page (Forbes, F1, BMW, Yuga Labs) required manual per-client development. Having learned Payload CMS on the MadeByApes Bodega project, I recognized the pattern, proposed automating it with the same tool, and built it myself.",
     architecture:
       "Payload CMS admin interface letting non-engineers generate and customize token-gated access pages. Next.js front-end renders the output dynamically.",
     impact:
@@ -152,47 +152,113 @@ const caseStudies: Record<string, CaseStudy> = {
   "uniserve-architecture": {
     id: "uniserve-architecture",
     title: "Uniserve Front-End Architecture",
-    tagline: "Setting Apply's first Payload CMS frontend architecture when the tech lead stepped away.",
+    tagline:
+      "Setting Apply's first Payload CMS frontend architecture as the most senior developer on the team.",
     client: "Uniserve (via Apply)",
     role: "Acting Tech Lead / Frontend Architect",
     timeframe: "Aug – Oct 2025",
     challenge:
-      "The assigned tech lead had to step away mid-project. Step into an ambiguous ownership gap, establish a coherent front-end architecture, and keep the team moving.",
+      "Join as the most senior developer on the team and become the vital source of knowledge for the entire dev group. Establish Apply's first Payload CMS frontend implementation while proactively managing risks and driving quality.",
     architecture:
-      "Defined Apply's first Payload CMS frontend implementation using an atomic component design system. Documented the full approach in Notion as a reusable company reference. Coordinated the rest of the dev team until the tech lead returned.",
+      "Payload CMS + Next.js frontend with Docker and PostgreSQL. Atomic component design system. Documented the full approach in Notion as a reusable company reference. Proactively identified risks and improvement opportunities before they became issues.",
     impact:
-      "Project continued without disruption. Produced a Notion doc now used as the standard Payload reference at Apply.",
-    tech: ["React", "Payload CMS", "TypeScript", "Tailwind CSS", "Notion"],
+      "Became the tech lead's right hand. Described as having 'clean components, steady velocity, zero drama.' Produced a Notion doc now used as the standard Payload reference at Apply.",
+    tech: [
+      "React",
+      "Payload CMS",
+      "TypeScript",
+      "Tailwind CSS",
+      "Next.js",
+      "Docker",
+      "PostgreSQL",
+    ],
   },
   "alltech-solo": {
     id: "alltech-solo",
     title: "Alltech — Solo Pre-Launch Delivery",
-    tagline: "Sole developer and primary client contact during critical pre-launch phase.",
+    tagline:
+      "Sole developer and primary client contact during critical pre-launch phase.",
     client: "Alltech (via Apply)",
     role: "Sole Developer & Technical Client Lead",
     timeframe: "~Nov 2025",
     challenge:
-      "Return to Alltech for pre-launch readiness as the only engineer on the account — owning not just the code, but direct client stakeholder communication and technical decision-making.",
+      "Return to Alltech for pre-launch readiness as the only engineer on the account — owning not just the code, but direct client stakeholder communication and technical decision-making. The account had a rocky start; trust needed to be rebuilt.",
     architecture:
-      "React, Vite, Tailwind CSS, Vercel. No other engineers on the account — full ownership of delivery, debugging, and client-facing technical conversations.",
+      "React, Vite, Tailwind CSS, Vercel. Contentful CMS, Algolia search, Storybook component documentation. No other engineers on the account — full ownership of delivery, debugging, and client-facing technical conversations.",
     impact:
-      "Received specific positive client feedback. Became Apply's sole technical point of contact during this period — without being assigned the title, purely by filling the gap.",
-    tech: ["React", "TypeScript", "Tailwind CSS", "Vite", "Vercel"],
+      "Turned a challenging account around. Tyler Cobb, Global Digital Marketing Manager at Alltech, gave public feedback: \"Williams' documentation was valuable... he doesn't see this as a goodbye, but a 'see you soon.'\" Became Apply's sole technical point of contact — a 'beacon of clarity' for the client.",
+    tech: [
+      "React",
+      "TypeScript",
+      "Tailwind CSS",
+      "Vite",
+      "Vercel",
+      "Contentful",
+      "Algolia",
+      "Storybook",
+    ],
   },
   "momentum-calculator": {
     id: "momentum-calculator",
     title: "Momentum Loan Calculator",
-    tagline: "Navigating conflicting stakeholder requirements to ship a customer-facing financial tool.",
+    tagline:
+      "Navigating conflicting stakeholder requirements to ship a customer-facing financial tool.",
     client: "Momentum (via Apply)",
     role: "Frontend Engineer",
     timeframe: "Nov 2025 – May 2026",
     challenge:
-      "Requirements from the client changed and conflicted across multiple stakeholders. Resolve the ambiguity directly — through meetings and written communication — rather than escalating or waiting.",
+      "Requirements from the client changed and conflicted across multiple stakeholders. Resolve the ambiguity directly — through meetings and written communication — rather than escalating or waiting. Additionally, propose and implement AI-assisted workflows for the team.",
     architecture:
-      "React + TypeScript customer-facing loan calculator. Feature went through multiple requirement iterations; final version shipped to production.",
+      "React + TypeScript customer-facing loan calculator. Feature went through multiple requirement iterations; final version shipped to production. Proposed AI tools and standardized skills for ticket planning and automating repetitive tasks. Built a self code-review practice to save time in PR reviews.",
     impact:
-      "Feature is live in production after successfully navigating a complex requirements process over ~6 months.",
+      "Feature is live in production after successfully navigating a complex requirements process over ~6 months. AI workflow proposals adopted by the team for improved efficiency.",
     tech: ["React", "TypeScript", "Tailwind CSS"],
+  },
+  "liverpool": {
+    id: "liverpool",
+    title: "Liverpool — Backup Coverage",
+    tagline: "Rapid onboarding and delivery on an unfamiliar CMS stack.",
+    client: "Liverpool (via Apply)",
+    role: "Backup Frontend Engineer",
+    timeframe: "~Jul 2025",
+    challenge:
+      "Step into an ongoing project as short-term backup coverage, onboarding fast on Contentstack CMS — a stack not previously used — and delivering immediately with no ramp-up time.",
+    architecture:
+      "Contentstack CMS integration. Quick adaptation to an unfamiliar content platform, demonstrating CMS breadth beyond Payload and Contentful.",
+    impact:
+      "Seamless coverage with no disruption to the team's velocity.",
+    tech: ["React", "TypeScript", "Contentstack CMS"],
+  },
+  "white-stuff": {
+    id: "white-stuff",
+    title: "White Stuff — Backup Coverage",
+    tagline:
+      "Highly autonomous Vue/Nuxt delivery — proving stack versatility.",
+    client: "White Stuff (via Apply)",
+    role: "Backup Frontend Engineer",
+    timeframe: "~Jun 2026",
+    challenge:
+      "Short-term backup on a Vue/Nuxt codebase — a different framework from the React/Next.js primary stack. Prove rapid adaptation and autonomous delivery without supervision.",
+    architecture:
+      "Vue/Nuxt frontend. Adapted to a new framework quickly and took ownership of tickets proactively.",
+    impact:
+      "Client feedback: 'Highly autonomous, proactively took tickets, no supervision needed.' Demonstrated that React expertise translates across frameworks.",
+    tech: ["Vue", "Nuxt", "TypeScript"],
+  },
+  "crunchyroll": {
+    id: "crunchyroll",
+    title: "Crunchyroll — Backup Coverage",
+    tagline: "Fast ramp-up on a high-profile entertainment brand.",
+    client: "Crunchyroll (via Apply)",
+    role: "Backup Frontend Engineer",
+    timeframe: "~Jul – Aug 2026",
+    challenge:
+      "Join a high-profile entertainment project for a short engagement, onboarding quickly and delivering production-ready code from day one.",
+    architecture:
+      "Next.js / React stack. Standard Apply engagement pattern — fast onboarding, immediate contribution.",
+    impact:
+      "Another data point in the rapid-adaptation pattern: different client, different domain, same day-one value delivery.",
+    tech: ["Next.js", "React", "TypeScript"],
   },
 };
 
@@ -241,7 +307,7 @@ export const contentByLocale: Record<Language, PortfolioContent> = {
         subtitle: "Hong Kong · Lisbon · Las Vegas",
         timeframe: "2023 – 2025",
         narrative:
-          "My first professional year was agency-speed: client after client at Crazy Imagine Software, then a placement at tokenproof that turned into a full-time chapter. tokenproof ran high-stakes, time-boxed experiences for some of the biggest names in Web3 — and nothing tested that more than ApeFest.\n\nThree cities. Three events. Each one a live production drop with a fixed date, real attendees, and zero tolerance for downtime.\n\n**Hong Kong (2023):** My first event-scale deployment — Firebase-backed order and session tracking for 2,000+ attendees across three live days.\n\n**Lisbon (2024):** Sole ownership of the ticket sale re-skin. I wrote and ran load-testing scripts to stress-test the platform before the drop, then provided real-time technical support during the live launch for 3,000+ attendees.\n\n**Las Vegas (2025):** After Yuga Labs acquired tokenproof's tech in December 2024, I wasn't carried over in the transition — but they specifically re-engaged me for ApeFest Las Vegas. The client called me back.",
+          "My first professional year was agency-speed: client after client at Crazy Imagine Software, working across the MERN stack (MongoDB, Express, React, Node.js) and various other technologies. Then a placement at tokenproof that turned into a full-time chapter.\n\ntokenproof ran high-stakes, time-boxed experiences for some of the biggest names in Web3 — and nothing tested that more than ApeFest. Their internal tools dashboard ran on a decoupled architecture: Express handling the backend services and React on the frontend. I also contributed to the ApeFest ticket sale page each year — doing re-skins for each new edition, running load and stress testing with automated scripts to prepare for the massive influx of buyers, and managing sessions and purchase orders via Firebase during live events.\n\nThree cities. Three events. Each one a live production drop with a fixed date, real attendees, and zero tolerance for downtime.\n\n**Hong Kong (2023):** My first event-scale deployment — Firebase-backed order and session tracking for 2,000+ attendees across three live days.\n\n**Lisbon (2024):** Sole ownership of the ticket sale re-skin. I wrote and ran load-testing scripts to stress-test the platform before the drop, then provided real-time technical support during the live launch for 3,000+ attendees.\n\n**Las Vegas (2025):** After Yuga Labs acquired tokenproof's tech in December 2024, I prepared the ticket sale page for the new edition and ran load testing to harden the infrastructure. My contract ended after that — but Yuga Labs specifically re-engaged me through former tokenproof colleagues who had stayed on. The client called me back.\n\n**MadeByApes Bodega** was my first CMS experience. I learned Payload CMS on the job, built the entire platform with it, and later proposed it as the solution for TGA — turning a one-time learning curve into a reusable company tool.",
         quote: {
           from: "Fonz Olvera",
           role: "Serial Entrepreneur, Former CEO at tokenproof",
@@ -270,17 +336,24 @@ export const contentByLocale: Record<Language, PortfolioContent> = {
         id: "chap-03",
         chapterNumber: "03 / 03",
         title: "Stepping into Leadership & Enterprise at Apply",
-        subtitle: "Uniserve · Alltech Solo · Momentum",
+        subtitle: "Alltech · Uniserve · Momentum · Quick Backups",
         timeframe: "2025 – 2026",
         narrative:
-          "Apply is a UK-based software consultancy. I joined in January 2025 as a Senior Software Engineer. What I didn't expect was how quickly \"backup coverage\" became real ownership.\n\n**Uniserve (Aug–Oct 2025):** The tech lead had to step away mid-project. I stepped in, set Apply's first Payload CMS frontend architecture, ran the dev team, and documented the whole approach in Notion as a reusable reference.\n\n**Alltech — Solo Pre-Launch (Nov 2025):** I was brought back to Alltech specifically for pre-launch readiness — as the only developer on the account. I became Apply's sole technical point of contact: making decisions, running client calls, debugging production issues. No title assigned, just a gap that needed filling.\n\n**Momentum (Nov 2025 – May 2026):** A loan calculator with conflicting requirements from multiple stakeholders. I resolved the ambiguity directly — through meetings and written communication — and shipped it to production.",
+          "Apply is a Canada-based software consultancy. I joined in January 2025 as a mid-level engineer (L3). By June 2026, I'd been promoted to Senior — thanks to the depth of ownership I took across every project.\n\n**Alltech (Feb–Jul 2025):** Started as backup coverage. Earned my Contentful certification and learned Algolia and Storybook on the job. Performed so well in my first project that they kept calling me back. In my second stint (~Nov 2025), I replaced the tech lead mid-project and became Apply's sole technical point of contact — making decisions, running client calls, and debugging production issues. The client's Global Digital Marketing Manager, Tyler Cobb, specifically praised my documentation and said he \"doesn't see this as a goodbye, but a see you soon.\" We turned a rocky start into full client confidence.\n\n**Uniserve (Aug–Oct 2025):** As the most senior developer on the team, I was the vital source of knowledge for the entire dev team. Payload CMS expertise, Docker, PostgreSQL, Next.js — I became the tech lead's right hand, proactively identifying risks and spotting improvement opportunities before they became issues. \"Clean components, steady velocity, zero drama.\"\n\n**Momentum (Nov 2025 – May 2026):** A loan calculator with conflicting stakeholder requirements. I resolved ambiguity directly through meetings and written communication, proposed AI tools and standardized workflows for the team to plan tickets and automate repetitive work, and built a self code-review practice that saved time in PR reviews.\n\n**Quick Backups — Liverpool, White Stuff, Crunchyroll (~1 month each):** Short stints that show rapid adaptation. At White Stuff (Vue/Nuxt), the feedback was: \"highly autonomous, proactively took tickets, no supervision needed.\" These aren't filler — they're evidence that I deliver value from day one, regardless of the stack.",
         quote: {
           from: "Luis Lara",
           role: "Computer Systems Engineer",
           message:
             "Williams is a technology enthusiast. He is always willing to learn new things. He works very well in a team, and adheres to the recommendations and procedures within an organization. He is an excellent professional, with great talent and potential, who works hard to achieve his goals. Punctual, with initiative, intelligent, orderly, and detail-oriented.",
         },
-        caseStudyIds: ["uniserve-architecture", "alltech-solo", "momentum-calculator"],
+        caseStudyIds: [
+          "uniserve-architecture",
+          "alltech-solo",
+          "momentum-calculator",
+          "liverpool",
+          "white-stuff",
+          "crunchyroll",
+        ],
       },
     ],
 
@@ -289,17 +362,12 @@ export const contentByLocale: Record<Language, PortfolioContent> = {
     humanSide: {
       headline: "Beyond the terminal",
       person:
-        "I'm based in Cúcuta, Colombia, with roots in San Cristóbal, Venezuela. I work fully remote across global distributed teams — US, UK, Europe — and hold a C1 Advanced English certification (EF SET, 63/100).",
+        "LATAM-based with Venezuelan roots. I work fully remote across global distributed teams — US, UK, Europe — and hold a C1 Advanced English certification (EF SET).",
       aiWorkflow:
-        "I hold four Anthropic certifications (Claude 101, Claude Code 101, Claude Code in Action, AI Capabilities & Limitations — all 2026) plus Apply's internal AI Foundations training. I use AI tools daily — not as a shortcut, but as a force multiplier for engineering quality and delivery speed.",
+        "Apply actively pushes AI adoption across engineering. I use Claude daily — in my personal projects I also experiment with OpenCode, Antigravity, Superpowers, and GStack. At work we follow the bmad method. I'm not listing every two-hour cert; what matters is I stay current with AI-assisted engineering practices and use them as a force multiplier for quality and speed.",
       mentorship:
-        "I currently mentor two engineers at Apply through monthly 1:1 coaching sessions. Earlier I mentored a junior developer at tokenproof (code reviews, architecture guidance, motivation support) and informally coached Microverse cohort peers. Mentoring shows up consistently across every chapter of my career.",
+        "I currently mentor two engineers at Apply through monthly 1:1 coaching sessions (Luis Herrera, Alex Orquera). Earlier I informally coached Microverse cohort peers. Beyond formal mentorship, I'm a knowledge sharer — I document reusable approaches (like the Payload CMS reference at Apply), share AI workflow practices with the team, and build self code-review habits that lift the whole team's quality.",
       certifications: [
-        "Claude Code in Action — Anthropic (May 2026)",
-        "Claude Code 101 — Anthropic (May 2026)",
-        "AI Capabilities and Limitations — Anthropic (May 2026)",
-        "Claude 101 — Anthropic (Apr 2026)",
-        "AI Foundations at Apply — Tier 1 (May 2026)",
         "Braze Certified Developer (Jul 2025)",
         "Contentful Certified Professional (Feb 2025)",
         "EF SET English Certificate C1 Advanced (Jun 2024)",
@@ -308,31 +376,33 @@ export const contentByLocale: Record<Language, PortfolioContent> = {
 
     toolkit: [
       {
-        groupName: "Core Engineering & Frontend Mastery",
+        groupName: "Core Engineering",
         items: [
           "React",
           "Next.js",
           "TypeScript",
-          "Tailwind CSS",
           "Node.js",
-          "PostgreSQL",
-          "Payload CMS",
-          "Web3 / Ethers.js",
+          "Express",
+          "Vue",
+          "Svelte",
+          "Tailwind CSS",
         ],
       },
       {
-        groupName: "AI & Modern Engineering",
-        items: [
-          "Anthropic Claude Code",
-          "Prompt Engineering",
-          "AI-Assisted Workflows",
-          "Contentful",
-          "Braze",
-        ],
+        groupName: "CMS & Content Platforms",
+        items: ["Payload", "Contentful", "Contentstack", "Algolia", "Constructor"],
       },
       {
-        groupName: "Cloud, Testing & Systems",
-        items: ["AWS S3", "Firebase", "Vercel", "Playwright", "Jest", "Git & GitHub"],
+        groupName: "Backend, Data & Cloud",
+        items: ["PostgreSQL", "MongoDB", "Firebase", "GCP", "Python", "Ruby on Rails"],
+      },
+      {
+        groupName: "AI & Automation",
+        items: ["Claude Code", "OpenCode", "Antigravity", "n8n", "MCPs"],
+      },
+      {
+        groupName: "Testing, DevOps & Tooling",
+        items: ["Playwright", "Jest", "Git & GitHub", "Jira", "Web3 / Ethers.js"],
       },
     ],
 
@@ -340,8 +410,9 @@ export const contentByLocale: Record<Language, PortfolioContent> = {
       email: "williamscolmenaresch@gmail.com",
       emailHref:
         "mailto:williamscolmenaresch@gmail.com?subject=Hello%20Williams&body=I%20would%20like%20to%20connect%20with%20you.",
-      location: "Cúcuta, Colombia — available globally (remote)",
-      availability: "Open to senior engineering roles & consulting. Response within 24 h.",
+      location: "LATAM-based — available globally (remote)",
+      availability:
+        "Full-time at Apply. Open to senior engineering roles & consulting. Response within 24 h.",
       social: socialAccounts,
     },
   },
@@ -369,7 +440,7 @@ export const contentByLocale: Record<Language, PortfolioContent> = {
         subtitle: "Hong Kong · Lisboa · Las Vegas",
         timeframe: "2023 – 2025",
         narrative:
-          "Mi primer año profesional fue a ritmo de agencia: cliente tras cliente en Crazy Imagine Software, seguido de una asignación en tokenproof que se convirtió en un capítulo completo. tokenproof gestionaba experiencias de alto riesgo y plazos fijos para algunos de los nombres más grandes de Web3 — y nada lo puso a prueba más que ApeFest.\n\nTres ciudades. Tres eventos. Cada uno un despliegue en producción en vivo con fecha fija, asistentes reales y cero tolerancia al downtime.\n\n**Hong Kong (2023):** Mi primer despliegue a escala de evento — seguimiento de pedidos y sesiones con Firebase para más de 2,000 asistentes durante tres días en vivo.\n\n**Lisboa (2024):** Responsabilidad total del re-skin de la página de venta de entradas. Escribí y ejecuté scripts de pruebas de carga para estresar la plataforma antes del lanzamiento, y brindé soporte técnico en tiempo real durante el drop en vivo para más de 3,000 asistentes.\n\n**Las Vegas (2025):** Después de que Yuga Labs adquiriera la tecnología de tokenproof en diciembre de 2024, no fui transferido en la transición — pero me contactaron específicamente para ApeFest Las Vegas. El cliente me llamó de vuelta.",
+          "Mi primer año profesional fue a ritmo de agencia: cliente tras cliente en Crazy Imagine Software, trabajando con el stack MERN (MongoDB, Express, React, Node.js) y varias otras tecnologías. Luego una asignación en tokenproof que se convirtió en un capítulo completo.\n\ntokenproof gestionaba experiencias de alto riesgo y plazos fijos para algunos de los nombres más grandes de Web3 — y nada lo puso a prueba más que ApeFest. Sus herramientas internas corrían en una arquitectura desacoplada: Express en el backend y React en el frontend. También contribuí a la página de venta de entradas de ApeFest cada año — haciendo re-skins para cada nueva edición, ejecutando pruebas de carga y estrés con scripts automatizados para prepararnos para la masiva afluencia de compradores, y manejando sesiones y órdenes de compra vía Firebase durante eventos en vivo.\n\nTres ciudades. Tres eventos. Cada uno un despliegue en producción en vivo con fecha fija, asistentes reales y cero tolerancia al downtime.\n\n**Hong Kong (2023):** Mi primer despliegue a escala de evento — seguimiento de pedidos y sesiones con Firebase para más de 2,000 asistentes durante tres días en vivo.\n\n**Lisboa (2024):** Responsabilidad total del re-skin de la página de venta de entradas. Escribí y ejecuté scripts de pruebas de carga para estresar la plataforma antes del lanzamiento, y brindé soporte técnico en tiempo real durante el drop en vivo para más de 3,000 asistentes.\n\n**Las Vegas (2025):** Después de que Yuga Labs adquiriera la tecnología de tokenproof en diciembre de 2024, preparé la página de venta de entradas para la nueva edición y ejecuté pruebas de carga para blindar la infraestructura. Mi contrato terminó después de eso — pero Yuga Labs me contactó específicamente a través de ex-compañeros de tokenproof que se habían quedado. El cliente me llamó de vuelta.\n\n**MadeByApes Bodega** fue mi primera experiencia con un CMS. Aprendí Payload CMS sobre la marcha, construí toda la plataforma con él, y luego lo propuse como solución para TGA — convirtiendo una curva de aprendizaje puntual en una herramienta reutilizable para la empresa.",
         quote: {
           from: "Fonz Olvera",
           role: "Emprendedor Serial, Ex-CEO de tokenproof",
@@ -398,17 +469,24 @@ export const contentByLocale: Record<Language, PortfolioContent> = {
         id: "chap-03",
         chapterNumber: "03 / 03",
         title: "Liderazgo & Empresa en Apply",
-        subtitle: "Uniserve · Alltech Solo · Momentum",
+        subtitle: "Alltech · Uniserve · Momentum · Backups Rápidos",
         timeframe: "2025 – 2026",
         narrative:
-          "Apply es una consultora de software del Reino Unido. Me uní en enero de 2025 como Ingeniero Senior de Software. Lo que no esperaba era la rapidez con que la «cobertura de respaldo» se convirtió en responsabilidad real.\n\n**Uniserve (Ago–Oct 2025):** El tech lead tuvo que ausentarse a mitad del proyecto. Intervine, establecí la primera arquitectura de frontend con Payload CMS en Apply, lideré al equipo de desarrollo y documenté todo el enfoque en Notion como referencia reutilizable.\n\n**Alltech — Preentrega en Solitario (Nov 2025):** Me volvieron a llamar a Alltech específicamente para la preparación pre-lanzamiento, como el único desarrollador en la cuenta. Me convertí en el único punto de contacto técnico de Apply: tomando decisiones, gestionando llamadas con el cliente y depurando problemas en producción.\n\n**Momentum (Nov 2025 – May 2026):** Una calculadora de préstamos con requisitos contradictorios de múltiples stakeholders. Resolví la ambigüedad directamente — a través de reuniones y comunicación escrita — y lo lancé a producción.",
+          "Apply es una consultora de software con sede en Canadá. Me uní en enero de 2025 como ingeniero de nivel medio (L3). Para junio de 2026, había sido promovido a Senior — gracias a la profundidad de responsabilidad que asumí en cada proyecto.\n\n**Alltech (Feb–Jul 2025):** Empecé como cobertura de respaldo. Obtuve mi certificación de Contentful y aprendí Algolia y Storybook en el trabajo. Rendí tan bien en mi primer proyecto que siguieron llamándome. En mi segunda stint (~Nov 2025), reemplacé al tech lead a mitad del proyecto y me convertí en el único punto de contacto técnico de Apply — tomando decisiones, dirigiendo llamadas con el cliente y depurando problemas en producción. El Global Digital Marketing Manager del cliente, Tyler Cobb, elogió específicamente mi documentación y dijo que «no ve esto como un adiós, sino como un hasta pronto». Convertimos un inicio complicado en confianza total del cliente.\n\n**Uniserve (Ago–Oct 2025):** Como el desarrollador más senior del equipo, fui la fuente vital de conocimiento para todo el equipo de desarrollo. Experiencia en Payload CMS, Docker, PostgreSQL, Next.js — me convertí en la mano derecha del tech lead, identificando proactivamente riesgos y detectando oportunidades de mejora antes de que se convirtieran en problemas. «Componentes limpios, velocidad constante, cero drama.»\n\n**Momentum (Nov 2025 – May 2026):** Una calculadora de préstamos con requisitos contradictorios de múltiples stakeholders. Resolví la ambigüedad directamente a través de reuniones y comunicación escrita, propuse herramientas de IA y flujos estandarizados para que el equipo planificara tickets y automatizara tareas repetitivas, y construí una práctica de auto-revisión de código que ahorró tiempo en las revisiones de PR.\n\n**Backups Rápidos — Liverpool, White Stuff, Crunchyroll (~1 mes cada uno):** Incursiones cortas que demuestran adaptación rápida. En White Stuff (Vue/Nuxt), el feedback fue: «altamente autónomo, proactivo tomando tickets, sin supervisión necesaria». No son relleno — son evidencia de que entrego valor desde el día uno, sin importar el stack.",
         quote: {
           from: "Luis Lara",
           role: "Ingeniero en Sistemas Computacionales",
           message:
             "Williams es un entusiasta de la tecnología. Siempre está dispuesto a aprender cosas nuevas. Trabaja muy bien en equipo y se adhiere a las recomendaciones y procedimientos de una organización. Es un excelente profesional, con gran talento y potencial, que trabaja duro para alcanzar sus metas. Puntual, con iniciativa, inteligente, ordenado y orientado al detalle.",
         },
-        caseStudyIds: ["uniserve-architecture", "alltech-solo", "momentum-calculator"],
+        caseStudyIds: [
+          "uniserve-architecture",
+          "alltech-solo",
+          "momentum-calculator",
+          "liverpool",
+          "white-stuff",
+          "crunchyroll",
+        ],
       },
     ],
 
@@ -417,17 +495,12 @@ export const contentByLocale: Record<Language, PortfolioContent> = {
     humanSide: {
       headline: "Más allá del terminal",
       person:
-        "Vivo en Cúcuta, Colombia, con raíces en San Cristóbal, Venezuela. Trabajo completamente en remoto con equipos distribuidos globalmente — EE.UU., Reino Unido, Europa — y cuento con certificación de inglés C1 Advanced (EF SET, 63/100).",
+        "LATAM-based con raíces venezolanas. Trabajo completamente en remoto con equipos distribuidos globalmente — EE.UU., Reino Unido, Europa — y cuento con certificación de inglés C1 Advanced (EF SET).",
       aiWorkflow:
-        "Poseo cuatro certificaciones de Anthropic (Claude 101, Claude Code 101, Claude Code in Action, AI Capabilities & Limitations — todas de 2026) además del entrenamiento interno AI Foundations de Apply. Uso herramientas de IA diariamente — no como atajo, sino como multiplicador de calidad y velocidad de entrega.",
+        "Apply impulsa activamente la adopción de IA en ingeniería. Uso Claude a diario — en proyectos personales también experimento con OpenCode, Antigravity, Superpowers y GStack. En el trabajo seguimos el bmad method. No listo cada certificación de dos horas; lo que importa es que me mantengo al corriente con las prácticas de ingeniería asistida por IA y las uso como multiplicador de calidad y velocidad.",
       mentorship:
-        "Actualmente mentorizo a dos ingenieros en Apply mediante sesiones de coaching 1:1 mensuales. Anteriormente mentoricé a un desarrollador junior en tokenproof y apoyé informalmente a compañeros del bootcamp Microverse.",
+        "Actualmente mentorizo a dos ingenieros en Apply mediante sesiones de coaching 1:1 mensuales (Luis Herrera, Alex Orquera). Anteriormente apoyé informalmente a compañeros del bootcamp Microverse. Más allá del mentorship formal, soy un compartidor de conocimiento — documento enfoques reutilizables (como la referencia de Payload CMS en Apply), comparto prácticas de flujos de IA con el equipo y construyo hábitos de auto-revisión de código que elevan la calidad de todo el equipo.",
       certifications: [
-        "Claude Code in Action — Anthropic (May 2026)",
-        "Claude Code 101 — Anthropic (May 2026)",
-        "AI Capabilities and Limitations — Anthropic (May 2026)",
-        "Claude 101 — Anthropic (Apr 2026)",
-        "AI Foundations en Apply — Nivel 1 (May 2026)",
         "Braze Certified Developer (Jul 2025)",
         "Contentful Certified Professional (Feb 2025)",
         "EF SET English Certificate C1 Advanced (Jun 2024)",
@@ -436,31 +509,33 @@ export const contentByLocale: Record<Language, PortfolioContent> = {
 
     toolkit: [
       {
-        groupName: "Ingeniería Core & Frontend",
+        groupName: "Ingeniería Core",
         items: [
           "React",
           "Next.js",
           "TypeScript",
-          "Tailwind CSS",
           "Node.js",
-          "PostgreSQL",
-          "Payload CMS",
-          "Web3 / Ethers.js",
+          "Express",
+          "Vue",
+          "Svelte",
+          "Tailwind CSS",
         ],
       },
       {
-        groupName: "IA & Ingeniería Moderna",
-        items: [
-          "Anthropic Claude Code",
-          "Ingeniería de Prompts",
-          "Flujos con IA",
-          "Contentful",
-          "Braze",
-        ],
+        groupName: "CMS & Plataformas de Contenido",
+        items: ["Payload", "Contentful", "Contentstack", "Algolia", "Constructor"],
       },
       {
-        groupName: "Cloud, Testing & Sistemas",
-        items: ["AWS S3", "Firebase", "Vercel", "Playwright", "Jest", "Git & GitHub"],
+        groupName: "Backend, Datos & Cloud",
+        items: ["PostgreSQL", "MongoDB", "Firebase", "GCP", "Python", "Ruby on Rails"],
+      },
+      {
+        groupName: "IA & Automatización",
+        items: ["Claude Code", "OpenCode", "Antigravity", "n8n", "MCPs"],
+      },
+      {
+        groupName: "Testing, DevOps & Herramientas",
+        items: ["Playwright", "Jest", "Git & GitHub", "Jira", "Web3 / Ethers.js"],
       },
     ],
 
@@ -468,8 +543,9 @@ export const contentByLocale: Record<Language, PortfolioContent> = {
       email: "williamscolmenaresch@gmail.com",
       emailHref:
         "mailto:williamscolmenaresch@gmail.com?subject=Hola%20Williams&body=Me%20gustar%C3%ADa%20conectar%20contigo.",
-      location: "Cúcuta, Colombia — disponible globalmente (remoto)",
-      availability: "Abierto a roles de ingeniería senior y consultoría. Respuesta en 24 h.",
+      location: "LATAM-based — disponible globalmente (remoto)",
+      availability:
+        "Tiempo completo en Apply. Abierto a roles de ingeniería senior y consultoría. Respuesta en 24 h.",
       social: socialAccounts,
     },
   },
