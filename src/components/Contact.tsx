@@ -1,5 +1,8 @@
 import { Mail, MapPin, Clock } from "lucide-react";
 import { usePortfolioContext } from "@/context/portfolio";
+import { Input } from "@/ui/input";
+import { Textarea } from "@/ui/textarea";
+import { Button } from "@/ui/button";
 
 export default function Contact() {
   const { data } = usePortfolioContext();
@@ -14,6 +17,43 @@ export default function Contact() {
         <p className="text-brand-muted leading-relaxed text-sm sm:text-base max-w-prose mb-10">
           Always open to a conversation about engineering, consulting, or interesting problems.
         </p>
+
+        <form
+          action="https://formspree.io/f/xlezzzro"
+          method="POST"
+          className="space-y-4 mb-10"
+        >
+          <div className="grid sm:grid-cols-2 gap-4">
+            <Input
+              type="text"
+              name="name"
+              required
+              maxLength={50}
+              placeholder="Your name"
+              className="bg-brand-warm border-brand-border focus:ring-brand-terra"
+            />
+            <Input
+              type="email"
+              name="email"
+              required
+              placeholder="Email address"
+              className="bg-brand-warm border-brand-border focus:ring-brand-terra"
+            />
+          </div>
+          <Textarea
+            name="message"
+            maxLength={500}
+            required
+            placeholder="Type your message here"
+            className="bg-brand-warm border-brand-border focus:ring-brand-terra min-h-[120px]"
+          />
+          <Button
+            type="submit"
+            className="bg-brand-ink text-brand-cream hover:bg-brand-terra transition-colors"
+          >
+            Send Message
+          </Button>
+        </form>
 
         <div className="space-y-4 mb-10">
           <a
