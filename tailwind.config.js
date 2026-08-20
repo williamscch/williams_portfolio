@@ -53,6 +53,16 @@ export default {
           4: "hsl(var(--chart-4))",
           5: "hsl(var(--chart-5))",
         },
+        brand: {
+          warm: "hsl(var(--brand-warm))",
+          cream: "hsl(var(--brand-cream))",
+          terra: "hsl(var(--brand-terra))",
+          "terra-hover": "hsl(var(--brand-terra-hover))",
+          ink: "hsl(var(--brand-ink))",
+          muted: "hsl(var(--brand-muted))",
+          border: "hsl(var(--brand-border))",
+          light: "hsl(var(--brand-light))",
+        },
       },
       keyframes: {
         "accordion-down": {
