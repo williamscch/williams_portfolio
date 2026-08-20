@@ -574,55 +574,6 @@ export const contentByLocale: Record<Language, PortfolioContent> = {
   },
 };
 
-// ─── Legacy Compatibility Shim (remove when Task 9 deletes old components) ───
-/**
- * @deprecated Kept only so legacy components (About, Me, Services, etc.)
- * continue to compile until Task 9 replaces them.
- */
-export interface PortfolioState {
-  skills: { name: string; logo: string }[];
-  services: {
-    id: string;
-    name: string;
-    bullets: string[];
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    icon: FC<any>;
-  }[];
-  about: { start: string; end: string; cta: string };
-  projects: {
-    name: string;
-    description: string;
-    skills: string[];
-    live?: string;
-    source?: string;
-    media?: string[];
-  }[];
-  connect: {
-    accounts: { icon: FC; name: string; url: string }[];
-    email: string;
-    links: {
-      email: string;
-      repositories: string;
-      resume: string;
-      microverse: string;
-      recommendations: string;
-    };
-  };
-  testimonials: { id: string; from: string; message: string; role: string }[];
-}
 
-/** @deprecated See PortfolioState above. */
-export const state: PortfolioState = {
-  skills: [],
-  services: [],
-  about: { start: "", end: "", cta: "" },
-  projects: [],
-  connect: {
-    accounts: [],
-    email: "",
-    links: { email: "", repositories: "", resume: "", microverse: "", recommendations: "" },
-  },
-  testimonials: [],
-};
 
 
