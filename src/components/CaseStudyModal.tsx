@@ -146,6 +146,21 @@ export default function CaseStudyModal() {
               </div>
             </div>
           )}
+
+          {/* Client testimonial */}
+          {activeCaseStudy.testimonial && (
+            <blockquote className="border-l-2 border-brand-terra pl-4 py-2 bg-brand-light/60 rounded-r-lg mt-4">
+              <p className="italic text-brand-ink text-sm sm:text-base leading-relaxed mb-2">
+                &ldquo;{activeCaseStudy.testimonial.message}&rdquo;
+              </p>
+              <footer className="text-xs text-brand-muted">
+                <span className="font-medium text-brand-ink">{activeCaseStudy.testimonial.from}</span>
+                {activeCaseStudy.testimonial.role && (
+                  <span> — {activeCaseStudy.testimonial.role}</span>
+                )}
+              </footer>
+            </blockquote>
+          )}
         </div>
       </DialogContent>
     </Dialog>

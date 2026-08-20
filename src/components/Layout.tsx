@@ -76,6 +76,7 @@ export default function Layout({ children }: { children?: React.ReactNode }) {
             offset={-40}
             delay={200}
             duration={600}
+            aria-label={option.label}
             className="flex flex-col items-center gap-0.5 text-brand-muted text-[10px] font-medium transition-colors"
           >
             {option.toId === "story" && <BookOpen className="w-4 h-4" />}
@@ -87,6 +88,7 @@ export default function Layout({ children }: { children?: React.ReactNode }) {
         ))}
         <button
           onClick={toggleLocale}
+          aria-label="Toggle language"
           className="flex flex-col items-center gap-0.5 text-brand-terra text-[10px] font-bold transition-colors"
         >
           <Languages className="w-4 h-4" />
