@@ -1,4 +1,4 @@
-import { ExternalLink } from "lucide-react";
+import { ExternalLink, X } from "lucide-react";
 import { usePortfolioContext } from "@/context/portfolio";
 import {
   Dialog,
@@ -29,19 +29,39 @@ export default function CaseStudyModal() {
 
   return (
     <Dialog open={!!activeCaseStudy} onOpenChange={(open) => !open && closeCaseStudy()}>
-      <DialogContent
-        className="max-w-3xl max-h-[85vh] overflow-y-auto bg-brand-cream border-brand-border p-0 gap-0"
-      >
+      <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto bg-brand-cream border-brand-border p-0 gap-0 rounded-2xl">
+        {/* Close button */}
+        <button
+          onClick={closeCaseStudy}
+          className="absolute top-4 right-4 z-10 h-8 w-8 rounded-full bg-brand-ink/80 text-brand-cream flex items-center justify-center hover:bg-brand-ink transition-colors"
+          aria-label="Close"
+        >
+          <X className="w-4 h-4" />
+        </button>
+
+        {/* Hero image */}
+        {image && (
+          <div className="relative">
+            <img
+              src={image}
+              alt={title}
+              className="w-full h-48 sm:h-64 object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-brand-ink/40 to-transparent" />
+          </div>
+        )}
+
+        {/* Header */}
         <DialogHeader className="p-6 pb-0">
           {(client || timeframe) && (
             <div className="flex items-center gap-3 mb-3">
               {client && (
-                <span className="font-mono text-xs uppercase tracking-widest text-brand-terra bg-brand-terra/10 px-3 py-1 rounded-full">
+                <span className="font-mono text-xs uppercase tracking-widest text-brand-terra">
                   {client}
                 </span>
               )}
               {timeframe && (
-                <span className="font-mono text-xs uppercase tracking-widest text-brand-muted">
+                <span className="text-xs text-brand-muted">
                   {timeframe}
                 </span>
               )}
@@ -51,95 +71,69 @@ export default function CaseStudyModal() {
             {title}
           </DialogTitle>
           {tagline && (
-            <DialogDescription className="text-base text-brand-muted mt-1">
+            <DialogDescription className="text-base text-brand-muted mt-2 leading-relaxed">
               {tagline}
             </DialogDescription>
           )}
         </DialogHeader>
 
-        <div className="px-6 py-4">
-          {(role || tech?.length) && (
-            <div className="flex flex-wrap items-center gap-3 py-3 border-b border-brand-border">
-              {role && (
-                <span className="text-sm font-medium text-brand-ink">
-                  {role}
-                </span>
-              )}
-              {role && tech?.length && (
-                <span className="text-brand-border">·</span>
-              )}
-              {tech?.slice(0, 4).map((t) => (
-                <span
-                  key={t}
-                  className="text-xs font-mono uppercase tracking-wider text-brand-muted bg-brand-warm px-2 py-0.5 rounded"
-                >
-                  {t}
-                </span>
-              ))}
-              {live && (
-                <a
-                  href={live}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="ml-auto inline-flex items-center gap-1.5 text-sm font-medium text-brand-terra hover:text-brand-terra-hover transition-colors"
-                >
-                  Live Site
-                  <ExternalLink className="w-3.5 h-3.5" />
-                </a>
-              )}
-            </div>
-          )}
-        </div>
-
-        {image && (
-          <div className="px-6">
-            <img
-              src={image}
-              alt={title}
-              className="w-full rounded-lg object-cover max-h-72 border border-brand-border"
-            />
+        {/* Role + Tech + Live */}
+        {(role || tech?.length || live) && (
+          <div className="px-6 py-4 flex flex-wrap items-center gap-3">
+            {role && (
+              <span className="text-sm font-medium text-brand-ink">
+                {role}
+              </span>
+            )}
+            {tech?.slice(0, 4).map((t) => (
+              <span
+                key={t}
+                className="text-xs font-mono uppercase tracking-wider text-brand-muted bg-brand-warm px-2 py-0.5 rounded"
+              >
+                {t}
+              </span>
+            ))}
+            {live && (
+              <a
+                href={live}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="ml-auto inline-flex items-center gap-1.5 text-sm font-medium text-brand-terra hover:text-brand-terra-hover transition-colors"
+              >
+                Live Site
+                <ExternalLink className="w-3.5 h-3.5" />
+              </a>
+            )}
           </div>
         )}
 
-        <div className="px-6 pb-6 space-y-5">
+        {/* Narrative sections */}
+        <div className="px-6 pb-6 space-y-4">
           {challenge && (
             <div className="bg-brand-warm rounded-xl p-5">
-              <h3 className="font-mono text-xs uppercase tracking-widest text-brand-terra mb-2">
-                The Challenge
-              </h3>
-              <p className="text-brand-muted leading-relaxed text-sm sm:text-base max-w-prose">
+              <p className="text-brand-muted leading-relaxed text-sm sm:text-base">
                 {challenge}
               </p>
             </div>
           )}
 
           {architecture && (
-            <div>
-              <h3 className="font-mono text-xs uppercase tracking-widest text-brand-terra mb-2">
-                Architecture & Build
-              </h3>
-              <p className="text-brand-muted leading-relaxed text-sm sm:text-base max-w-prose">
-                {architecture}
-              </p>
-            </div>
+            <p className="text-brand-muted leading-relaxed text-sm sm:text-base px-1">
+              {architecture}
+            </p>
           )}
 
           {impact && (
             <div className="bg-brand-warm rounded-xl p-5">
-              <h3 className="font-mono text-xs uppercase tracking-widest text-brand-terra mb-2">
-                Impact & Outcome
-              </h3>
-              <p className="text-brand-muted leading-relaxed text-sm sm:text-base max-w-prose">
+              <p className="text-brand-muted leading-relaxed text-sm sm:text-base">
                 {impact}
               </p>
             </div>
           )}
 
+          {/* Full tech stack */}
           {tech && tech.length > 4 && (
-            <div>
-              <h3 className="font-mono text-xs uppercase tracking-widest text-brand-terra mb-2">
-                Full Tech Stack
-              </h3>
+            <div className="pt-2">
               <div className="flex flex-wrap gap-2">
                 {tech.map((t) => (
                   <span
