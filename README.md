@@ -1,50 +1,44 @@
-# React + TypeScript + Vite
+# Portfolio & Agent Workflow
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This repository is the personal portfolio site for **Williams Colmenares**, a senior software engineer.
 
-Currently, two official plugins are available:
+- **Framework**: React 18 + TypeScript + Vite
+- **Styling**: Tailwind CSS, `tailwindcss-animate`, Radix UI primitives
+- **Icons**: `lucide-react` and custom SVG brand icons
+- **Navigation**: Smooth scroll via `react-scroll`
+- **State**: React Context (`src/context/data.ts`) – single source of truth for all displayed content.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Development Commands
 
-## Expanding the ESLint configuration
+| Command | Description |
+|---|---|
+| `npm run dev` | Start Vite dev server with HMR |
+| `npm run build` | Type‑check (`tsc -b`) and bundle production build |
+| `npm run lint` | Run ESLint across the codebase |
+| `npm run preview` | Preview the production output locally |
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+> **Note**: No automated test runner is configured; always run `npm run build` and `npm run lint` after changes.
 
-- Configure the top-level `parserOptions` property like this:
+## Agent‑Enabled Workflow
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+The project ships with an **AGENTS.md** guide that describes how to use Antigravity agents (brainstorming, planning, code‑review, etc.) directly inside the repository. Typical workflow:
+
+1. **Brainstorm** – `/grill-me` or `/plan` to explore new ideas (e.g., repurposing the portfolio).
+2. **Write a Plan** – `/plan` generates a step‑by‑step implementation checklist.
+3. **Execute** – Run the generated commands or let the CLI assistant apply changes.
+4. **Verify** – `npm run build` + `npm run lint` before committing.
+
+## Project Structure
+
+```
+src/
+├─ assets/           # Brand SVGs & images
+├─ components/       # Page sections (About, Me, Portfolio, …)
+├─ context/          # data.ts & portfolio.tsx (React Context)
+├─ ui/               # Reusable UI primitives (Button, Dialog, …)
+├─ utils/            # Helper functions (cn.ts)
+└─ App.tsx, main.tsx
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+Feel free to explore the **AGENTS.md** file for detailed agent usage instructions.
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
