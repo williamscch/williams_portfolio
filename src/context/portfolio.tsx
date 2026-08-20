@@ -1,13 +1,98 @@
-import { createContext, ReactNode, useContext } from "react";
-import { PortfolioState, state } from "./data";
+import {
+  createContext,
+  ReactNode,
+  useCallback,
+  useContext,
+  useMemo,
+  useState,
+} from "react";
+import {
+  CaseStudy,
+  Language,
+  PortfolioContent,
+  contentByLocale,
+  state as legacyState,
+} from "./data";
 
-const PortfolioContext = createContext<PortfolioState | undefined>(undefined);
+interface PortfolioContextValue {
+  locale: Language;
+  setLocale: (lang: Language) => void;
+  data: PortfolioContent;
+  activeCaseStudy: CaseStudy | null;
+  openCaseStudy: (caseStudyId: string) => void;
+  closeCaseStudy: () => void;
+  /** @deprecated Legacy shim for old components — will be removed in Task 9. */
+  skills: typeof legacyState.skills;
+  /** @deprecated Legacy shim for old components — will be removed in Task 9. */
+  services: typeof legacyState.services;
+  /** @deprecated Legacy shim for old components — will be removed in Task 9. */
+  about: typeof legacyState.about;
+  /** @deprecated Legacy shim for old components — will be removed in Task 9. */
+  projects: typeof legacyState.projects;
+  /** @deprecated Legacy shim for old components — will be removed in Task 9. */
+  connect: typeof legacyState.connect;
+  /** @deprecated Legacy shim for old components — will be removed in Task 9. */
+  testimonials: typeof legacyState.testimonials;
+}
 
-export const PortfolioProvider = ({ children }: { children: ReactNode }) => (
-  <PortfolioContext.Provider value={state}>
-    {children}
-  </PortfolioContext.Provider>
+const PortfolioContext = createContext<PortfolioContextValue | undefined>(
+  undefined
 );
+
+function detectBrowserLanguage(): Language {
+  if (typeof navigator === "undefined") return "en";
+  const tag = navigator.language.slice(0, 2).toLowerCase();
+  return tag === "es" ? "es" : "en";
+}
+
+export const PortfolioProvider = ({ children }: { children: ReactNode }) => {
+  const [locale, setLocale] = useState<Language>(detectBrowserLanguage);
+  const [activeCaseStudyId, setActiveCaseStudyId] = useState<string | null>(
+    null
+  );
+
+  const data = contentByLocale[locale];
+
+  const activeCaseStudy = useMemo(() => {
+    if (!activeCaseStudyId) return null;
+    return data.caseStudies[activeCaseStudyId] ?? null;
+  }, [activeCaseStudyId, data.caseStudies]);
+
+  const openCaseStudy = useCallback(
+    (caseStudyId: string) => {
+      setActiveCaseStudyId(caseStudyId);
+    },
+    []
+  );
+
+  const closeCaseStudy = useCallback(() => {
+    setActiveCaseStudyId(null);
+  }, []);
+
+  const value = useMemo<PortfolioContextValue>(
+    () => ({
+      locale,
+      setLocale,
+      data,
+      activeCaseStudy,
+      openCaseStudy,
+      closeCaseStudy,
+      skills: legacyState.skills,
+      services: legacyState.services,
+      about: legacyState.about,
+      projects: legacyState.projects,
+      connect: legacyState.connect,
+      testimonials: legacyState.testimonials,
+    }),
+    [locale, data, activeCaseStudy, openCaseStudy, closeCaseStudy]
+  );
+
+  return (
+    <PortfolioContext.Provider value={value}>
+      {children}
+    </PortfolioContext.Provider>
+  );
+};
 
 export const usePortfolioContext = () => {
   const context = useContext(PortfolioContext);
