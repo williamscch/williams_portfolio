@@ -1,16 +1,486 @@
-import { ForwardRefExoticComponent, ReactNode } from "react";
-import {
-  CloudDownload,
-  Code2,
-  GlobeLock,
-  Layers2,
-  MonitorCog,
-  MonitorSmartphone,
-} from "lucide-react";
+import { FC } from "react";
 import IconUpwork from "@/assets/IconUpwork";
 import IconLinkedin from "@/assets/IconLinkedin";
 import IconGithub from "@/assets/IconGithub";
 
+// ─── Language ─────────────────────────────────────────────────────────────────
+
+export type Language = "en" | "es";
+
+// ─── Interfaces ───────────────────────────────────────────────────────────────
+
+export interface TestimonialQuote {
+  from: string;
+  role: string;
+  message: string;
+}
+
+export interface CaseStudy {
+  id: string;
+  title: string;
+  tagline?: string;
+  client?: string;
+  role?: string;
+  timeframe?: string;
+  challenge?: string;
+  architecture?: string;
+  impact?: string;
+  tech?: string[];
+  /** Optional single public hero image (strictly one, no internal admin dumps). */
+  image?: string;
+  /** Optional live production URL. */
+  live?: string;
+}
+
+export interface StoryChapter {
+  id: string;
+  chapterNumber: string;
+  title: string;
+  subtitle?: string;
+  timeframe?: string;
+  narrative: string;
+  quote?: TestimonialQuote;
+  caseStudyIds: string[];
+}
+
+export interface HeroContent {
+  greeting: string;
+  headline: string;
+  subheadline: string;
+  philosophies: string[];
+}
+
+export interface HumanSide {
+  headline: string;
+  person: string;
+  aiWorkflow: string;
+  mentorship: string;
+  certifications: string[];
+}
+
+export interface ToolkitGroup {
+  groupName: string;
+  items: string[];
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type SocialIcon = FC<any>;
+
+export interface ConnectInfo {
+  email: string;
+  emailHref: string;
+  location: string;
+  availability: string;
+  social: { name: string; url: string; icon: SocialIcon }[];
+}
+
+export interface PortfolioContent {
+  hero: HeroContent;
+  chapters: StoryChapter[];
+  caseStudies: Record<string, CaseStudy>;
+  humanSide: HumanSide;
+  toolkit: ToolkitGroup[];
+  connect: ConnectInfo;
+}
+
+// ─── Case Study Records (shared, not locale-duplicated) ───────────────────────
+
+const caseStudies: Record<string, CaseStudy> = {
+  "apefest-lisbon": {
+    id: "apefest-lisbon",
+    title: "ApeFest Lisbon 2024 — Ticket Sale",
+    tagline: "High-traffic ticketing platform: re-skin, load testing & live launch support.",
+    client: "Yuga Labs / tokenproof",
+    role: "Sole Frontend Engineer",
+    timeframe: "2024",
+    challenge:
+      "Own the entire re-skin of the ApeFest Lisbon ticketing page solo, then stress-test it to survive the spike at drop time — with no room for downtime during a live international event.",
+    architecture:
+      "React + Vite + Tailwind, deployed on Vercel. Authored custom load-testing scripts to simulate concurrent sessions pre-launch. Provided real-time technical monitoring and support on launch day.",
+    impact:
+      "Ticket drop went live without incident for 3,000+ attendees. Load tests gave the team confidence before a high-stakes, irreversible moment.",
+    tech: ["React", "TypeScript", "Tailwind CSS", "Vite", "Vercel", "Load Testing"],
+    live: "https://apefest.tokenproof.xyz/",
+  },
+  "apefest-merch": {
+    id: "apefest-merch",
+    title: "ApeFest 2024 Exclusive Merch Sale",
+    tagline: "Token-gated merch platform with Stripe payments & entry queue.",
+    client: "Yuga Labs / tokenproof",
+    role: "Sole Developer",
+    timeframe: "2024",
+    challenge:
+      "Build an exclusive merch sale restricted to verified ApeFest ticket holders, with a queue system and session expiration to prevent abuse under real event conditions.",
+    architecture:
+      "React + Tailwind following a Figma design. Stripe for payment processing. tokenproof authentication widget to verify on-chain ticket ownership. Internal inventory API integration.",
+    impact:
+      "Shipped end-to-end as the only developer, handling auth, queue logic, payment, and inventory in a single project.",
+    tech: ["React", "TypeScript", "Tailwind CSS", "Stripe", "Figma"],
+  },
+  "bodega": {
+    id: "bodega",
+    title: "MadeByApes Bodega Web",
+    tagline: "Full-stack content platform for Yuga Labs' MadeByApes licensing program.",
+    client: "Yuga Labs",
+    role: "Sole Full-Stack Developer",
+    timeframe: "2023",
+    challenge:
+      "Build a production-grade platform from scratch — licensing database, CMS, fast search, email automation, and media storage — as the only engineer on the account.",
+    architecture:
+      "Next.js + Payload CMS backend with PostgreSQL. Meilisearch for fast license lookups. Mailgun for transactional emails. AWS S3 for media. Mobile and desktop optimized.",
+    impact:
+      "Content teams went from no self-serve capability to full CMS-driven updates. License lookup is near-instant via Meilisearch.",
+    tech: ["Next.js", "Payload CMS", "TypeScript", "PostgreSQL", "AWS S3", "Meilisearch", "Mailgun"],
+    live: "https://madeby.boredapeyachtclub.com/",
+  },
+  "tga-automation": {
+    id: "tga-automation",
+    title: "Token-Gate Automation (TGA)",
+    tagline: "Turning bespoke client builds into a self-serve CMS workflow.",
+    client: "tokenproof",
+    role: "Lead Engineer",
+    timeframe: "Jul – Nov 2024",
+    challenge:
+      "Every new token-gated client page (Forbes, F1, BMW, Yuga Labs) required manual per-client development. Identify a pattern, propose an automated solution, and build it.",
+    architecture:
+      "Payload CMS admin interface letting non-engineers generate and customize token-gated access pages. Next.js front-end renders the output dynamically.",
+    impact:
+      "Reduced per-client setup from manual multi-day builds to a CMS-driven workflow. Scaled to handle simultaneous client campaigns without additional engineering.",
+    tech: ["Next.js", "Payload CMS", "React", "TypeScript"],
+    live: "https://forbesweb3inspire.tokenproof.xyz/",
+  },
+  "uniserve-architecture": {
+    id: "uniserve-architecture",
+    title: "Uniserve Front-End Architecture",
+    tagline: "Setting Apply's first Payload CMS frontend architecture when the tech lead stepped away.",
+    client: "Uniserve (via Apply)",
+    role: "Acting Tech Lead / Frontend Architect",
+    timeframe: "Aug – Oct 2025",
+    challenge:
+      "The assigned tech lead had to step away mid-project. Step into an ambiguous ownership gap, establish a coherent front-end architecture, and keep the team moving.",
+    architecture:
+      "Defined Apply's first Payload CMS frontend implementation using an atomic component design system. Documented the full approach in Notion as a reusable company reference. Coordinated the rest of the dev team until the tech lead returned.",
+    impact:
+      "Project continued without disruption. Produced a Notion doc now used as the standard Payload reference at Apply.",
+    tech: ["React", "Payload CMS", "TypeScript", "Tailwind CSS", "Notion"],
+  },
+  "alltech-solo": {
+    id: "alltech-solo",
+    title: "Alltech — Solo Pre-Launch Delivery",
+    tagline: "Sole developer and primary client contact during critical pre-launch phase.",
+    client: "Alltech (via Apply)",
+    role: "Sole Developer & Technical Client Lead",
+    timeframe: "~Nov 2025",
+    challenge:
+      "Return to Alltech for pre-launch readiness as the only engineer on the account — owning not just the code, but direct client stakeholder communication and technical decision-making.",
+    architecture:
+      "React, Vite, Tailwind CSS, Vercel. No other engineers on the account — full ownership of delivery, debugging, and client-facing technical conversations.",
+    impact:
+      "Received specific positive client feedback. Became Apply's sole technical point of contact during this period — without being assigned the title, purely by filling the gap.",
+    tech: ["React", "TypeScript", "Tailwind CSS", "Vite", "Vercel"],
+  },
+  "momentum-calculator": {
+    id: "momentum-calculator",
+    title: "Momentum Loan Calculator",
+    tagline: "Navigating conflicting stakeholder requirements to ship a customer-facing financial tool.",
+    client: "Momentum (via Apply)",
+    role: "Frontend Engineer",
+    timeframe: "Nov 2025 – May 2026",
+    challenge:
+      "Requirements from the client changed and conflicted across multiple stakeholders. Resolve the ambiguity directly — through meetings and written communication — rather than escalating or waiting.",
+    architecture:
+      "React + TypeScript customer-facing loan calculator. Feature went through multiple requirement iterations; final version shipped to production.",
+    impact:
+      "Feature is live in production after successfully navigating a complex requirements process over ~6 months.",
+    tech: ["React", "TypeScript", "Tailwind CSS"],
+  },
+};
+
+// ─── Social Accounts (shared) ─────────────────────────────────────────────────
+
+const socialAccounts = [
+  {
+    name: "LinkedIn",
+    url: "https://www.linkedin.com/in/williamscolmenaresch",
+    icon: IconLinkedin as SocialIcon,
+  },
+  {
+    name: "GitHub",
+    url: "https://github.com/williamscch",
+    icon: IconGithub as SocialIcon,
+  },
+  {
+    name: "Upwork",
+    url: "https://www.upwork.com/freelancers/~0136f944648d8cc21e",
+    icon: IconUpwork as SocialIcon,
+  },
+];
+
+// ─── Content by Locale ────────────────────────────────────────────────────────
+
+export const contentByLocale: Record<Language, PortfolioContent> = {
+  // ── English ────────────────────────────────────────────────────────────────
+  en: {
+    hero: {
+      greeting: "Hey, I'm Williams",
+      headline: "Senior Software Engineer — I build software that holds up when it matters.",
+      subheadline:
+        "LATAM-based, globally collaborative. I turn ambiguous requirements into rock-solid products, integrate AI workflows to accelerate craftsmanship, and leave systems better than I found them.",
+      philosophies: [
+        "Ship under pressure without cutting corners",
+        "Communicate clearly across timezones and cultures",
+        "Leave every codebase better than you found it",
+      ],
+    },
+
+    chapters: [
+      {
+        id: "chap-01",
+        chapterNumber: "01 / 03",
+        title: "The Fast Lane & The ApeFest Trilogy",
+        subtitle: "Hong Kong · Lisbon · Las Vegas",
+        timeframe: "2023 – 2025",
+        narrative:
+          "My first professional year was agency-speed: client after client at Crazy Imagine Software, then a placement at tokenproof that turned into a full-time chapter. tokenproof ran high-stakes, time-boxed experiences for some of the biggest names in Web3 — and nothing tested that more than ApeFest.\n\nThree cities. Three events. Each one a live production drop with a fixed date, real attendees, and zero tolerance for downtime.\n\n**Hong Kong (2023):** My first event-scale deployment — Firebase-backed order and session tracking for 2,000+ attendees across three live days.\n\n**Lisbon (2024):** Sole ownership of the ticket sale re-skin. I wrote and ran load-testing scripts to stress-test the platform before the drop, then provided real-time technical support during the live launch for 3,000+ attendees.\n\n**Las Vegas (2025):** After Yuga Labs acquired tokenproof's tech in December 2024, I wasn't carried over in the transition — but they specifically re-engaged me for ApeFest Las Vegas. The client called me back.",
+        quote: {
+          from: "Fonz Olvera",
+          role: "Serial Entrepreneur, Former CEO at tokenproof",
+          message:
+            "Williams was an amazing addition to our team. Not only did he exceed our expectations of talent and skills, but he also carries an excellent work ethic and all around great attitude. Cannot wait to work with Williams again.",
+        },
+        caseStudyIds: ["apefest-lisbon", "apefest-merch"],
+      },
+      {
+        id: "chap-02",
+        chapterNumber: "02 / 03",
+        title: "Building Platforms & Eliminating Repetition",
+        subtitle: "MadeByApes Bodega · TGA Automation",
+        timeframe: "2023 – 2024",
+        narrative:
+          "At the same time as the ApeFest trilogy, I was building infrastructure that had to outlast individual events.\n\n**MadeByApes Bodega** was the biggest solo full-stack project of my tokenproof years: a Next.js + Payload CMS platform for Yuga Labs' MadeByApes licensing program. License lookups, blog, handbooks, content management, AWS S3 media storage, Mailgun email — built and shipped alone.\n\n**TGA (Token-Gate Anything)** started as manual per-client work for Forbes, F1, BMW, and Yuga Labs — building custom token-gated access pages, one at a time. I recognized the pattern, proposed automating it, and built the CMS-driven tool myself. The same engineering that took days per client became a self-serve admin workflow.",
+        quote: {
+          from: "Jesus Cocaño",
+          role: "Software Engineer & DevOps Engineer",
+          message:
+            "Exceptional frontend developer with a remarkable ability to learn quickly and adapt to new challenges. Their positive attitude and teamwork skills make every project smoother and more enjoyable. I highly recommend them to any team looking for both talent and great collaboration!",
+        },
+        caseStudyIds: ["bodega", "tga-automation"],
+      },
+      {
+        id: "chap-03",
+        chapterNumber: "03 / 03",
+        title: "Stepping into Leadership & Enterprise at Apply",
+        subtitle: "Uniserve · Alltech Solo · Momentum",
+        timeframe: "2025 – 2026",
+        narrative:
+          "Apply is a UK-based software consultancy. I joined in January 2025 as a Senior Software Engineer. What I didn't expect was how quickly \"backup coverage\" became real ownership.\n\n**Uniserve (Aug–Oct 2025):** The tech lead had to step away mid-project. I stepped in, set Apply's first Payload CMS frontend architecture, ran the dev team, and documented the whole approach in Notion as a reusable reference.\n\n**Alltech — Solo Pre-Launch (Nov 2025):** I was brought back to Alltech specifically for pre-launch readiness — as the only developer on the account. I became Apply's sole technical point of contact: making decisions, running client calls, debugging production issues. No title assigned, just a gap that needed filling.\n\n**Momentum (Nov 2025 – May 2026):** A loan calculator with conflicting requirements from multiple stakeholders. I resolved the ambiguity directly — through meetings and written communication — and shipped it to production.",
+        quote: {
+          from: "Luis Lara",
+          role: "Computer Systems Engineer",
+          message:
+            "Williams is a technology enthusiast. He is always willing to learn new things. He works very well in a team, and adheres to the recommendations and procedures within an organization. He is an excellent professional, with great talent and potential, who works hard to achieve his goals. Punctual, with initiative, intelligent, orderly, and detail-oriented.",
+        },
+        caseStudyIds: ["uniserve-architecture", "alltech-solo", "momentum-calculator"],
+      },
+    ],
+
+    caseStudies,
+
+    humanSide: {
+      headline: "Beyond the terminal",
+      person:
+        "I'm based in Cúcuta, Colombia, with roots in San Cristóbal, Venezuela. I work fully remote across global distributed teams — US, UK, Europe — and hold a C1 Advanced English certification (EF SET, 63/100).",
+      aiWorkflow:
+        "I hold four Anthropic certifications (Claude 101, Claude Code 101, Claude Code in Action, AI Capabilities & Limitations — all 2026) plus Apply's internal AI Foundations training. I use AI tools daily — not as a shortcut, but as a force multiplier for engineering quality and delivery speed.",
+      mentorship:
+        "I currently mentor two engineers at Apply through monthly 1:1 coaching sessions. Earlier I mentored a junior developer at tokenproof (code reviews, architecture guidance, motivation support) and informally coached Microverse cohort peers. Mentoring shows up consistently across every chapter of my career.",
+      certifications: [
+        "Claude Code in Action — Anthropic (May 2026)",
+        "Claude Code 101 — Anthropic (May 2026)",
+        "AI Capabilities and Limitations — Anthropic (May 2026)",
+        "Claude 101 — Anthropic (Apr 2026)",
+        "AI Foundations at Apply — Tier 1 (May 2026)",
+        "Braze Certified Developer (Jul 2025)",
+        "Contentful Certified Professional (Feb 2025)",
+        "EF SET English Certificate C1 Advanced (Jun 2024)",
+      ],
+    },
+
+    toolkit: [
+      {
+        groupName: "Core Engineering & Frontend Mastery",
+        items: [
+          "React",
+          "Next.js",
+          "TypeScript",
+          "Tailwind CSS",
+          "Node.js",
+          "PostgreSQL",
+          "Payload CMS",
+          "Web3 / Ethers.js",
+        ],
+      },
+      {
+        groupName: "AI & Modern Engineering",
+        items: [
+          "Anthropic Claude Code",
+          "Prompt Engineering",
+          "AI-Assisted Workflows",
+          "Contentful",
+          "Braze",
+        ],
+      },
+      {
+        groupName: "Cloud, Testing & Systems",
+        items: ["AWS S3", "Firebase", "Vercel", "Playwright", "Jest", "Git & GitHub"],
+      },
+    ],
+
+    connect: {
+      email: "williamscolmenaresch@gmail.com",
+      emailHref:
+        "mailto:williamscolmenaresch@gmail.com?subject=Hello%20Williams&body=I%20would%20like%20to%20connect%20with%20you.",
+      location: "Cúcuta, Colombia — available globally (remote)",
+      availability: "Open to senior engineering roles & consulting. Response within 24 h.",
+      social: socialAccounts,
+    },
+  },
+
+  // ── Spanish ────────────────────────────────────────────────────────────────
+  es: {
+    hero: {
+      greeting: "¡Hola! Soy Williams",
+      headline:
+        "Ingeniero Senior de Software — construyo software que resiste cuando más importa.",
+      subheadline:
+        "Basado en LATAM, colaboro con equipos globales. Transformo requisitos ambiguos en productos sólidos, integro flujos de trabajo con IA y dejo los sistemas mejor de como los encontré.",
+      philosophies: [
+        "Entregar bajo presión sin sacrificar calidad",
+        "Comunicar con claridad a través de zonas horarias y culturas",
+        "Dejar cada base de código mejor de como la encontraste",
+      ],
+    },
+
+    chapters: [
+      {
+        id: "chap-01",
+        chapterNumber: "01 / 03",
+        title: "El Carril Rápido & La Trilogía ApeFest",
+        subtitle: "Hong Kong · Lisboa · Las Vegas",
+        timeframe: "2023 – 2025",
+        narrative:
+          "Mi primer año profesional fue a ritmo de agencia: cliente tras cliente en Crazy Imagine Software, seguido de una asignación en tokenproof que se convirtió en un capítulo completo. tokenproof gestionaba experiencias de alto riesgo y plazos fijos para algunos de los nombres más grandes de Web3 — y nada lo puso a prueba más que ApeFest.\n\nTres ciudades. Tres eventos. Cada uno un despliegue en producción en vivo con fecha fija, asistentes reales y cero tolerancia al downtime.\n\n**Hong Kong (2023):** Mi primer despliegue a escala de evento — seguimiento de pedidos y sesiones con Firebase para más de 2,000 asistentes durante tres días en vivo.\n\n**Lisboa (2024):** Responsabilidad total del re-skin de la página de venta de entradas. Escribí y ejecuté scripts de pruebas de carga para estresar la plataforma antes del lanzamiento, y brindé soporte técnico en tiempo real durante el drop en vivo para más de 3,000 asistentes.\n\n**Las Vegas (2025):** Después de que Yuga Labs adquiriera la tecnología de tokenproof en diciembre de 2024, no fui transferido en la transición — pero me contactaron específicamente para ApeFest Las Vegas. El cliente me llamó de vuelta.",
+        quote: {
+          from: "Fonz Olvera",
+          role: "Emprendedor Serial, Ex-CEO de tokenproof",
+          message:
+            "Williams fue una incorporación increíble a nuestro equipo. No solo superó nuestras expectativas de talento y habilidades, sino que también demuestra una excelente ética de trabajo y una actitud genial. No puedo esperar para volver a trabajar con Williams.",
+        },
+        caseStudyIds: ["apefest-lisbon", "apefest-merch"],
+      },
+      {
+        id: "chap-02",
+        chapterNumber: "02 / 03",
+        title: "Construyendo Plataformas & Eliminando Repetición",
+        subtitle: "MadeByApes Bodega · Automatización TGA",
+        timeframe: "2023 – 2024",
+        narrative:
+          "Al mismo tiempo que la trilogía ApeFest, construía infraestructura que debía sobrevivir a eventos individuales.\n\n**MadeByApes Bodega** fue el mayor proyecto full-stack en solitario de mis años en tokenproof: una plataforma Next.js + Payload CMS para el programa de licencias MadeByApes de Yuga Labs. Búsqueda de licencias, blog, manuales, gestión de contenido, almacenamiento de medios en AWS S3, correos con Mailgun — construido y lanzado solo.\n\n**TGA (Token-Gate Anything)** comenzó como trabajo manual por cliente para Forbes, F1, BMW y Yuga Labs. Reconocí el patrón, propuse automatizarlo y construí yo mismo la herramienta basada en CMS. Lo que antes tardaba días por cliente se convirtió en un flujo de trabajo de autoservicio.",
+        quote: {
+          from: "Jesus Cocaño",
+          role: "Ingeniero de Software & DevOps",
+          message:
+            "Desarrollador frontend excepcional con una notable capacidad para aprender rápidamente y adaptarse a nuevos desafíos. Su actitud positiva y habilidades de trabajo en equipo hacen que cada proyecto sea más fluido y agradable. ¡Lo recomiendo ampliamente a cualquier equipo que busque talento y gran colaboración!",
+        },
+        caseStudyIds: ["bodega", "tga-automation"],
+      },
+      {
+        id: "chap-03",
+        chapterNumber: "03 / 03",
+        title: "Liderazgo & Empresa en Apply",
+        subtitle: "Uniserve · Alltech Solo · Momentum",
+        timeframe: "2025 – 2026",
+        narrative:
+          "Apply es una consultora de software del Reino Unido. Me uní en enero de 2025 como Ingeniero Senior de Software. Lo que no esperaba era la rapidez con que la «cobertura de respaldo» se convirtió en responsabilidad real.\n\n**Uniserve (Ago–Oct 2025):** El tech lead tuvo que ausentarse a mitad del proyecto. Intervine, establecí la primera arquitectura de frontend con Payload CMS en Apply, lideré al equipo de desarrollo y documenté todo el enfoque en Notion como referencia reutilizable.\n\n**Alltech — Preentrega en Solitario (Nov 2025):** Me volvieron a llamar a Alltech específicamente para la preparación pre-lanzamiento, como el único desarrollador en la cuenta. Me convertí en el único punto de contacto técnico de Apply: tomando decisiones, gestionando llamadas con el cliente y depurando problemas en producción.\n\n**Momentum (Nov 2025 – May 2026):** Una calculadora de préstamos con requisitos contradictorios de múltiples stakeholders. Resolví la ambigüedad directamente — a través de reuniones y comunicación escrita — y lo lancé a producción.",
+        quote: {
+          from: "Luis Lara",
+          role: "Ingeniero en Sistemas Computacionales",
+          message:
+            "Williams es un entusiasta de la tecnología. Siempre está dispuesto a aprender cosas nuevas. Trabaja muy bien en equipo y se adhiere a las recomendaciones y procedimientos de una organización. Es un excelente profesional, con gran talento y potencial, que trabaja duro para alcanzar sus metas. Puntual, con iniciativa, inteligente, ordenado y orientado al detalle.",
+        },
+        caseStudyIds: ["uniserve-architecture", "alltech-solo", "momentum-calculator"],
+      },
+    ],
+
+    caseStudies,
+
+    humanSide: {
+      headline: "Más allá del terminal",
+      person:
+        "Vivo en Cúcuta, Colombia, con raíces en San Cristóbal, Venezuela. Trabajo completamente en remoto con equipos distribuidos globalmente — EE.UU., Reino Unido, Europa — y cuento con certificación de inglés C1 Advanced (EF SET, 63/100).",
+      aiWorkflow:
+        "Poseo cuatro certificaciones de Anthropic (Claude 101, Claude Code 101, Claude Code in Action, AI Capabilities & Limitations — todas de 2026) además del entrenamiento interno AI Foundations de Apply. Uso herramientas de IA diariamente — no como atajo, sino como multiplicador de calidad y velocidad de entrega.",
+      mentorship:
+        "Actualmente mentorizo a dos ingenieros en Apply mediante sesiones de coaching 1:1 mensuales. Anteriormente mentoricé a un desarrollador junior en tokenproof y apoyé informalmente a compañeros del bootcamp Microverse.",
+      certifications: [
+        "Claude Code in Action — Anthropic (May 2026)",
+        "Claude Code 101 — Anthropic (May 2026)",
+        "AI Capabilities and Limitations — Anthropic (May 2026)",
+        "Claude 101 — Anthropic (Apr 2026)",
+        "AI Foundations en Apply — Nivel 1 (May 2026)",
+        "Braze Certified Developer (Jul 2025)",
+        "Contentful Certified Professional (Feb 2025)",
+        "EF SET English Certificate C1 Advanced (Jun 2024)",
+      ],
+    },
+
+    toolkit: [
+      {
+        groupName: "Ingeniería Core & Frontend",
+        items: [
+          "React",
+          "Next.js",
+          "TypeScript",
+          "Tailwind CSS",
+          "Node.js",
+          "PostgreSQL",
+          "Payload CMS",
+          "Web3 / Ethers.js",
+        ],
+      },
+      {
+        groupName: "IA & Ingeniería Moderna",
+        items: [
+          "Anthropic Claude Code",
+          "Ingeniería de Prompts",
+          "Flujos con IA",
+          "Contentful",
+          "Braze",
+        ],
+      },
+      {
+        groupName: "Cloud, Testing & Sistemas",
+        items: ["AWS S3", "Firebase", "Vercel", "Playwright", "Jest", "Git & GitHub"],
+      },
+    ],
+
+    connect: {
+      email: "williamscolmenaresch@gmail.com",
+      emailHref:
+        "mailto:williamscolmenaresch@gmail.com?subject=Hola%20Williams&body=Me%20gustar%C3%ADa%20conectar%20contigo.",
+      location: "Cúcuta, Colombia — disponible globalmente (remoto)",
+      availability: "Abierto a roles de ingeniería senior y consultoría. Respuesta en 24 h.",
+      social: socialAccounts,
+    },
+  },
+};
+
+// ─── Legacy Compatibility Shim (remove when Task 2 refactors portfolio.tsx) ───
+/**
+ * @deprecated Use `contentByLocale` instead. Kept only so existing components
+ * continue to compile until Task 2 refactors `src/context/portfolio.tsx`.
+ */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export interface PortfolioState {
   skills: { name: string; logo: string }[];
   services: {
@@ -18,13 +488,9 @@ export interface PortfolioState {
     name: string;
     bullets: string[];
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    icon: ForwardRefExoticComponent<any>;
+    icon: FC<any>;
   }[];
-  about: {
-    start: string;
-    end: string;
-    cta: string;
-  };
+  about: { start: string; end: string; cta: string };
   projects: {
     name: string;
     description: string;
@@ -34,11 +500,7 @@ export interface PortfolioState {
     media?: string[];
   }[];
   connect: {
-    accounts: {
-      icon: () => ReactNode;
-      name: string;
-      url: string;
-    }[];
+    accounts: { icon: FC; name: string; url: string }[];
     email: string;
     links: {
       email: string;
@@ -48,485 +510,19 @@ export interface PortfolioState {
       recommendations: string;
     };
   };
-  testimonials: {
-    id: string;
-    from: string;
-    message: string;
-    role: string;
-  }[];
+  testimonials: { id: string; from: string; message: string; role: string }[];
 }
 
+/** @deprecated See PortfolioState above. */
 export const state: PortfolioState = {
-  skills: [
-    {
-      name: "React.js",
-      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
-    },
-    {
-      name: "Next.js",
-      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg",
-    },
-    {
-      name: "TypeScript",
-      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg",
-    },
-    {
-      name: "JavaScript",
-      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg",
-    },
-    {
-      name: "HTML/CSS",
-      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg",
-    },
-    {
-      name: "Tailwind",
-      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg",
-    },
-    {
-      name: "Node.js",
-      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg",
-    },
-    {
-      name: "Express.js",
-      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg",
-    },
-    {
-      name: "PostgreSQL",
-      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg",
-    },
-    {
-      name: "MongoDB",
-      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg",
-    },
-    {
-      name: "GraphQl",
-      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/graphql/graphql-plain.svg",
-    },
-    {
-      name: "Docker",
-      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg",
-    },
-    {
-      name: "AWS",
-      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original-wordmark.svg",
-    },
-    {
-      name: "GCP",
-      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/googlecloud/googlecloud-original.svg",
-    },
-    {
-      name: "Firebase",
-      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-original.svg",
-    },
-    {
-      name: "Vercel",
-      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vercel/vercel-original.svg",
-    },
-    {
-      name: "Netlify",
-      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/netlify/netlify-original.svg",
-    },
-    {
-      name: "VS Code",
-      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg",
-    },
-    {
-      name: "Git",
-      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg",
-    },
-    {
-      name: "Github",
-      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg",
-    },
-    {
-      name: "Figma",
-      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg",
-    },
-    {
-      name: "Bootstrap",
-      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg",
-    },
-    {
-      name: "Ubuntu",
-      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/ubuntu/ubuntu-original.svg",
-    },
-    {
-      name: "Jira",
-      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jira/jira-original.svg",
-    },
-    {
-      name: "Notion",
-      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/notion/notion-original.svg",
-    },
-    {
-      name: "Swagger",
-      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/swagger/swagger-original.svg",
-    },
-    {
-      name: "Redux",
-      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redux/redux-original.svg",
-    },
-    {
-      name: "Playwright",
-      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/playwright/playwright-original.svg",
-    },
-    {
-      name: "Jest",
-      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jest/jest-plain.svg",
-    },
-    {
-      name: "Rspec",
-      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/rspec/rspec-original.svg",
-    },
-    {
-      name: "Insomnia",
-      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/insomnia/insomnia-original.svg",
-    },
-    {
-      name: "Postman",
-      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postman/postman-original.svg",
-    },
-    {
-      name: "Ruby",
-      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/ruby/ruby-original.svg",
-    },
-    {
-      name: "Rails",
-      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/rails/rails-plain.svg",
-    },
-  ],
-  services: [
-    {
-      id: "service-001",
-      name: "Front-End Development",
-      bullets: [
-        "Design and development of modern, functional user interfaces using React.js, Next.js, TypeScript, and Tailwind CSS.",
-        "Implementation of pixel-perfect designs based on tools like Figma.",
-        "Performance optimization and accessibility improvements for exceptional user experiences.",
-      ],
-      icon: MonitorCog,
-    },
-    {
-      id: "service-002",
-      name: "Full-Stack Web Development",
-      bullets: [
-        "Creation of complete web applications using stacks like MERN (MongoDB, Express.js, React, Node.js).",
-        "Development of scalable and secure systems with seamless API and database integrations, including PostgreSQL and MongoDB.",
-      ],
-      icon: Code2,
-    },
-    {
-      id: "service-003",
-      name: "API Integration and Development",
-      bullets: [
-        "Design and integration of efficient REST APIs.",
-        "Implementation of secure authentication using JSON Web Tokens JWT).",
-        "Proficient with tools like GraphQL and Fetch API for advanced data handling.",
-      ],
-      icon: CloudDownload,
-    },
-    {
-      id: "service-004",
-      name: "Web3 and Blockchain Solutions",
-      bullets: [
-        "Development of onboarding flows for blockchain networks like Ethereum, Solana, and more.",
-        "Integration of digital wallets using SDKs such as MetaMask and Ethers.js.",
-        "Knowledge on token-gated applications for exclusive services.",
-      ],
-      icon: GlobeLock,
-    },
-    {
-      id: "service-005",
-      name: "Performance Optimization",
-      bullets: [
-        "Optimization of applications to ensure stability and scalability.",
-        "Conducting load testing and fine-tuning to handle high traffic volumes.",
-        "Enhancing web application performance using advanced development techniques.",
-      ],
-      icon: Layers2,
-    },
-    {
-      id: "service-006",
-      name: "Responsive Web Design",
-      bullets: [
-        "Development of mobile-optimized websites with a Mobile-First approach.",
-        "Delivering consistent user experiences across various screen sizes while ensuring functionality and visual appeal.",
-      ],
-      icon: MonitorSmartphone,
-    },
-  ],
-
-  about: {
-    start:
-      "Hello! I’m Williams Colmenares, a dedicated and passionate Front-End Software Engineer with a strong background in Full-Stack Development. I have spent the last several years turning complex ideas into intuitive and engaging digital experiences. My mission is simple: to create software that not only works seamlessly but also delivers meaningful value to users. I bring over three years of professional experience in the software industry, where I’ve built and optimized scalable web applications using modern frameworks and tools like React.js, Next.js, Node.js, and TypeScript. My career has been defined by my ability to solve problems creatively, adapt to ever-evolving technologies, and consistently deliver high-quality work. As a Frontend Engineer, I’ve had the privilege of collaborating with innovative companies like tokenproof, where I played a pivotal role in enhancing their self-service customer portal, and Crazy Imagine Software, where I contributed to the development of robust, full-stack solutions for diverse clients. These experiences have not only sharpened my technical expertise but also reinforced my commitment to excellence and attention to detail.",
-    end: "What sets me apart is my ability to seamlessly blend technical expertise with strong communication and collaboration skills. Working with international teams has taught me the importance of adaptability, clear communication, and the value of diverse perspectives. Whether I’m mentoring junior developers, implementing pixel-perfect designs, or troubleshooting complex issues, I approach every challenge with enthusiasm and a mindset geared towards solutions. I’m a firm believer in the power of continuous learning and growth. Over the years, I’ve dedicated myself to mastering technologies, refining my coding practices, and exploring innovative solutions to deliver the best possible results. My journey has also included a rich educational background through programs like Microverse, where I gained hands-on experience in algorithms, data structures, and full-stack development while collaborating with developers from around the world. When I’m not immersed in coding, you’ll likely find me exploring the latest advancements in web technologies, contributing to community-driven projects, or planning my next software challenge. For me, every project is an opportunity to push boundaries, solve problems, and leave a positive impact.",
-    cta: "I invite you to explore my work and see how my skills and experiences come together to create exceptional software solutions. Let’s connect and build something extraordinary!",
-  },
-
-  projects: [
-    {
-      name: "Made by Apes Bodega Web for Yuga Labs",
-      description:
-        "Assigned as the sole developer for this project, I built a web platform from scratch using Next.js and Payload CMS for the Yuga Labs team. This site displays active MBA licenses and provides interested users with resources like FAQs, Blog posts, and Handbooks. The platform includes an admin interface for content management and integrates Meilisearch for quick access to licensing information. User profile email actions are managed through Mailgun, with media storage on AWS S3 and optimized for both mobile and desktop. Live site: madeby.boredapeyachtclub.com (VPN may be needed in some regions)",
-      skills: [
-        "Payload CMS",
-        "Next.js",
-        "React",
-        "Typescript",
-        "PostgreSQL",
-        "Amazon S3",
-      ],
-      live: "https://madeby.boredapeyachtclub.com/",
-      media: [
-        "https://raw.githubusercontent.com/williamscch/williams_portfolio/main/src/assets/projects-ss/bodega/home-features.png",
-        "https://raw.githubusercontent.com/williamscch/williams_portfolio/main/src/assets/projects-ss/bodega/bodega-2.png",
-        "https://raw.githubusercontent.com/williamscch/williams_portfolio/main/src/assets/projects-ss/bodega/bodega-details.png",
-        "https://raw.githubusercontent.com/williamscch/williams_portfolio/main/src/assets/projects-ss/bodega/bodega-details-2.png",
-        "https://raw.githubusercontent.com/williamscch/williams_portfolio/main/src/assets/projects-ss/bodega/blog-features.png",
-        "https://raw.githubusercontent.com/williamscch/williams_portfolio/main/src/assets/projects-ss/bodega/blog-2.png",
-        "https://raw.githubusercontent.com/williamscch/williams_portfolio/main/src/assets/projects-ss/bodega/cms-home.png",
-        "https://raw.githubusercontent.com/williamscch/williams_portfolio/main/src/assets/projects-ss/bodega/cms-blog.png",
-      ],
-    },
-    {
-      name: "Tokenproof Tools",
-      description:
-        "Tools played a crucial role in Tokenproof, managing, and operating the services offered. My responsibilities included creating and managing events, defining entry policies, handling online authentication, and overseeing the user experience within the app. I worked directly with Tokenproof’s API to implement new features, conduct maintenance, resolve bugs, and provide ongoing support to ensure smooth operation. I led a comprehensive UX and UI improvement for the Tools app, utilizing Tailwind and ShadCN to give the platform a fresh look while enhancing its existing functionalities.",
-      skills: [
-        "React",
-        "Typescript",
-        "Library Management",
-        "Tailwind",
-        "Shadcn",
-        "Services Management",
-      ],
-      media: [
-        "https://raw.githubusercontent.com/williamscch/williams_portfolio/main/src/assets/projects-ss/tools/home.png",
-        "https://raw.githubusercontent.com/williamscch/williams_portfolio/main/src/assets/projects-ss/tools/dark-home.png",
-        "https://raw.githubusercontent.com/williamscch/williams_portfolio/main/src/assets/projects-ss/tools/event-details.png",
-        "https://raw.githubusercontent.com/williamscch/williams_portfolio/main/src/assets/projects-ss/tools/tools.png",
-        "https://raw.githubusercontent.com/williamscch/williams_portfolio/main/src/assets/projects-ss/tools/notification-details.png",
-        "https://raw.githubusercontent.com/williamscch/williams_portfolio/main/src/assets/projects-ss/tools/calendar.png",
-      ],
-    },
-    {
-      name: "Multi-Network Onboarding Web Flow for Tokenproof App",
-      description:
-        "Developed a flexible onboarding flow for tokenproof, supporting multiple blockchain networks (Ethereum, Solana, Flow, Sui, Bitcoin, Crypto.com) across mobile and desktop. Integrated diverse wallet providers tailored to each network, using SDKs like Dynamic, Moopay-SDK, Mysthen, Ethers, and Magic SDK. Implemented secure authentication with JWTs and nonces. Overcame challenges in cross-platform UX and SDKs integrations, delivering a smooth, secure onboarding experience for users accessing tokenproof services for token-gated events and experiences. It is composed of several react/vite projects.",
-      skills: ["SDK", "React", "Security Token", "Ethers.js", "MetaMask"],
-      live: "https://tokenproof.xyz/connect/v2",
-      media: [
-        "https://raw.githubusercontent.com/williamscch/williams_portfolio/main/src/assets/projects-ss/onboardings/desktop-network.png",
-        "https://raw.githubusercontent.com/williamscch/williams_portfolio/main/src/assets/projects-ss/onboardings/desktop-init.png",
-        "https://raw.githubusercontent.com/williamscch/williams_portfolio/main/src/assets/projects-ss/onboardings/desktop-dynamic-select.png",
-        "https://raw.githubusercontent.com/williamscch/williams_portfolio/main/src/assets/projects-ss/onboardings/desktop-sign.png",
-        "https://raw.githubusercontent.com/williamscch/williams_portfolio/main/src/assets/projects-ss/onboardings/init.png",
-        "https://raw.githubusercontent.com/williamscch/williams_portfolio/main/src/assets/projects-ss/onboardings/email.png",
-        "https://raw.githubusercontent.com/williamscch/williams_portfolio/main/src/assets/projects-ss/onboardings/wallets.png",
-        "https://raw.githubusercontent.com/williamscch/williams_portfolio/main/src/assets/projects-ss/onboardings/connect.png",
-        "https://raw.githubusercontent.com/williamscch/williams_portfolio/main/src/assets/projects-ss/onboardings/sign.png",
-        "https://raw.githubusercontent.com/williamscch/williams_portfolio/main/src/assets/projects-ss/onboardings/success.png",
-      ],
-    },
-    {
-      name: "V2 Tokenproof Event Pages",
-      description:
-        "Developed a flexible onboarding flow for tokenproof, supporting multiple blockchain networks (Ethereum, Solana, Flow, Sui, Bitcoin, Crypto.com) across mobile and desktop. Integrated diverse wallet providers tailored to each network, using SDKs like Dynamic, Moopay-SDK, Mysthen, Ethers, and Magic SDK. Implemented secure authentication with JWTs and nonces. Overcame challenges in cross-platform UX and SDKs integrations, delivering a smooth, secure onboarding experience for users accessing tokenproof services for token-gated events and experiences. It is composed of several react/vite projects.",
-      skills: [
-        "React",
-        "Figma",
-        "Typescript",
-        "Stripe",
-        "Web3",
-        "API integration",
-      ],
-      media: [
-        "https://raw.githubusercontent.com/williamscch/williams_portfolio/main/src/assets/projects-ss/events/home.png",
-        "https://raw.githubusercontent.com/williamscch/williams_portfolio/main/src/assets/projects-ss/events/cta.png",
-        "https://raw.githubusercontent.com/williamscch/williams_portfolio/main/src/assets/projects-ss/events/connect.png",
-        "https://raw.githubusercontent.com/williamscch/williams_portfolio/main/src/assets/projects-ss/events/social.png",
-        "https://raw.githubusercontent.com/williamscch/williams_portfolio/main/src/assets/projects-ss/events/tickets.png",
-        "https://raw.githubusercontent.com/williamscch/williams_portfolio/main/src/assets/projects-ss/events/payment.png",
-        "https://raw.githubusercontent.com/williamscch/williams_portfolio/main/src/assets/projects-ss/events/success.png",
-      ],
-    },
-    {
-      name: "Development and Automation of Token-Gate Solutions (TGA)",
-      description:
-        "Led the development of Token-Gate Anything (TGA) in Tokenproof, a solution for creating exclusive token-based experiences. Initially, I manually developed and managed projects for clients like Forbes, Yuga Labs, F1, and BMW, configuring protected content (forms, iframes). Later, I suggested and developed an automated tool using Payload CMS and Next.js, enabling administrators to easily generate and customize dynamic TGAs, reducing time, and enhancing scalability and system flexibility.",
-      skills: [
-        "Next.js",
-        "React",
-        "Typescript",
-        "Payload CMS",
-        "Project Management",
-        "Project Development",
-        "Automation",
-      ],
-      media: [
-        "https://raw.githubusercontent.com/williamscch/williams_portfolio/main/src/assets/projects-ss/tga/bmw-gate.png",
-        "https://raw.githubusercontent.com/williamscch/williams_portfolio/main/src/assets/projects-ss/tga/oa.png",
-        "https://raw.githubusercontent.com/williamscch/williams_portfolio/main/src/assets/projects-ss/tga/bmw-typeform-load.png",
-        "https://raw.githubusercontent.com/williamscch/williams_portfolio/main/src/assets/projects-ss/tga/bmw-typeform.png",
-        "https://raw.githubusercontent.com/williamscch/williams_portfolio/main/src/assets/projects-ss/tga/bmw-typeform-2.png",
-        "https://raw.githubusercontent.com/williamscch/williams_portfolio/main/src/assets/projects-ss/tga/bmw-typeform-3.png",
-        "https://raw.githubusercontent.com/williamscch/williams_portfolio/main/src/assets/projects-ss/tga/forbes-gate.png",
-        "https://raw.githubusercontent.com/williamscch/williams_portfolio/main/src/assets/projects-ss/tga/forbes-iframe.png",
-        "https://raw.githubusercontent.com/williamscch/williams_portfolio/main/src/assets/projects-ss/tga/forbes-calendly.png",
-        "https://raw.githubusercontent.com/williamscch/williams_portfolio/main/src/assets/projects-ss/tga/hangover-gate.png",
-        "https://raw.githubusercontent.com/williamscch/williams_portfolio/main/src/assets/projects-ss/tga/hangover-form.png",
-        "https://raw.githubusercontent.com/williamscch/williams_portfolio/main/src/assets/projects-ss/tga/hangover-form-2.png",
-        "https://raw.githubusercontent.com/williamscch/williams_portfolio/main/src/assets/projects-ss/tga/cms-login.png",
-        "https://raw.githubusercontent.com/williamscch/williams_portfolio/main/src/assets/projects-ss/tga/cms-home.png",
-        "https://raw.githubusercontent.com/williamscch/williams_portfolio/main/src/assets/projects-ss/tga/cms-form.png",
-      ],
-      live: "https://forbesweb3inspire.tokenproof.xyz/",
-    },
-    {
-      name: "ApeFest 2024 Exclusive Merch Sale – Authentication & Payments",
-      description:
-        "As the sole developer on this project, I created a platform for the exclusive sale of merchandise based on the ticketing page available only to ApeFest 2024 ticket holders. Built with React and Tailwind, the project followed a provided Figma design and utilized Stripe to handle payments. Key features included a queue for entry, session expiration for purchases, and an online authentication widget from Tokenproof to verify ApeFest ticket ownership and make use of an internal API to handle inventory.",
-      skills: ["React", "Typescript", "Tailwind", "Figma", "Stripe"],
-      media: [
-        "https://raw.githubusercontent.com/williamscch/williams_portfolio/main/src/assets/projects-ss/merchsite/gate.png",
-        "https://raw.githubusercontent.com/williamscch/williams_portfolio/main/src/assets/projects-ss/merchsite/merch.png",
-        "https://raw.githubusercontent.com/williamscch/williams_portfolio/main/src/assets/projects-ss/merchsite/merchsize.png",
-        "https://raw.githubusercontent.com/williamscch/williams_portfolio/main/src/assets/projects-ss/merchsite/email.png",
-        "https://raw.githubusercontent.com/williamscch/williams_portfolio/main/src/assets/projects-ss/merchsite/payment.png",
-        "https://raw.githubusercontent.com/williamscch/williams_portfolio/main/src/assets/projects-ss/merchsite/success.png",
-      ],
-    },
-    {
-      name: "ApeFest 2024 Ticket Sale – Re-skin, Load Testing & Launch Support",
-      description:
-        "As the sole person responsible at Tokenproof for the re-skin and adjustments on the ApeFest 2024 ticket sale page in Lisbon, I completed the redesign using React and Tailwind to align the website with the new Figma design and updated user flow. I developed and implemented load-testing scripts to ensure the site's stability and capacity to handle high traffic on the launch day, where I also provided real-time technical support.",
-      skills: ["React", "Typescript", "Scripting", "Load Testing", "Figma"],
-      live: "https://apefest.tokenproof.xyz/",
-      media: [
-        "https://raw.githubusercontent.com/williamscch/williams_portfolio/main/src/assets/projects-ss/apefest/gate.png",
-        "https://raw.githubusercontent.com/williamscch/williams_portfolio/main/src/assets/projects-ss/apefest/tickets.png",
-        "https://raw.githubusercontent.com/williamscch/williams_portfolio/main/src/assets/projects-ss/apefest/email.png",
-        "https://raw.githubusercontent.com/williamscch/williams_portfolio/main/src/assets/projects-ss/apefest/payment.png",
-        "https://raw.githubusercontent.com/williamscch/williams_portfolio/main/src/assets/projects-ss/apefest/success.png",
-        "https://raw.githubusercontent.com/williamscch/williams_portfolio/main/src/assets/projects-ss/apefest/whitelist.png",
-        "https://raw.githubusercontent.com/williamscch/williams_portfolio/main/src/assets/projects-ss/apefest/soldout.png",
-      ],
-    },
-    {
-      name: "Rental Cars",
-      description:
-        "This a Full-stack project made for a renting cars business. As user you can watch the cars available, check its specifications, select and reserve it, as well as cancel those reservations. Using the admin role you can manage the availability of cars, add new ones, edit and delete them. Built with React, Rails and Postgres stack.",
-      skills: ["Ruby on Rails", "React", "Capybara", "PostgreSQL"],
-      live: "https://rental-cars-williamscch.netlify.app/",
-      source: "https://github.com/williamscch/front_rental_cars",
-      media: [
-        "https://raw.githubusercontent.com/williamscch/front_rental_cars/dev/app-ss.png",
-      ],
-    },
-    {
-      name: "TV Shows Explorer",
-      description:
-        "Web application based on an external API which contains information about popular TV shows. This app let you like the shows that you like the most and comment what you think about them making it so interactive and uses an involvement API to save this interaction information.",
-      skills: ["Javascript", "ES6", "API integration", "Jest"],
-      live: "https://williamscch.github.io/tv-shows/dist/",
-      source: "https://github.com/williamscch/tv-shows",
-      media: [
-        "https://raw.githubusercontent.com/williamscch/tv-shows/development/app-ss.png",
-      ],
-    },
-    {
-      name: "Today's To-Do Tasks Tool",
-      description:
-        "A web app which help you to save your daily tasks, mark them as completed and edit and delete them. Built vanilla JavaScript",
-      skills: ["Javascript", "CSS", "HTML", "Local Storage"],
-      live: "https://williamscch.github.io/to-do-list/dist/",
-      source: "https://github.com/williamscch/to-do-list",
-      media: [
-        "https://raw.githubusercontent.com/williamscch/to-do-list/master/app-ss.png",
-      ],
-    },
-  ],
-
+  skills: [],
+  services: [],
+  about: { start: "", end: "", cta: "" },
+  projects: [],
   connect: {
-    accounts: [
-      {
-        icon: IconLinkedin,
-        name: "LinkedIn",
-        url: "https://www.linkedin.com/in/williamscolmenaresch",
-      },
-      {
-        icon: IconGithub,
-        name: "Github",
-        url: "https://github.com/williamscch",
-      },
-      {
-        icon: IconUpwork,
-        name: "Upwork",
-        url: "https://www.upwork.com/freelancers/~0136f944648d8cc21e?mp_source=share",
-      },
-    ],
-    email: "williamscolmenaresch@gmail.com",
-    links: {
-      email:
-        "mailto:williamscolmenaresch@gmail.com?subject=Hello%20Williams&body=I%20would%20like%20to%20connect%20with%20you.",
-      repositories: "https://github.com/williamscch?tab=repositories",
-      microverse: "https://www.microverse.org/?grsf=s3swmk",
-      recommendations:
-        "https://www.linkedin.com/in/williamscolmenaresch/details/recommendations/?detailScreenTabIndex=0",
-      resume:
-        "https://docs.google.com/document/d/100M7OyXCnLGtPcNVfu-YGa2jH5O3AG09_NlbYNN2c-0/edit?usp=sharing",
-    },
+    accounts: [],
+    email: "",
+    links: { email: "", repositories: "", resume: "", microverse: "", recommendations: "" },
   },
-
-  testimonials: [
-    {
-      id: "testimonial-001",
-      from: "Fonz Olvera",
-      role: "Serial Entrepreneur, Former CEO at Tokenproof",
-      message:
-        "Williams was an amazing addition to our team. Not only did he exceed our expectations of talent and skills, but he also carries an excellent work ethic and all around great attitude. Cannot wait to work with Williams again.",
-    },
-    {
-      id: "testimonial-002",
-      from: "Jesus Cocaño",
-      role: "Software Engineer, Devops Engineer",
-      message:
-        "Exceptional frontend developer with a remarkable ability to learn quickly and adapt to new challenges. Their positive attitude and teamwork skills make every project smoother and more enjoyable. I highly recommend them to any team looking for both talent and great collaboration!",
-    },
-    {
-      id: "testimonial-003",
-      from: "Luis Lara",
-      role: "Computer Systems Engineer",
-      message:
-        "Williams is a technology enthusiast. He always willing to learn new things. He works very well in a team, and adheres to the recommendations and procedures within an organization. He is an excellent professional, with great talent and potential, who works hard to achieve his goals. He is a very good worker: punctual, with initiative, intelligent, orderly and detail-oriented. We wish you much success in all the new work stages to come.",
-    },
-    {
-      id: "testimonial-004",
-      from: "Diego Yon",
-      role: "Full stack developer",
-      message:
-        "It is my pleasure to recommend Williams. I have had the opportunity to work with him a couple of times now and I can say that he is a great teammate to have, very knowledgeable, and easy to work with. He not only gets the job done, but he also goes above and beyond in every project.",
-    },
-    {
-      id: "testimonial-005",
-      from: "Alzubair Alqaraghuli",
-      role: "Full stack developer",
-      message:
-        "Williams is a fantastic developer, and his detail-oriented approach made him a pleasure to work with. We pair-programmed extensively together while enrolled at microverse, and in that time his work ethic blew me away. Williams views writing clean, accessible code as a calling, and he's great at identifying areas where we can improve UI. He's also super friendly; by the time our project was done, I felt like we'd known each other for years. I can't recommend him enough!",
-    },
-    {
-      id: "testimonial-006",
-      from: "Muhyideen Elias",
-      role: "DevOps Engineer",
-      message:
-        "Williams is a great person and deeply creative I will say because he has a great eye for details. I worked with him for several weeks during microverse training. I am always inspired by his decision to be a full-stack developer because of his previous background. And he has this tenacity for seeing things through and having very good interpersonal relationship skills.",
-    },
-    {
-      id: "testimonial-007",
-      from: "Vitor Guedes Madeira",
-      role: "Full stack developer",
-      message:
-        "I've met Williams during a coding bootcamp and it was always a pleasure to be partnered with him. Making friends and working with different people is a natural skill for him, so it makes the whole environment better for everyone to work together, especially when it comes to team projects, since he also has such a great coding organization. He codes in a way that other programmers won't struggle to work on his projects.",
-    },
-  ],
+  testimonials: [],
 };
