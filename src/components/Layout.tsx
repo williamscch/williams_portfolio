@@ -34,7 +34,7 @@ export default function Layout({ children }: { children?: React.ReactNode }) {
       <div className="flex flex-col">
         <header
           className={cn(
-            "sticky top-0 z-30 flex justify-between items-center gap-4 border-b bg-[#F4EFEA] px-4 sm:px-6 transition-all ease delay-400",
+            "sticky top-0 z-30 flex justify-between items-center gap-4 border-b bg-brand-warm px-4 sm:px-6 transition-all ease delay-400",
             scrolled
               ? "h-10 sm:py-2 sm:border-b sm:shadow-md"
               : "h-12 sm:py-4 sm:border-0"
@@ -47,21 +47,21 @@ export default function Layout({ children }: { children?: React.ReactNode }) {
                 <span className="sr-only">Toggle Menu</span>
               </Button>
             </SheetTrigger>
-            <SheetContent side="left" className="sm:max-w-xs bg-[#FAF7F2]">
+            <SheetContent side="left" className="sm:max-w-xs bg-brand-cream">
               <nav className="grid gap-6 text-lg font-medium mt-8">
                 {navOptions.map((option) => (
                   <Link
                     onClick={() => setOpen(false)}
                     key={option.toId}
                     to={option.toId}
-                    className="pl-2 text-[#4A4A52] text-xl font-semibold transition-colors hover:text-[#19191C] cursor-pointer"
+                    className="pl-2 text-brand-muted text-xl font-semibold transition-colors hover:text-brand-ink cursor-pointer"
                   >
                     {option.label}
                   </Link>
                 ))}
                 <button
                   onClick={() => { toggleLocale(); setOpen(false); }}
-                  className="pl-2 text-[#C25E3E] text-xl font-semibold text-left cursor-pointer"
+                  className="pl-2 text-brand-terra text-xl font-semibold text-left cursor-pointer"
                 >
                   {locale === "en" ? "ES" : "EN"}
                 </button>
@@ -72,9 +72,9 @@ export default function Layout({ children }: { children?: React.ReactNode }) {
           <div className="hidden sm:flex w-full gap-6 items-center justify-center relative">
             {navOptions.map((option) => (
               <Link
-                activeStyle={{ color: "#C25E3E" }}
+                activeStyle={{ color: "hsl(14 65% 50%)" }}
                 key={option.toId}
-                className="font-medium cursor-pointer text-[#4A4A52] hover:text-[#19191C] transition-colors"
+                className="font-medium cursor-pointer text-brand-muted hover:text-brand-ink transition-colors"
                 to={option.toId}
                 spy
                 smooth
@@ -89,7 +89,7 @@ export default function Layout({ children }: { children?: React.ReactNode }) {
 
           <button
             onClick={toggleLocale}
-            className="hidden sm:inline-flex font-mono text-xs uppercase tracking-widest text-[#C25E3E] hover:text-[#A84E33] transition-colors cursor-pointer"
+            className="hidden sm:inline-flex font-mono text-xs uppercase tracking-widest text-brand-terra hover:text-brand-terra-hover transition-colors cursor-pointer"
           >
             {locale === "en" ? "ES" : "EN"}
           </button>

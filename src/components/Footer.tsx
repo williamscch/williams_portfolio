@@ -7,9 +7,9 @@ export default function Footer() {
   const { social } = data.connect;
 
   return (
-    <footer className="bg-[#19191C] px-6 py-10 sm:px-12 md:px-20">
+    <footer className="bg-brand-ink px-6 py-10 sm:px-12 md:px-20">
       <div className="mx-auto max-w-3xl flex flex-col sm:flex-row items-center justify-between gap-6">
-        <p className="text-sm text-[#FAF7F2]/60">
+        <p className="text-sm text-brand-cream/60">
           &copy; {new Date().getFullYear()} Williams Colmenares. Built with care.
         </p>
 
@@ -22,7 +22,7 @@ export default function Footer() {
                 href={account.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[#FAF7F2]/60 hover:text-[#C25E3E] transition-colors"
+                className="text-brand-cream/60 hover:text-brand-terra transition-colors"
                 aria-label={account.name}
               >
                 <Icon className="w-4 h-4" />
@@ -30,14 +30,14 @@ export default function Footer() {
             );
           })}
 
-          <span className="text-[#FAF7F2]/20">|</span>
+          <span className="text-brand-cream/20">|</span>
 
           <Link
             to="hero"
             spy
             smooth
             duration={600}
-            className="inline-flex items-center gap-1 text-xs text-[#FAF7F2]/60 hover:text-[#C25E3E] transition-colors cursor-pointer"
+            className="inline-flex items-center gap-1 text-xs text-brand-cream/60 hover:text-brand-terra transition-colors cursor-pointer"
           >
             <ArrowUp className="w-3 h-3" />
             Back to top
