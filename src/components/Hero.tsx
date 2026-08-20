@@ -1,6 +1,7 @@
 import { Link } from "react-scroll";
 import { ArrowDown, MessageCircle } from "lucide-react";
 import { usePortfolioContext } from "@/context/portfolio";
+import IMG_3406 from "@/assets/IMG_3406.jpg";
 
 export default function Hero() {
   const { data } = usePortfolioContext();
@@ -13,9 +14,11 @@ export default function Hero() {
     >
       <div className="mx-auto max-w-3xl">
         <div className="flex items-center gap-5 mb-8">
-          <div className="flex h-20 w-20 shrink-0 items-center justify-center rounded-full bg-brand-terra/10 text-brand-terra text-2xl font-bold tracking-tight select-none">
-            WC
-          </div>
+          <img
+            src={IMG_3406}
+            alt="Williams Colmenares"
+            className="h-20 w-20 shrink-0 rounded-full object-cover ring-2 ring-brand-terra/20 shadow-md"
+          />
           <p className="font-mono text-sm uppercase tracking-widest text-brand-terra">
             {greeting}
           </p>
