@@ -1,70 +1,56 @@
-import { Button } from "@/ui/button";
-import { Input } from "@/ui/input";
-import { Textarea } from "@/ui/textarea";
+import { Mail, MapPin, Clock } from "lucide-react";
+import { usePortfolioContext } from "@/context/portfolio";
 
 export default function Contact() {
+  const { data } = usePortfolioContext();
+  const { email, emailHref, location, availability, social } = data.connect;
+
   return (
-    <section
-      id="contact"
-      className="md:mx-6 lg:mx-24 px-6 md:px-0 py-10 md:py-24 flex flex-col items-center"
-    >
-      <div className="w-full justify-center text-center mb-8 lg:mb-14">
-        <h2 className="font-medium text-3xl md:text-4xl mb-5">Contact Form</h2>
-        <p>
-          I&apos;m always interested in hearing about new projects, so if
-          you&apos;d like to chat please get in touch.
+    <section id="connect" className="bg-[#FAF7F2] px-6 py-20 sm:px-12 md:px-20">
+      <div className="mx-auto max-w-3xl">
+        <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-[#19191C] mb-4">
+          Let&apos;s Connect
+        </h2>
+        <p className="text-[#4A4A52] leading-relaxed text-sm sm:text-base max-w-prose mb-10">
+          Always open to a conversation about engineering, consulting, or interesting problems.
         </p>
+
+        <div className="space-y-4 mb-10">
+          <a
+            href={emailHref}
+            className="flex items-center gap-3 text-[#19191C] hover:text-[#C25E3E] transition-colors group"
+          >
+            <Mail className="w-4 h-4 text-[#C25E3E]" />
+            <span className="text-sm sm:text-base font-medium">{email}</span>
+          </a>
+          <div className="flex items-center gap-3 text-[#4A4A52]">
+            <MapPin className="w-4 h-4 text-[#C25E3E]" />
+            <span className="text-sm sm:text-base">{location}</span>
+          </div>
+          <div className="flex items-center gap-3 text-[#4A4A52]">
+            <Clock className="w-4 h-4 text-[#C25E3E]" />
+            <span className="text-sm sm:text-base">{availability}</span>
+          </div>
+        </div>
+
+        <div className="flex flex-wrap gap-3">
+          {social.map((account) => {
+            const Icon = account.icon;
+            return (
+              <a
+                key={account.name}
+                href={account.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 rounded-full border border-[#DDD5CA] bg-[#F4EFEA] px-4 py-2 text-sm font-medium text-[#19191C] hover:border-[#C25E3E]/60 hover:bg-[#C25E3E]/5 transition-all"
+              >
+                <Icon className="w-4 h-4" />
+                {account.name}
+              </a>
+            );
+          })}
+        </div>
       </div>
-      <form
-        action="https://formspree.io/f/xlezzzro"
-        method="POST"
-        id="form"
-        className="flex flex-col gap-6 px-4 max-w-7xl w-full"
-      >
-        <div className="flex flex-col md:flex-row w-full gap-6">
-          <Input
-            id="first-name"
-            type="text"
-            name="first-name"
-            required
-            maxLength={30}
-            placeholder="Firts name"
-          />
-
-          <Input
-            id="last-name"
-            type="text"
-            name="last-name"
-            required
-            maxLength={30}
-            placeholder="Last name"
-          />
-        </div>
-
-        <Input
-          id="email"
-          type="email"
-          name="email"
-          required
-          placeholder="Email address"
-        />
-
-        <Textarea
-          id="text-area"
-          name="message"
-          maxLength={500}
-          placeholder="Type your message here"
-          required
-        />
-
-        <div className="button-errormessage">
-          <Button type="submit" size="lg">
-            Send Message
-          </Button>
-
-          <small id="error-message" />
-        </div>
-      </form>
     </section>
   );
 }
