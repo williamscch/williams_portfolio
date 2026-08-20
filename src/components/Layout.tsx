@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-scroll";
-import { PanelLeft } from "lucide-react";
-import { Button } from "@/ui/button";
-import { Sheet, SheetContent, SheetTrigger } from "@/ui/sheet";
+import { BookOpen, User, Wrench, Mail, Languages } from "lucide-react";
 import { cn } from "@/utils/cn";
 import { usePortfolioContext } from "@/context/portfolio";
 
@@ -15,7 +13,6 @@ const navOptions = [
 
 export default function Layout({ children }: { children?: React.ReactNode }) {
   const { locale, setLocale } = usePortfolioContext();
-  const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
   const handleScroll = () => {
@@ -40,35 +37,6 @@ export default function Layout({ children }: { children?: React.ReactNode }) {
               : "h-12 sm:py-4 sm:border-0"
           )}
         >
-          <Sheet onOpenChange={setOpen} open={open}>
-            <SheetTrigger asChild>
-              <Button size="icon" variant="outline" className="sm:hidden">
-                <PanelLeft className="h-5 w-5" />
-                <span className="sr-only">Toggle Menu</span>
-              </Button>
-            </SheetTrigger>
-            <SheetContent side="left" className="sm:max-w-xs bg-brand-cream">
-              <nav className="grid gap-6 text-lg font-medium mt-8">
-                {navOptions.map((option) => (
-                  <Link
-                    onClick={() => setOpen(false)}
-                    key={option.toId}
-                    to={option.toId}
-                    className="pl-2 text-brand-muted text-xl font-semibold transition-colors hover:text-brand-ink cursor-pointer"
-                  >
-                    {option.label}
-                  </Link>
-                ))}
-                <button
-                  onClick={() => { toggleLocale(); setOpen(false); }}
-                  className="pl-2 text-brand-terra text-xl font-semibold text-left cursor-pointer"
-                >
-                  {locale === "en" ? "ES" : "EN"}
-                </button>
-              </nav>
-            </SheetContent>
-          </Sheet>
-
           <div className="hidden sm:flex w-full gap-6 items-center justify-center relative">
             {navOptions.map((option) => (
               <Link
@@ -94,8 +62,37 @@ export default function Layout({ children }: { children?: React.ReactNode }) {
             {locale === "en" ? "ES" : "EN"}
           </button>
         </header>
-        <main className="flex-1">{children}</main>
+        <main className="flex-1 pb-16 sm:pb-0">{children}</main>
       </div>
+      {/* Mobile bottom tab bar */}
+      <nav className="sm:hidden fixed bottom-0 inset-x-0 z-50 bg-brand-cream/95 backdrop-blur-sm border-t border-brand-border px-2 py-1.5 flex items-center justify-around safe-area-bottom">
+        {navOptions.map((option) => (
+          <Link
+            activeStyle={{ color: "hsl(14 65% 50%)" }}
+            key={option.toId}
+            to={option.toId}
+            spy
+            smooth
+            offset={-40}
+            delay={200}
+            duration={600}
+            className="flex flex-col items-center gap-0.5 text-brand-muted text-[10px] font-medium transition-colors"
+          >
+            {option.toId === "story" && <BookOpen className="w-4 h-4" />}
+            {option.toId === "beyond-code" && <User className="w-4 h-4" />}
+            {option.toId === "toolkit" && <Wrench className="w-4 h-4" />}
+            {option.toId === "connect" && <Mail className="w-4 h-4" />}
+            {option.label}
+          </Link>
+        ))}
+        <button
+          onClick={toggleLocale}
+          className="flex flex-col items-center gap-0.5 text-brand-terra text-[10px] font-bold transition-colors"
+        >
+          <Languages className="w-4 h-4" />
+          {locale === "en" ? "ES" : "EN"}
+        </button>
+      </nav>
     </div>
   );
 }
