@@ -5,27 +5,27 @@ export default function HumanSide() {
   const { headline, person, aiWorkflow, mentorship, certifications } = data.humanSide;
 
   return (
-    <section id="beyond-code" className="bg-[#FAF7F2] px-6 py-20 sm:px-12 md:px-20">
+    <section id="beyond-code" className="bg-brand-cream px-6 py-20 sm:px-12 md:px-20">
       <div className="mx-auto max-w-3xl">
-        <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-[#19191C] mb-12">
+        <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-brand-ink mb-12">
           {headline}
         </h2>
 
         <div className="grid sm:grid-cols-2 gap-10">
           <div>
-            <h3 className="font-mono text-xs uppercase tracking-widest text-[#C25E3E] mb-3">
+            <h3 className="font-mono text-xs uppercase tracking-widest text-brand-terra mb-3">
               The Person Behind the Code
             </h3>
-            <p className="text-[#4A4A52] leading-relaxed text-sm sm:text-base max-w-prose">
+            <p className="text-brand-muted leading-relaxed text-sm sm:text-base max-w-prose">
               {person}
             </p>
           </div>
 
           <div>
-            <h3 className="font-mono text-xs uppercase tracking-widest text-[#C25E3E] mb-3">
+            <h3 className="font-mono text-xs uppercase tracking-widest text-brand-terra mb-3">
               AI-Augmented Workflow
             </h3>
-            <p className="text-[#4A4A52] leading-relaxed text-sm sm:text-base max-w-prose mb-6">
+            <p className="text-brand-muted leading-relaxed text-sm sm:text-base max-w-prose mb-6">
               {aiWorkflow}
             </p>
 
@@ -34,9 +34,9 @@ export default function HumanSide() {
                 {certifications.map((cert) => (
                   <li
                     key={cert}
-                    className="flex items-start gap-2 text-xs text-[#4A4A52]"
+                    className="flex items-start gap-2 text-xs text-brand-muted"
                   >
-                    <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[#C25E3E]" />
+                    <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-terra" />
                     {cert}
                   </li>
                 ))}
@@ -46,10 +46,10 @@ export default function HumanSide() {
         </div>
 
         <div className="mt-12">
-          <h3 className="font-mono text-xs uppercase tracking-widest text-[#C25E3E] mb-3">
+          <h3 className="font-mono text-xs uppercase tracking-widest text-brand-terra mb-3">
             Mentorship & Coaching
           </h3>
-          <p className="text-[#4A4A52] leading-relaxed text-sm sm:text-base max-w-prose">
+          <p className="text-brand-muted leading-relaxed text-sm sm:text-base max-w-prose">
             {mentorship}
           </p>
         </div>

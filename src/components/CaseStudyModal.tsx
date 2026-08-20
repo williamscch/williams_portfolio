@@ -1,4 +1,4 @@
-import { ExternalLink } from "lucide-react";
+import { ExternalLink, X } from "lucide-react";
 import { usePortfolioContext } from "@/context/portfolio";
 import {
   Dialog,
@@ -9,7 +9,7 @@ import {
 } from "@/ui/dialog";
 
 export default function CaseStudyModal() {
-  const { activeCaseStudy, closeCaseStudy } = usePortfolioContext();
+  const { activeCaseStudy, closeCaseStudy, locale } = usePortfolioContext();
 
   if (!activeCaseStudy) return null;
 
@@ -25,131 +25,146 @@ export default function CaseStudyModal() {
     tech,
     image,
     live,
+    testimonials,
   } = activeCaseStudy;
 
   return (
     <Dialog open={!!activeCaseStudy} onOpenChange={(open) => !open && closeCaseStudy()}>
-      <DialogContent
-        className="max-w-3xl max-h-[85vh] overflow-y-auto bg-[#FAF7F2] border-[#DDD5CA] p-0 gap-0"
-      >
+      <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto bg-brand-cream border-brand-border p-0 gap-0 rounded-2xl">
+        {/* Close button */}
+        <button
+          onClick={closeCaseStudy}
+          className="absolute top-4 right-4 z-10 h-8 w-8 rounded-full bg-brand-ink/80 text-brand-cream flex items-center justify-center hover:bg-brand-ink transition-colors"
+          aria-label="Close"
+        >
+          <X className="w-4 h-4" />
+        </button>
+
+        {/* Hero image */}
+        {image && (
+          <div className="relative">
+            <img
+              src={image}
+              alt={title}
+              className="w-full h-48 sm:h-64 object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-brand-ink/40 to-transparent" />
+          </div>
+        )}
+
+        {/* Header */}
         <DialogHeader className="p-6 pb-0">
           {(client || timeframe) && (
             <div className="flex items-center gap-3 mb-3">
               {client && (
-                <span className="font-mono text-xs uppercase tracking-widest text-[#C25E3E] bg-[#C25E3E]/10 px-3 py-1 rounded-full">
+                <span className="font-mono text-xs uppercase tracking-widest text-brand-terra">
                   {client}
                 </span>
               )}
               {timeframe && (
-                <span className="font-mono text-xs uppercase tracking-widest text-[#4A4A52]">
+                <span className="text-xs text-brand-muted">
                   {timeframe}
                 </span>
               )}
             </div>
           )}
-          <DialogTitle className="text-2xl sm:text-3xl font-bold tracking-tight text-[#19191C]">
+          <DialogTitle className="text-2xl sm:text-3xl font-bold tracking-tight text-brand-ink">
             {title}
           </DialogTitle>
           {tagline && (
-            <DialogDescription className="text-base text-[#4A4A52] mt-1">
+            <DialogDescription className="text-base text-brand-muted mt-2 leading-relaxed">
               {tagline}
             </DialogDescription>
           )}
         </DialogHeader>
 
-        <div className="px-6 py-4">
-          {(role || tech?.length) && (
-            <div className="flex flex-wrap items-center gap-3 py-3 border-b border-[#DDD5CA]">
-              {role && (
-                <span className="text-sm font-medium text-[#19191C]">
-                  {role}
-                </span>
-              )}
-              {role && tech?.length && (
-                <span className="text-[#DDD5CA]">·</span>
-              )}
-              {tech?.slice(0, 4).map((t) => (
-                <span
-                  key={t}
-                  className="text-xs font-mono uppercase tracking-wider text-[#4A4A52] bg-[#F4EFEA] px-2 py-0.5 rounded"
-                >
-                  {t}
-                </span>
-              ))}
-              {live && (
-                <a
-                  href={live}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="ml-auto inline-flex items-center gap-1.5 text-sm font-medium text-[#C25E3E] hover:text-[#A84E33] transition-colors"
-                >
-                  Live Site
-                  <ExternalLink className="w-3.5 h-3.5" />
-                </a>
-              )}
-            </div>
-          )}
-        </div>
-
-        {image && (
-          <div className="px-6">
-            <img
-              src={image}
-              alt={title}
-              className="w-full rounded-lg object-cover max-h-72 border border-[#DDD5CA]"
-            />
+        {/* Role + Tech + Live */}
+        {(role || tech?.length || live) && (
+          <div className="px-6 py-4 flex flex-wrap items-center gap-3">
+            {role && (
+              <span className="text-sm font-medium text-brand-ink">
+                {role}
+              </span>
+            )}
+            {tech?.slice(0, 4).map((t) => (
+              <span
+                key={t}
+                className="text-xs font-mono uppercase tracking-wider text-brand-muted bg-brand-warm px-2 py-0.5 rounded"
+              >
+                {t}
+              </span>
+            ))}
+            {live && (
+              <a
+                href={live}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="ml-auto inline-flex items-center gap-1.5 text-sm font-medium text-brand-terra hover:text-brand-terra-hover transition-colors"
+              >
+                Live Site
+                <ExternalLink className="w-3.5 h-3.5" />
+              </a>
+            )}
           </div>
         )}
 
-        <div className="px-6 pb-6 space-y-5">
+        {/* Narrative sections */}
+        <div className="px-6 pb-6 space-y-4">
           {challenge && (
-            <div className="bg-[#F4EFEA] rounded-xl p-5">
-              <h3 className="font-mono text-xs uppercase tracking-widest text-[#C25E3E] mb-2">
-                The Challenge
-              </h3>
-              <p className="text-[#4A4A52] leading-relaxed text-sm sm:text-base max-w-prose">
+            <div className="bg-brand-warm rounded-xl p-5">
+              <p className="text-brand-muted leading-relaxed text-sm sm:text-base">
                 {challenge}
               </p>
             </div>
           )}
 
           {architecture && (
-            <div>
-              <h3 className="font-mono text-xs uppercase tracking-widest text-[#C25E3E] mb-2">
-                Architecture & Build
-              </h3>
-              <p className="text-[#4A4A52] leading-relaxed text-sm sm:text-base max-w-prose">
-                {architecture}
-              </p>
-            </div>
+            <p className="text-brand-muted leading-relaxed text-sm sm:text-base px-1">
+              {architecture}
+            </p>
           )}
 
           {impact && (
-            <div className="bg-[#F4EFEA] rounded-xl p-5">
-              <h3 className="font-mono text-xs uppercase tracking-widest text-[#C25E3E] mb-2">
-                Impact & Outcome
-              </h3>
-              <p className="text-[#4A4A52] leading-relaxed text-sm sm:text-base max-w-prose">
+            <div className="bg-brand-warm rounded-xl p-5">
+              <p className="text-brand-muted leading-relaxed text-sm sm:text-base">
                 {impact}
               </p>
             </div>
           )}
 
+          {/* Full tech stack */}
           {tech && tech.length > 4 && (
-            <div>
-              <h3 className="font-mono text-xs uppercase tracking-widest text-[#C25E3E] mb-2">
-                Full Tech Stack
-              </h3>
+            <div className="pt-2">
               <div className="flex flex-wrap gap-2">
                 {tech.map((t) => (
                   <span
                     key={t}
-                    className="text-xs font-mono uppercase tracking-wider text-[#19191C] bg-[#F4EFEA] border border-[#DDD5CA] px-3 py-1 rounded-full"
+                    className="text-xs font-mono uppercase tracking-wider text-brand-ink bg-brand-warm border border-brand-border px-3 py-1 rounded-full"
                   >
                     {t}
                   </span>
                 ))}
               </div>
+            </div>
+          )}
+
+          {/* Client testimonials */}
+          {testimonials && testimonials.length > 0 && (
+            <div className="space-y-3 mt-4">
+              {testimonials.map((t, i) => (
+                <blockquote
+                  key={`${t.from}-${i}`}
+                  className="border-l-2 border-brand-terra pl-4 py-2 bg-brand-light/60 rounded-r-lg"
+                >
+                  <p className="italic text-brand-ink text-sm sm:text-base leading-relaxed mb-2">
+                    &ldquo;{locale === "es" && t.messageEs ? t.messageEs : t.message}&rdquo;
+                  </p>
+                  <footer className="text-xs text-brand-muted">
+                    <span className="font-medium text-brand-ink">{t.from}</span>
+                    {t.role && <span> — {t.role}</span>}
+                  </footer>
+                </blockquote>
+              ))}
             </div>
           )}
         </div>

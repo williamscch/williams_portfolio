@@ -40,17 +40,15 @@ williams_portfolio/
 ├── src/
 │   ├── assets/             # Brand SVGs (IconGithub, IconLinkedin, etc.) and images
 │   ├── components/         # Page sections & feature components
-│   │   ├── About.tsx       # About Me section
-│   │   ├── Contact.tsx     # Contact form and direct contact links
-│   │   ├── Footer.tsx      # Page footer with social links & copyright
-│   │   ├── Layout.tsx      # Main layout wrapper, header navbar, and scroll triggers
-│   │   ├── Me.tsx          # Hero section / introduction
-│   │   ├── Portfolio.tsx   # Project grid showcase
-│   │   ├── ProjectCard.tsx # Individual project preview card
-│   │   ├── ProjectModal.tsx# Detailed project modal dialog
-│   │   ├── Services.tsx    # Services offered section
-│   │   ├── Skills.tsx      # Tech stack & skills categorization
-│   │   └── Testimonials.tsx# Client recommendations / carousel
+│   │   ├── CaseStudyModal.tsx   # Narrative case study modal with bilingual testimonials
+│   │   ├── Contact.tsx          # Formspree contact form + direct links
+│   │   ├── Footer.tsx           # Page footer with social links & copyright
+│   │   ├── Hero.tsx             # Hero section with profile photo
+│   │   ├── HumanSide.tsx        # Personal section (Beyond Code)
+│   │   ├── Layout.tsx           # Main layout, desktop header, mobile bottom tab bar
+│   │   ├── StoryChapters.tsx    # Career story timeline with case study cards
+│   │   ├── StructuredData.tsx   # JSON-LD structured data for SEO
+│   │   └── Toolkit.tsx          # Tech stack & skills categorization
 │   ├── context/
 │   │   ├── data.ts         # SINGLE SOURCE OF TRUTH for all portfolio content
 │   │   └── portfolio.tsx   # React Context & usePortfolioContext hook
@@ -75,12 +73,14 @@ williams_portfolio/
 
 - **Single Source of Truth for Display**: All displayed portfolio content (profile info, experience cards, skills, services, project details, testimonials, contact endpoints) is defined in [`src/context/data.ts`](file:///Users/williamscolmenares/Desktop/Repos/williams_portfolio/src/context/data.ts).
 - **Career Master Reference**: When updating or expanding content, refer to [`context/career-master.md`](file:///Users/williamscolmenares/Desktop/Repos/williams_portfolio/context/career-master.md) (if present). This file contains unabridged, verified timelines, job history, and achievement metrics. Ensure all numbers and details stay aligned.
+- **Bilingual Support**: `TestimonialQuote` supports `messageEs` for Spanish translations. Case study modals render based on `locale` context.
 - **Consumption**: Components access content via `usePortfolioContext()` from [`src/context/portfolio.tsx`](file:///Users/williamscolmenares/Desktop/Repos/williams_portfolio/src/context/portfolio.tsx).
 
 ### 4.2 Navigation & Section IDs
 
 - Navigation is hash-free smooth scrolling powered by `react-scroll`.
 - Each section component in [`src/components/`](file:///Users/williamscolmenares/Desktop/Repos/williams_portfolio/src/components/) receives an `id` prop that must match the `toId` defined in [`src/App.tsx`](file:///Users/williamscolmenares/Desktop/Repos/williams_portfolio/src/App.tsx) / [`src/components/Layout.tsx`](file:///Users/williamscolmenares/Desktop/Repos/williams_portfolio/src/components/Layout.tsx).
+- Mobile uses a fixed bottom tab bar (`sm:hidden`), not a side sheet. Desktop uses sticky header.
 - The sticky header activates styling when `window.scrollY >= 64`.
 
 ### 4.3 Styling & UI Primitives
@@ -93,6 +93,10 @@ williams_portfolio/
 
 - Use the `@/` path alias (resolves to `./src/`) for clean imports across the project.
 - Maintain strict typing in all new code and refactors.
+
+### 4.5 Contact Form
+
+- Contact form uses **Formspree** endpoint `xlezzzro`. Form submissions go to `https://formspree.io/f/xlezzzro`.
 
 ---
 

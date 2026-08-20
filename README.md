@@ -7,6 +7,7 @@ This repository is the personal portfolio site for **Williams Colmenares**, a s
 - **Icons**: `lucide-react` and custom SVG brand icons
 - **Navigation**: Smooth scroll via `react-scroll`
 - **State**: React Context (`src/context/data.ts`) – single source of truth for all displayed content.
+- **Bilingual**: Content supports EN/ES via locale context. Testimonials include `messageEs` for bilingual rendering in case study modals.
 
 ## Development Commands
 
@@ -21,21 +22,16 @@ This repository is the personal portfolio site for **Williams Colmenares**, a s
 
 ## Agent‑Enabled Workflow
 
-The project ships with an **AGENTS.md** guide that describes how to use Antigravity agents (brainstorming, planning, code‑review, etc.) directly inside the repository. Typical workflow:
-
-1. **Brainstorm** – `/grill-me` or `/plan` to explore new ideas (e.g., repurposing the portfolio).
-2. **Write a Plan** – `/plan` generates a step‑by‑step implementation checklist.
-3. **Execute** – Run the generated commands or let the CLI assistant apply changes.
-4. **Verify** – `npm run build` + `npm run lint` before committing.
+The project ships with an **AGENTS.md** guide that provides detailed architecture and development guidelines. Run `npm run build` + `npm run lint` to verify changes.
 
 ## Project Structure
 
 ```
 src/
-├─ assets/           # Brand SVGs & images
-├─ components/       # Page sections (About, Me, Portfolio, …)
-├─ context/          # data.ts & portfolio.tsx (React Context)
-├─ ui/               # Reusable UI primitives (Button, Dialog, …)
+├─ assets/           # Brand SVGs, profile photo, icon components
+├─ components/       # Page sections (Hero, StoryChapters, HumanSide, Toolkit, Contact, Footer, CaseStudyModal, Layout, StructuredData)
+├─ context/          # data.ts (single source of truth) & portfolio.tsx (React Context)
+├─ ui/               # Reusable UI primitives (Button, Dialog, Input, Textarea)
 ├─ utils/            # Helper functions (cn.ts)
 └─ App.tsx, main.tsx
 ```

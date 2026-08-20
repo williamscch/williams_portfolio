@@ -11,7 +11,6 @@ import {
   Language,
   PortfolioContent,
   contentByLocale,
-  state as legacyState,
 } from "./data";
 
 interface PortfolioContextValue {
@@ -21,18 +20,7 @@ interface PortfolioContextValue {
   activeCaseStudy: CaseStudy | null;
   openCaseStudy: (caseStudyId: string) => void;
   closeCaseStudy: () => void;
-  /** @deprecated Legacy shim for old components — will be removed in Task 9. */
-  skills: typeof legacyState.skills;
-  /** @deprecated Legacy shim for old components — will be removed in Task 9. */
-  services: typeof legacyState.services;
-  /** @deprecated Legacy shim for old components — will be removed in Task 9. */
-  about: typeof legacyState.about;
-  /** @deprecated Legacy shim for old components — will be removed in Task 9. */
-  projects: typeof legacyState.projects;
-  /** @deprecated Legacy shim for old components — will be removed in Task 9. */
-  connect: typeof legacyState.connect;
-  /** @deprecated Legacy shim for old components — will be removed in Task 9. */
-  testimonials: typeof legacyState.testimonials;
+
 }
 
 const PortfolioContext = createContext<PortfolioContextValue | undefined>(
@@ -77,12 +65,7 @@ export const PortfolioProvider = ({ children }: { children: ReactNode }) => {
       activeCaseStudy,
       openCaseStudy,
       closeCaseStudy,
-      skills: legacyState.skills,
-      services: legacyState.services,
-      about: legacyState.about,
-      projects: legacyState.projects,
-      connect: legacyState.connect,
-      testimonials: legacyState.testimonials,
+
     }),
     [locale, data, activeCaseStudy, openCaseStudy, closeCaseStudy]
   );

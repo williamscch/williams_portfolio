@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-scroll";
-import { PanelLeft } from "lucide-react";
-import { Button } from "@/ui/button";
-import { Sheet, SheetContent, SheetTrigger } from "@/ui/sheet";
+import { BookOpen, User, Wrench, Mail, Languages } from "lucide-react";
 import { cn } from "@/utils/cn";
 import { usePortfolioContext } from "@/context/portfolio";
 
@@ -15,7 +13,6 @@ const navOptions = [
 
 export default function Layout({ children }: { children?: React.ReactNode }) {
   const { locale, setLocale } = usePortfolioContext();
-  const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
   const handleScroll = () => {
@@ -34,47 +31,18 @@ export default function Layout({ children }: { children?: React.ReactNode }) {
       <div className="flex flex-col">
         <header
           className={cn(
-            "sticky top-0 z-30 flex justify-between items-center gap-4 border-b bg-[#F4EFEA] px-4 sm:px-6 transition-all ease delay-400",
+            "sticky top-0 z-30 hidden sm:flex justify-between items-center gap-4 border-b bg-brand-warm px-6 transition-all ease delay-400",
             scrolled
-              ? "h-10 sm:py-2 sm:border-b sm:shadow-md"
-              : "h-12 sm:py-4 sm:border-0"
+              ? "py-2 border-b shadow-md"
+              : "py-4 border-0"
           )}
         >
-          <Sheet onOpenChange={setOpen} open={open}>
-            <SheetTrigger asChild>
-              <Button size="icon" variant="outline" className="sm:hidden">
-                <PanelLeft className="h-5 w-5" />
-                <span className="sr-only">Toggle Menu</span>
-              </Button>
-            </SheetTrigger>
-            <SheetContent side="left" className="sm:max-w-xs bg-[#FAF7F2]">
-              <nav className="grid gap-6 text-lg font-medium mt-8">
-                {navOptions.map((option) => (
-                  <Link
-                    onClick={() => setOpen(false)}
-                    key={option.toId}
-                    to={option.toId}
-                    className="pl-2 text-[#4A4A52] text-xl font-semibold transition-colors hover:text-[#19191C] cursor-pointer"
-                  >
-                    {option.label}
-                  </Link>
-                ))}
-                <button
-                  onClick={() => { toggleLocale(); setOpen(false); }}
-                  className="pl-2 text-[#C25E3E] text-xl font-semibold text-left cursor-pointer"
-                >
-                  {locale === "en" ? "ES" : "EN"}
-                </button>
-              </nav>
-            </SheetContent>
-          </Sheet>
-
-          <div className="hidden sm:flex w-full gap-6 items-center justify-center relative">
+          <div className="flex w-full gap-6 items-center justify-center relative">
             {navOptions.map((option) => (
               <Link
-                activeStyle={{ color: "#C25E3E" }}
+                activeStyle={{ color: "hsl(14 65% 50%)" }}
                 key={option.toId}
-                className="font-medium cursor-pointer text-[#4A4A52] hover:text-[#19191C] transition-colors"
+                className="font-medium cursor-pointer text-brand-muted hover:text-brand-ink transition-colors"
                 to={option.toId}
                 spy
                 smooth
@@ -89,13 +57,44 @@ export default function Layout({ children }: { children?: React.ReactNode }) {
 
           <button
             onClick={toggleLocale}
-            className="hidden sm:inline-flex font-mono text-xs uppercase tracking-widest text-[#C25E3E] hover:text-[#A84E33] transition-colors cursor-pointer"
+            className="inline-flex font-mono text-xs uppercase tracking-widest text-brand-terra hover:text-brand-terra-hover transition-colors cursor-pointer"
           >
             {locale === "en" ? "ES" : "EN"}
           </button>
         </header>
-        <main className="flex-1">{children}</main>
+        <main className="flex-1 pb-16 sm:pb-0">{children}</main>
       </div>
+      {/* Mobile bottom tab bar */}
+      <nav className="sm:hidden fixed bottom-0 inset-x-0 z-50 bg-brand-cream/95 backdrop-blur-sm border-t border-brand-border px-2 py-1.5 flex items-center justify-around">
+        {navOptions.map((option) => (
+          <Link
+            activeStyle={{ color: "hsl(14 65% 50%)" }}
+            key={option.toId}
+            to={option.toId}
+            spy
+            smooth
+            offset={-40}
+            delay={200}
+            duration={600}
+            aria-label={option.label}
+            className="flex flex-col items-center gap-0.5 text-brand-muted text-[10px] font-medium transition-colors"
+          >
+            {option.toId === "story" && <BookOpen className="w-4 h-4" />}
+            {option.toId === "beyond-code" && <User className="w-4 h-4" />}
+            {option.toId === "toolkit" && <Wrench className="w-4 h-4" />}
+            {option.toId === "connect" && <Mail className="w-4 h-4" />}
+            {option.label}
+          </Link>
+        ))}
+        <button
+          onClick={toggleLocale}
+          aria-label="Toggle language"
+          className="flex flex-col items-center gap-0.5 text-brand-terra text-[10px] font-bold transition-colors"
+        >
+          <Languages className="w-4 h-4" />
+          {locale === "en" ? "ES" : "EN"}
+        </button>
+      </nav>
     </div>
   );
 }

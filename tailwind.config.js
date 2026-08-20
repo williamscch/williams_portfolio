@@ -46,12 +46,15 @@ export default {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
-        chart: {
-          1: "hsl(var(--chart-1))",
-          2: "hsl(var(--chart-2))",
-          3: "hsl(var(--chart-3))",
-          4: "hsl(var(--chart-4))",
-          5: "hsl(var(--chart-5))",
+        brand: {
+          warm: "hsl(var(--brand-warm))",
+          cream: "hsl(var(--brand-cream))",
+          terra: "hsl(var(--brand-terra))",
+          "terra-hover": "hsl(var(--brand-terra-hover))",
+          ink: "hsl(var(--brand-ink))",
+          muted: "hsl(var(--brand-muted))",
+          border: "hsl(var(--brand-border))",
+          light: "hsl(var(--brand-light))",
         },
       },
       keyframes: {
