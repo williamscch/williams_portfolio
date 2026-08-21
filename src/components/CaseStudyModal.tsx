@@ -9,7 +9,8 @@ import {
 } from "@/ui/dialog";
 
 export default function CaseStudyModal() {
-  const { activeCaseStudy, closeCaseStudy, locale } = usePortfolioContext();
+  const { activeCaseStudy, closeCaseStudy, locale, data } = usePortfolioContext();
+  const { close, liveSite } = data.ui.caseStudyModal;
 
   if (!activeCaseStudy) return null;
 
@@ -35,7 +36,7 @@ export default function CaseStudyModal() {
         <button
           onClick={closeCaseStudy}
           className="absolute top-4 right-4 z-10 h-8 w-8 rounded-full bg-brand-ink/80 text-brand-cream flex items-center justify-center hover:bg-brand-ink transition-colors"
-          aria-label="Close"
+          aria-label={close}
         >
           <X className="w-4 h-4" />
         </button>
@@ -101,7 +102,7 @@ export default function CaseStudyModal() {
                 rel="noopener noreferrer"
                 className="ml-auto inline-flex items-center gap-1.5 text-sm font-medium text-brand-terra hover:text-brand-terra-hover transition-colors"
               >
-                Live Site
+                {liveSite}
                 <ExternalLink className="w-3.5 h-3.5" />
               </a>
             )}

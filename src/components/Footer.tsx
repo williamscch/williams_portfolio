@@ -5,12 +5,13 @@ import { usePortfolioContext } from "@/context/portfolio";
 export default function Footer() {
   const { data } = usePortfolioContext();
   const { social } = data.connect;
+  const { tagline, backToTop } = data.ui.footer;
 
   return (
     <footer className="bg-brand-ink px-6 py-10 sm:px-12 md:px-20">
       <div className="mx-auto max-w-3xl flex flex-col sm:flex-row items-center justify-between gap-6">
         <p className="text-sm text-brand-cream/60">
-          &copy; {new Date().getFullYear()} Williams Colmenares. Built with care.
+          &copy; {new Date().getFullYear()} Williams Colmenares. {tagline}
         </p>
 
         <div className="flex items-center gap-4">
@@ -40,7 +41,7 @@ export default function Footer() {
             className="inline-flex items-center gap-1 text-xs text-brand-cream/60 hover:text-brand-terra transition-colors cursor-pointer"
           >
             <ArrowUp className="w-3 h-3" />
-            Back to top
+            {backToTop}
           </Link>
         </div>
       </div>

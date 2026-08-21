@@ -6,6 +6,7 @@ import thumbnail from "@/assets/thumbnail.jpg";
 export default function Hero() {
   const { data } = usePortfolioContext();
   const { greeting, headline, subheadline, philosophies } = data.hero;
+  const { exploreCta, connectCta } = data.ui.hero;
 
   return (
     <section
@@ -56,7 +57,7 @@ export default function Hero() {
             className="inline-flex items-center gap-2 rounded-full bg-brand-ink px-6 py-3 text-sm font-medium text-white cursor-pointer transition-colors hover:bg-brand-terra"
           >
             <ArrowDown className="h-4 w-4" />
-            Explore the Journey
+            {exploreCta}
           </Link>
           <Link
             to="connect"
@@ -67,7 +68,7 @@ export default function Hero() {
             className="inline-flex items-center gap-2 rounded-full border border-brand-border bg-brand-cream px-6 py-3 text-sm font-medium text-brand-ink cursor-pointer transition-colors hover:border-brand-terra/60 hover:bg-brand-terra/5"
           >
             <MessageCircle className="h-4 w-4" />
-            Get in Touch
+            {connectCta}
           </Link>
         </div>
       </div>

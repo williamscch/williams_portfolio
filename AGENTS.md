@@ -42,17 +42,19 @@ williams_portfolio/
 │   ├── components/         # Page sections & feature components
 │   │   ├── CaseStudyModal.tsx   # Narrative case study modal with bilingual testimonials
 │   │   ├── Contact.tsx          # Formspree contact form + direct links
+│   │   ├── DesktopNavbar.tsx    # Sticky desktop header nav with locale toggle
 │   │   ├── Footer.tsx           # Page footer with social links & copyright
 │   │   ├── Hero.tsx             # Hero section with profile photo
 │   │   ├── HumanSide.tsx        # Personal section (Beyond Code)
-│   │   ├── Layout.tsx           # Main layout, desktop header, mobile bottom tab bar
+│   │   ├── Layout.tsx           # Thin layout wrapper composing navbars and main
+│   │   ├── MobileTabBar.tsx     # Fixed mobile bottom tab bar with locale toggle
 │   │   ├── StoryChapters.tsx    # Career story timeline with case study cards
 │   │   ├── StructuredData.tsx   # JSON-LD structured data for SEO
 │   │   └── Toolkit.tsx          # Tech stack & skills categorization
 │   ├── context/
 │   │   ├── data.ts         # SINGLE SOURCE OF TRUTH for all portfolio content
 │   │   └── portfolio.tsx   # React Context & usePortfolioContext hook
-│   ├── ui/                 # Reusable UI primitives (Button, Card, Dialog, Sheet, etc.)
+│   ├── ui/                 # Reusable UI primitives (Button, Dialog, Input, Textarea)
 │   ├── utils/
 │   │   └── cn.ts           # clsx + tailwind-merge helper function
 │   ├── App.tsx             # Main App layout mounting sections and navigation targets
@@ -73,13 +75,14 @@ williams_portfolio/
 
 - **Single Source of Truth for Display**: All displayed portfolio content (profile info, experience cards, skills, services, project details, testimonials, contact endpoints) is defined in [`src/context/data.ts`](file:///Users/williamscolmenares/Desktop/Repos/williams_portfolio/src/context/data.ts).
 - **Career Master Reference**: When updating or expanding content, refer to [`context/career-master.md`](file:///Users/williamscolmenares/Desktop/Repos/williams_portfolio/context/career-master.md) (if present). This file contains unabridged, verified timelines, job history, and achievement metrics. Ensure all numbers and details stay aligned.
-- **Bilingual Support**: `TestimonialQuote` supports `messageEs` for Spanish translations. Case study modals render based on `locale` context.
+- **Bilingual Support**: Everything is locale-driven. UI chrome strings (nav labels, CTAs, form placeholders, footer) come from per-locale `ui` objects; case studies localize via `esCaseStudyOverrides` merged over the shared records; `TestimonialQuote` supports `messageEs`. Toggling `locale` re-renders all sections.
+- **Adding translatable UI strings**: Never hardcode user-facing text in components — add it to the `UiStrings` interface and both locale objects in `data.ts`, then consume via `usePortfolioContext()`.
 - **Consumption**: Components access content via `usePortfolioContext()` from [`src/context/portfolio.tsx`](file:///Users/williamscolmenares/Desktop/Repos/williams_portfolio/src/context/portfolio.tsx).
 
 ### 4.2 Navigation & Section IDs
 
 - Navigation is hash-free smooth scrolling powered by `react-scroll`.
-- Each section component in [`src/components/`](file:///Users/williamscolmenares/Desktop/Repos/williams_portfolio/src/components/) receives an `id` prop that must match the `toId` defined in [`src/App.tsx`](file:///Users/williamscolmenares/Desktop/Repos/williams_portfolio/src/App.tsx) / [`src/components/Layout.tsx`](file:///Users/williamscolmenares/Desktop/Repos/williams_portfolio/src/components/Layout.tsx).
+- Each section component in [`src/components/`](file:///Users/williamscolmenares/Desktop/Repos/williams_portfolio/src/components/) receives an `id` prop that must match the `toId` in the nav item arrays of [`src/components/DesktopNavbar.tsx`](file:///Users/williamscolmenares/Desktop/Repos/williams_portfolio/src/components/DesktopNavbar.tsx) / [`src/components/MobileTabBar.tsx`](file:///Users/williamscolmenares/Desktop/Repos/williams_portfolio/src/components/MobileTabBar.tsx).
 - Mobile uses a fixed bottom tab bar (`sm:hidden`), not a side sheet. Desktop uses sticky header.
 - The sticky header activates styling when `window.scrollY >= 64`.
 
@@ -87,7 +90,7 @@ williams_portfolio/
 
 - **Tailwind Tokens**: Color tokens are defined as CSS variables (HSL) in [`src/index.css`](file:///Users/williamscolmenares/Desktop/Repos/williams_portfolio/src/index.css).
 - **Class Merging**: Always use `cn(...)` from [`src/utils/cn.ts`](file:///Users/williamscolmenares/Desktop/Repos/williams_portfolio/src/utils/cn.ts) for conditional or merged Tailwind classes.
-- **Modals & Overlays**: Use Radix UI primitives inside [`src/ui/`](file:///Users/williamscolmenares/Desktop/Repos/williams_portfolio/src/ui/) (e.g., [`ProjectModal.tsx`](file:///Users/williamscolmenares/Desktop/Repos/williams_portfolio/src/components/ProjectModal.tsx) leverages Radix Dialog).
+- **Modals & Overlays**: Use Radix UI primitives inside [`src/ui/`](file:///Users/williamscolmenares/Desktop/Repos/williams_portfolio/src/ui/) (e.g., [`CaseStudyModal.tsx`](file:///Users/williamscolmenares/Desktop/Repos/williams_portfolio/src/components/CaseStudyModal.tsx) leverages Radix Dialog). Note: `DialogContent` renders no built-in close button — each modal owns its own.
 
 ### 4.4 TypeScript & Aliasing
 

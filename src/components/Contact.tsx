@@ -7,15 +7,16 @@ import { Button } from "@/ui/button";
 export default function Contact() {
   const { data } = usePortfolioContext();
   const { email, emailHref, location, availability, social } = data.connect;
+  const { headline, intro, namePlaceholder, emailPlaceholder, messagePlaceholder, sendButton } = data.ui.contact;
 
   return (
     <section id="connect" className="bg-brand-cream px-6 py-20 sm:px-12 md:px-20">
       <div className="mx-auto max-w-3xl">
         <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-brand-ink mb-4">
-          Let&apos;s Connect
+          {headline}
         </h2>
         <p className="text-brand-muted leading-relaxed text-sm sm:text-base max-w-prose mb-10">
-          Always open to a conversation about engineering, consulting, or interesting problems.
+          {intro}
         </p>
 
         <form
@@ -29,14 +30,14 @@ export default function Contact() {
               name="name"
               required
               maxLength={50}
-              placeholder="Your name"
+              placeholder={namePlaceholder}
               className="bg-brand-warm border-brand-border focus:ring-brand-terra"
             />
             <Input
               type="email"
               name="email"
               required
-              placeholder="Email address"
+              placeholder={emailPlaceholder}
               className="bg-brand-warm border-brand-border focus:ring-brand-terra"
             />
           </div>
@@ -44,14 +45,14 @@ export default function Contact() {
             name="message"
             maxLength={500}
             required
-            placeholder="Type your message here"
+            placeholder={messagePlaceholder}
             className="bg-brand-warm border-brand-border focus:ring-brand-terra min-h-[120px]"
           />
           <Button
             type="submit"
             className="bg-brand-ink text-brand-cream hover:bg-brand-terra transition-colors"
           >
-            Send Message
+            {sendButton}
           </Button>
         </form>
 
@@ -60,15 +61,15 @@ export default function Contact() {
             href={emailHref}
             className="flex items-center gap-3 text-brand-ink hover:text-brand-terra transition-colors group"
           >
-            <Mail className="w-4 h-4 text-brand-terra" />
+            <Mail className="w-4 h-4 shrink-0 text-brand-terra" />
             <span className="text-sm sm:text-base font-medium">{email}</span>
           </a>
           <div className="flex items-center gap-3 text-brand-muted">
-            <MapPin className="w-4 h-4 text-brand-terra" />
+            <MapPin className="w-4 h-4 shrink-0 text-brand-terra" />
             <span className="text-sm sm:text-base">{location}</span>
           </div>
           <div className="flex items-center gap-3 text-brand-muted">
-            <Clock className="w-4 h-4 text-brand-terra" />
+            <Clock className="w-4 h-4 shrink-0 text-brand-terra" />
             <span className="text-sm sm:text-base">{availability}</span>
           </div>
         </div>
