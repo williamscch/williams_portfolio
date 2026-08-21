@@ -7,7 +7,7 @@ This repository is the personal portfolio site for **Williams Colmenares**, a s
 - **Icons**: `lucide-react` and custom SVG brand icons
 - **Navigation**: Smooth scroll via `react-scroll`
 - **State**: React Context (`src/context/data.ts`) – single source of truth for all displayed content.
-- **Bilingual**: Content supports EN/ES via locale context. Testimonials include `messageEs` for bilingual rendering in case study modals.
+- **Bilingual**: Fully localized EN/ES — content, case studies, and UI strings all switch via locale context (`data.ts` per-locale `ui` objects + `esCaseStudyOverrides`).
 
 ## Development Commands
 
@@ -29,7 +29,7 @@ The project ships with an **AGENTS.md** guide that provides detailed architectur
 ```
 src/
 ├─ assets/           # Brand SVGs, profile photo, icon components
-├─ components/       # Page sections (Hero, StoryChapters, HumanSide, Toolkit, Contact, Footer, CaseStudyModal, Layout, StructuredData)
+├─ components/       # Page sections (Hero, StoryChapters, HumanSide, Toolkit, Contact, Footer, CaseStudyModal, DesktopNavbar, MobileTabBar, Layout, StructuredData)
 ├─ context/          # data.ts (single source of truth) & portfolio.tsx (React Context)
 ├─ ui/               # Reusable UI primitives (Button, Dialog, Input, Textarea)
 ├─ utils/            # Helper functions (cn.ts)
