@@ -78,6 +78,45 @@ export interface ConnectInfo {
   social: { name: string; url: string; icon: SocialIcon }[];
 }
 
+export interface UiStrings {
+  nav: {
+    story: string;
+    beyondCode: string;
+    beyondCodeMobile: string;
+    toolkit: string;
+    connect: string;
+  };
+  hero: {
+    exploreCta: string;
+    connectCta: string;
+  };
+  storyCards: {
+    live: string;
+    readCaseStudy: string;
+  };
+  caseStudyModal: {
+    close: string;
+    liveSite: string;
+  };
+  humanSide: {
+    personTitle: string;
+    aiWorkflowTitle: string;
+    mentorshipTitle: string;
+  };
+  contact: {
+    headline: string;
+    intro: string;
+    namePlaceholder: string;
+    emailPlaceholder: string;
+    messagePlaceholder: string;
+    sendButton: string;
+  };
+  footer: {
+    tagline: string;
+    backToTop: string;
+  };
+}
+
 export interface PortfolioContent {
   hero: HeroContent;
   chapters: StoryChapter[];
@@ -85,6 +124,7 @@ export interface PortfolioContent {
   humanSide: HumanSide;
   toolkit: ToolkitGroup[];
   connect: ConnectInfo;
+  ui: UiStrings;
 }
 
 // ─── Case Study Records (shared, not locale-duplicated) ───────────────────────
@@ -168,7 +208,7 @@ const caseStudies: Record<string, CaseStudy> = {
     title: "Uniserve Front-End Architecture",
     tagline:
       "Setting Apply's first Payload CMS frontend architecture as the most senior developer on the team.",
-    client: "Uniserve (via Apply)",
+    client: "Uniserve (APPLY)",
     role: "Acting Tech Lead / Frontend Architect",
     timeframe: "Aug – Oct 2025",
     challenge:
@@ -202,7 +242,7 @@ const caseStudies: Record<string, CaseStudy> = {
     title: "Alltech — Solo Pre-Launch Delivery",
     tagline:
       "Sole developer and primary client contact during critical pre-launch phase.",
-    client: "Alltech (via Apply)",
+    client: "Alltech (APPLY)",
     role: "Sole Developer & Technical Client Lead",
     timeframe: "~Nov 2025",
     challenge:
@@ -243,7 +283,7 @@ const caseStudies: Record<string, CaseStudy> = {
     title: "Momentum Loan Calculator",
     tagline:
       "Navigating conflicting stakeholder requirements to ship a customer-facing financial tool.",
-    client: "Momentum (via Apply)",
+    client: "Momentum (APPLY)",
     role: "Frontend Engineer",
     timeframe: "Nov 2025 – May 2026",
     challenge:
@@ -288,6 +328,113 @@ const caseStudies: Record<string, CaseStudy> = {
     ],
   },
 };
+
+// ─── Case Study Records (Spanish overrides merged over the shared records) ───
+
+const esCaseStudyOverrides: Record<string, Partial<CaseStudy>> = {
+  "apefest-lisbon": {
+    title: "ApeFest Lisboa 2024 — Venta de Entradas",
+    tagline:
+      "Plataforma de ticketing de alto tráfico: re-skin, pruebas de carga y soporte en el lanzamiento en vivo.",
+    role: "Ingeniero Frontend Único",
+    challenge:
+      "Asumir en solitario el re-skin completo de la página de ticketing de ApeFest Lisboa y luego someterla a pruebas de estrés para que sobreviva al pico en el momento del drop — sin margen para downtime durante un evento internacional en vivo.",
+    architecture:
+      "React + Vite + Tailwind, desplegado en Vercel. Escribí scripts de pruebas de carga para simular sesiones concurrentes antes del lanzamiento. Brindé monitoreo técnico y soporte en tiempo real el día del lanzamiento.",
+    impact:
+      "El drop de entradas salió en vivo sin incidentes para más de 3,000 asistentes. Las pruebas de carga dieron al equipo confianza antes de un momento irreversible de alto riesgo.",
+  },
+  "apefest-merch": {
+    title: "Venta Exclusiva de Merch ApeFest 2024",
+    tagline: "Plataforma de merch token-gated con pagos Stripe y fila de entrada.",
+    role: "Desarrollador Único",
+    challenge:
+      "Construir una venta exclusiva de merch restringida a poseedores verificados de entradas de ApeFest, con sistema de fila y expiración de sesión para prevenir abusos bajo condiciones reales de evento.",
+    architecture:
+      "React + Tailwind siguiendo un diseño en Figma. Stripe para el procesamiento de pagos. Widget de autenticación de tokenproof para verificar la propiedad on-chain de las entradas. Integración con API interna de inventario.",
+    impact:
+      "Lanzado de punta a punta como único desarrollador, manejando autenticación, lógica de fila, pagos e inventario en un solo proyecto.",
+  },
+  bodega: {
+    tagline:
+      "Plataforma full-stack de contenido para el programa de licencias MadeByApes de Yuga Labs.",
+    role: "Desarrollador Full-Stack Único",
+    challenge:
+      "Construir una plataforma lista para producción desde cero — base de datos de licencias, CMS, búsqueda rápida, automatización de correos y almacenamiento de medios — como único ingeniero en la cuenta.",
+    architecture:
+      "Backend Next.js + Payload CMS con PostgreSQL. Meilisearch para búsquedas de licencias casi instantáneas. Mailgun para correos transaccionales. AWS S3 para medios. Optimizado para móvil y escritorio.",
+    impact:
+      "Los equipos de contenido pasaron de no tener capacidad de autoservicio a actualizaciones totalmente gestionadas por CMS. La búsqueda de licencias es casi instantánea vía Meilisearch.",
+  },
+  "tga-automation": {
+    title: "Automatización Token-Gate (TGA)",
+    tagline:
+      "Convirtiendo builds personalizadas por cliente en un flujo de trabajo CMS de autoservicio.",
+    role: "Ingeniero Lead",
+    challenge:
+      "Cada nueva página token-gated de cliente (Forbes, F1, BMW, Yuga Labs) requería desarrollo manual por cliente. Tras aprender Payload CMS en el proyecto MadeByApes Bodega, reconocí el patrón, propuse automatizarlo con la misma herramienta y lo construí yo mismo.",
+    architecture:
+      "Interfaz de administración de Payload CMS que permite a perfiles no técnicos generar y personalizar páginas token-gated. El frontend Next.js renderiza el resultado dinámicamente.",
+    impact:
+      "Reduje la configuración por cliente de builds manuales de varios días a un flujo impulsado por CMS. Escaló para manejar campañas simultáneas de clientes sin ingeniería adicional.",
+  },
+  "uniserve-architecture": {
+    title: "Arquitectura Front-End de Uniserve",
+    tagline:
+      "Estableciendo la primera arquitectura frontend con Payload CMS de Apply como el desarrollador más senior del equipo.",
+    role: "Tech Lead Interino / Arquitecto Frontend",
+    challenge:
+      "Incorporarme como el desarrollador más senior del equipo y convertirme en la fuente vital de conocimiento para todo el grupo de desarrollo. Establecer la primera implementación frontend con Payload CMS de Apply mientras gestionaba riesgos proactivamente e impulsaba la calidad.",
+    architecture:
+      "Frontend Payload CMS + Next.js con Docker y PostgreSQL. Sistema de diseño de componentes atómicos. Documenté todo el enfoque en Notion como referencia reutilizable de la empresa. Identifiqué proactivamente riesgos y oportunidades de mejora antes de que se convirtieran en problemas.",
+    impact:
+      "Me convertí en la mano derecha del tech lead. Descrito como alguien con «componentes limpios, velocidad constante, cero drama». Produje un documento en Notion que ahora se usa como referencia estándar de Payload en Apply.",
+  },
+  "alltech-solo": {
+    title: "Alltech — Entrega Pre-Lanzamiento en Solitario",
+    tagline:
+      "Desarrollador único y contacto principal del cliente durante la fase crítica de pre-lanzamiento.",
+    role: "Desarrollador Único & Líder Técnico ante el Cliente",
+    challenge:
+      "Regresar a Alltech para la preparación del pre-lanzamiento como único ingeniero en la cuenta — siendo dueño no solo del código, sino de la comunicación directa con los stakeholders del cliente y de las decisiones técnicas. La cuenta tuvo un inicio difícil; había que reconstruir la confianza.",
+    architecture:
+      "React, Vite, Tailwind CSS, Vercel. Contentful CMS, búsqueda con Algolia, documentación de componentes con Storybook. Sin otros ingenieros en la cuenta — propiedad total de la entrega, la depuración y las conversaciones técnicas con el cliente.",
+    impact:
+      "Di la vuelta a una cuenta complicada. Tyler Cobb, Global Digital Marketing Manager de Alltech, dio feedback público: \"La documentación de Williams fue muy valiosa... él no ve esto como un adiós, sino como un «hasta pronto».\" Me convertí en el único punto de contacto técnico de Apply — un «faro de claridad» para el cliente.",
+  },
+  "momentum-calculator": {
+    title: "Calculadora de Préstamos Momentum",
+    tagline:
+      "Navegando requisitos contradictorios entre stakeholders para lanzar una herramienta financiera orientada al cliente.",
+    role: "Ingeniero Frontend",
+    challenge:
+      "Los requisitos del cliente cambiaron y entraron en conflicto entre múltiples stakeholders. Resolví la ambigüedad directamente — mediante reuniones y comunicación escrita — en lugar de escalar o esperar. Adicionalmente, propuse e implementé flujos de trabajo asistidos por IA para el equipo.",
+    architecture:
+      "Calculadora de préstamos orientada al cliente en React + TypeScript. La funcionalidad pasó por múltiples iteraciones de requisitos; la versión final llegó a producción. Propuse herramientas de IA y estandaricé prácticas para la planificación de tickets y la automatización de tareas repetitivas. Construí una práctica de auto-revisión de código para ahorrar tiempo en las revisiones de PR.",
+    impact:
+      "La funcionalidad está en producción tras navegar con éxito un proceso de requisitos complejo durante ~6 meses. Las propuestas de flujos de IA fueron adoptadas por el equipo para mejorar la eficiencia.",
+  },
+  "quick-backups": {
+    title: "Backups Rápidos — Adaptación Ágil entre Stacks",
+    tagline:
+      "Liverpool · White Stuff · Crunchyroll — prueba de que el valor empieza desde el día uno.",
+    client: "Apply (múltiples clientes)",
+    role: "Ingeniero Frontend de Respaldo",
+    challenge:
+      "Asignaciones cortas de respaldo en tres clientes distintos, cada una exigiendo un onboarding rápido en stacks desconocidos — Contentstack CMS en Liverpool, Vue/Nuxt en White Stuff y Next.js en Crunchyroll. Demostrar adaptación rápida y entrega autónoma sin supervisión.",
+    architecture:
+      "Liverpool: integración con Contentstack CMS. White Stuff: frontend Vue/Nuxt, tomé propiedad de tickets de forma proactiva. Crunchyroll: stack Next.js/React, patrón estándar de ramp-up rápido.",
+    impact:
+      "Cobertura fluida sin interrupciones en los tres equipos. Feedback de White Stuff: «Altamente autónomo, tomaba tickets proactivamente, sin necesidad de supervisión». Demostré que la experiencia en React se traduce entre frameworks y plataformas CMS.",
+  },
+};
+
+const caseStudiesEs: Record<string, CaseStudy> = Object.fromEntries(
+  Object.entries(caseStudies).map(([id, cs]) => [
+    id,
+    { ...cs, ...esCaseStudyOverrides[id] },
+  ])
+);
 
 // ─── Social Accounts (shared) ─────────────────────────────────────────────────
 
@@ -387,7 +534,7 @@ export const contentByLocale: Record<Language, PortfolioContent> = {
     humanSide: {
       headline: "Beyond the terminal",
       person:
-        "Venezuelan, based in Colombia. I work fully remote across global distributed teams — US, UK, Europe — and hold a C1 Advanced English certification (EF SET). When I'm not coding, you'll find me doing CrossFit (or trying to), watching thought-provoking movies, or catching any sport — football is my favorite. I love being outdoors and staying active.",
+        "Venezuelan, living in Colombia. I work fully remote across global distributed teams — US, UK, Europe — and hold a C1 Advanced English certification (EF SET). When I'm not coding, you'll find me doing CrossFit (or trying to), watching thought-provoking movies, or catching any sport — football is my favorite. I love being outdoors and staying active.",
       aiWorkflow:
         "Apply actively pushes AI adoption across engineering. I use Claude daily — in my personal projects I also experiment with OpenCode, Antigravity, Superpowers, and GStack. At work we follow the bmad method. I'm not listing every two-hour cert; what matters is I stay current with AI-assisted engineering practices and use them as a force multiplier for quality and speed.",
       mentorship:
@@ -439,6 +586,46 @@ export const contentByLocale: Record<Language, PortfolioContent> = {
       availability:
         "Full-time at Apply. Open to senior engineering roles & consulting. Response within 24 h.",
       social: socialAccounts,
+    },
+
+    ui: {
+      nav: {
+        story: "Story",
+        beyondCode: "Beyond Code",
+        beyondCodeMobile: "Beyond Code",
+        toolkit: "Toolkit",
+        connect: "Connect",
+      },
+      hero: {
+        exploreCta: "Explore the Journey",
+        connectCta: "Get in Touch",
+      },
+      storyCards: {
+        live: "Live",
+        readCaseStudy: "Read Case Study",
+      },
+      caseStudyModal: {
+        close: "Close",
+        liveSite: "Live Site",
+      },
+      humanSide: {
+        personTitle: "The Person Behind the Code",
+        aiWorkflowTitle: "AI-Augmented Workflow",
+        mentorshipTitle: "Mentorship & Coaching",
+      },
+      contact: {
+        headline: "Let's Connect",
+        intro:
+          "Always open to a conversation about engineering, consulting, or interesting problems.",
+        namePlaceholder: "Your name",
+        emailPlaceholder: "Email address",
+        messagePlaceholder: "Type your message here",
+        sendButton: "Send Message",
+      },
+      footer: {
+        tagline: "Built with care.",
+        backToTop: "Back to top",
+      },
     },
   },
 
@@ -513,12 +700,12 @@ export const contentByLocale: Record<Language, PortfolioContent> = {
       },
     ],
 
-    caseStudies,
+    caseStudies: caseStudiesEs,
 
     humanSide: {
       headline: "Más allá del terminal",
       person:
-        "Venezolano, basado en Colombia. Trabajo completamente en remoto con equipos distribuidos globalmente — EE.UU., Reino Unido, Europa — y cuento con certificación de inglés C1 Advanced (EF SET). Cuando no estoy programando, me encontrarás haciendo CrossFit (o intentándolo), viendo películas que te dejan pensando, o viendo cualquier deporte — el fútbol es mi favorito. Me encanta estar al aire libre y mantenerme activo.",
+        "Venezolano, viviendo en Colombia. Trabajo completamente en remoto con equipos distribuidos globalmente — EE.UU., Reino Unido, Europa — y cuento con certificación de inglés C1 Advanced (EF SET). Cuando no estoy programando, me encontrarás haciendo CrossFit (o intentándolo), viendo películas que te dejan pensando, o viendo cualquier deporte — el fútbol es mi favorito. Me encanta estar al aire libre y mantenerme activo.",
       aiWorkflow:
         "Apply impulsa activamente la adopción de IA en ingeniería. Uso Claude a diario — en proyectos personales también experimento con OpenCode, Antigravity, Superpowers y GStack. En el trabajo seguimos el bmad method. No listo cada certificación de dos horas; lo que importa es que me mantengo al corriente con las prácticas de ingeniería asistida por IA y las uso como multiplicador de calidad y velocidad.",
       mentorship:
@@ -570,6 +757,46 @@ export const contentByLocale: Record<Language, PortfolioContent> = {
       availability:
         "Tiempo completo en Apply. Abierto a roles de ingeniería senior y consultoría. Respuesta en 24 h.",
       social: socialAccounts,
+    },
+
+    ui: {
+      nav: {
+        story: "Historia",
+        beyondCode: "Más allá del código",
+        beyondCodeMobile: "Más allá",
+        toolkit: "Stack",
+        connect: "Contacto",
+      },
+      hero: {
+        exploreCta: "Explora el recorrido",
+        connectCta: "Hablemos",
+      },
+      storyCards: {
+        live: "En vivo",
+        readCaseStudy: "Leer caso de estudio",
+      },
+      caseStudyModal: {
+        close: "Cerrar",
+        liveSite: "Sitio en vivo",
+      },
+      humanSide: {
+        personTitle: "La persona detrás del código",
+        aiWorkflowTitle: "Flujo de trabajo con IA",
+        mentorshipTitle: "Mentoría y coaching",
+      },
+      contact: {
+        headline: "Conectemos",
+        intro:
+          "Siempre abierto a conversar sobre ingeniería, consultoría o problemas interesantes.",
+        namePlaceholder: "Tu nombre",
+        emailPlaceholder: "Correo electrónico",
+        messagePlaceholder: "Escribe tu mensaje aquí",
+        sendButton: "Enviar mensaje",
+      },
+      footer: {
+        tagline: "Construido con cuidado.",
+        backToTop: "Volver arriba",
+      },
     },
   },
 };

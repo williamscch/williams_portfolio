@@ -20,6 +20,7 @@ function renderNarrative(text: string) {
 
 export default function StoryChapters() {
   const { data, openCaseStudy } = usePortfolioContext();
+  const { ui } = data;
 
   return (
     <section id="story" className="bg-brand-warm px-6 py-20 sm:px-12 md:px-20">
@@ -56,9 +57,9 @@ export default function StoryChapters() {
                       key={cs.id}
                       className="rounded-xl border border-brand-border bg-brand-cream p-5 hover:border-brand-terra/60 transition-all hover:shadow-md"
                     >
-                      <div className="flex items-center gap-3 mb-2">
+                      <div className="flex flex-wrap items-center gap-x-3 gap-y-2 mb-2">
                         {cs.client && (
-                          <span className="font-mono text-xs uppercase tracking-widest text-brand-terra bg-brand-terra/10 px-2 py-0.5 rounded-full">
+                          <span className="whitespace-nowrap font-mono text-xs uppercase tracking-widest text-brand-terra bg-brand-terra/10 px-2 py-0.5 rounded-full">
                             {cs.client}
                           </span>
                         )}
@@ -100,7 +101,7 @@ export default function StoryChapters() {
                               rel="noopener noreferrer"
                               className="inline-flex items-center gap-1 text-xs font-medium text-brand-muted hover:text-brand-terra transition-colors"
                             >
-                              Live
+                              {ui.storyCards.live}
                               <ExternalLink className="w-3 h-3" />
                             </a>
                           )}
@@ -108,7 +109,7 @@ export default function StoryChapters() {
                             onClick={() => openCaseStudy(cs.id)}
                             className="inline-flex items-center gap-1.5 text-sm font-medium text-brand-terra hover:text-brand-terra-hover transition-colors cursor-pointer"
                           >
-                            Read Case Study
+                            {ui.storyCards.readCaseStudy}
                             <ArrowRight className="w-3.5 h-3.5" />
                           </button>
                         </div>
